@@ -25,14 +25,19 @@ class GameMap extends IslandsMap {
   }
   
   getCurrentMapY() {
+    let floorY = Main.CanvasHeight - 200;
     let mapSlices = this.slices;
-    let currentSliceIndex = this.getSliceForViewportX(this.getViewportX());
+    let currentSliceIndex = this.getSliceForViewportX(this.getViewportX() + 50);
     let slice = mapSlices[ currentSliceIndex ];
-    console.log('Current type is', slice.type);
-    if (slice && slice.type >= IslandType.BIG_1 && slice.type <= IslandType.MOVABLE_1) {
+    if (slice && slice.type >= IslandType.BIG_1 && slice.type <= IslandType.MOVABLE_4) {
+      let foxY = this.foxy.getY();
+      let surfaceY = slice.yPosition + slice.ySurfaceOffset;
+      if (foxY - surfaceY > 30) {
+        return floorY;
+      }
       return slice.yPosition + slice.ySurfaceOffset;
     }
-    return Main.CanvasHeight - 200;
+    return floorY;
   }
   
   toFront(object) {

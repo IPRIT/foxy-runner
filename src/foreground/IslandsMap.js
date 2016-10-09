@@ -18,21 +18,12 @@ class IslandsMap extends PIXI.Container {
     this.slices = [];
     this.viewportX = 0;
     this.viewportSliceX = 0;
-  
-    this.initMap();
-  }
-  
-  initMap() {
-    for (let i = 0; i < 3; ++i) {
-      //this.slices.push(this.builder.generateNext(this));
-    }
   }
   
   getLastObject() {
     if (this.slices.length) {
       return this.slices[ this.slices.length - 1 ];
     }
-    console.error('...#getLastObject');
     return null;
   }
   
@@ -65,7 +56,7 @@ class IslandsMap extends PIXI.Container {
   
   addNewSlices() {
     var firstX = -(this.viewportX % IslandsMap.ViewportSliceWidth);
-    for (var i = this.viewportSliceX, sliceIndex = 0; i < this.viewportSliceX + IslandsMap.ViewportNumSlices; i++, sliceIndex++) {
+    for (var i = this.viewportSliceX - 1, sliceIndex = -1; i < this.viewportSliceX + IslandsMap.ViewportNumSlices; i++, sliceIndex++) {
       if (i < 0) {
         continue;
       }
@@ -84,9 +75,9 @@ class IslandsMap extends PIXI.Container {
   }
   
   removeOldSlices(prevViewportSliceX) {
-    var numOldSlices = Math.min(IslandsMap.ViewportNumSlices, this.viewportSliceX - prevViewportSliceX);
+    var numOldSlices = Math.min(IslandsMap.ViewportNumSlices, this.viewportSliceX - prevViewportSliceX - 1);
     
-    for (var i = prevViewportSliceX; i < prevViewportSliceX + numOldSlices; i++) {
+    for (var i = prevViewportSliceX - 1; i < prevViewportSliceX + numOldSlices; i++) {
       var slice = this.slices[i];
       if (!slice) {
         continue;
@@ -100,7 +91,7 @@ class IslandsMap extends PIXI.Container {
   
   returnIslandSlice(slice) {
     let type = slice.type;
-    if (type >= IslandType.BIG_1 && type <= IslandType.MOVABLE_1) {
+    if (type >= IslandType.BIG_1 && type <= IslandType.MOVABLE_4) {
       this.builder.returnIsland(slice);
     } else if (type >= IslandType.EMPTY_SHORT && type <= IslandType.EMPTY_LARGE) {
       this.builder.returnEmpty(slice);
@@ -113,7 +104,7 @@ class IslandsMap extends PIXI.Container {
     if (!this.slices.length) {
       return;
     }
-    this.slices.filter(slice => slice && slice.type === IslandType.MOVABLE_1)
+    this.slices.filter(slice => slice && slice.type >= IslandType.MOVABLE_1 && slice.type <= IslandType.MOVABLE_4)
       .forEach(slice => slice.move());
   }
 }

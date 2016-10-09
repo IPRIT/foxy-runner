@@ -80,6 +80,8 @@ class Main {
   }
   
   update() {
+    this.frame++;
+    console.info('FPS:', (this.frame / ((new Date().getTime() - this.firstFrameStartedAt.getTime()) / 1000)));
     this.scroller.speed = Math.min(this.scroller.speed + Settings.ScrollSpeedAcceleration, Settings.MaxScrollSpeed);
     this.scroller.shiftViewportX(this.scroller.speed);
     this.renderer.render(this.stage);
@@ -95,6 +97,8 @@ class Main {
     if (!this.isResourcesLoaded) {
       return console.error('Resources not loaded yet');
     }
+    this.firstFrameStartedAt = new Date();
+    this.frame = 60;
     requestAnimationFrame(this.update.bind(this));
   }
   

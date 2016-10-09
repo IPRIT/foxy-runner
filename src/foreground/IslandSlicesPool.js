@@ -12,12 +12,12 @@ class IslandSlicesPool {
   createIslands() {
     this.islands = [];
     let islandsNumber = 4;
-    for (let type = IslandType.BIG_1; type <= IslandType.MOVABLE_1; ++type) {
-      let count = 1;
-      if (type === IslandType.MOVABLE_1) {
-        count *= 10;
-      }
-      this.islands = this.islands.concat(this.addObject(type, count, `island_0${type % islandsNumber + 1}`));
+    let similarTypeNumber = 1;
+    for (let type = IslandType.BIG_1; type <= IslandType.SMALL_4; ++type) {
+      this.islands = this.islands.concat(this.addObject(type, similarTypeNumber, `island_0${type % islandsNumber + 1}`));
+    }
+    for (let type = IslandType.MOVABLE_1, spriteIndex = 0; type <= IslandType.MOVABLE_4; ++type, ++spriteIndex) {
+      this.islands = this.islands.concat(this.addObject(type, similarTypeNumber * 4, `island_0${spriteIndex + 1}`));
     }
     this.shuffle(this.islands);
   }
@@ -35,7 +35,7 @@ class IslandSlicesPool {
       sprite.scale.y *= ratio;
   
       let island;
-      if (objectType === IslandType.MOVABLE_1) {
+      if (objectType >= IslandType.MOVABLE_1 && objectType <= IslandType.MOVABLE_4) {
         island = new MovableIsland(objectType, sprite);
       } else {
         island = new Island(objectType, sprite);

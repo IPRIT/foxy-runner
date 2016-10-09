@@ -27,13 +27,22 @@ class IslandType {
   static get MOVABLE_1() {
     return 9;
   }
-  static get EMPTY_SHORT() {
+  static get MOVABLE_2() {
     return 10;
   }
-  static get EMPTY_NORMAL() {
+  static get MOVABLE_3() {
     return 11;
   }
-  static get EMPTY_LARGE() {
+  static get MOVABLE_4() {
     return 12;
+  }
+  static get EMPTY_SHORT() {
+    return 13;
+  }
+  static get EMPTY_NORMAL() {
+    return 14;
+  }
+  static get EMPTY_LARGE() {
+    return 15;
   }
 }

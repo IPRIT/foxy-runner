@@ -9,7 +9,6 @@ class Island {
     
     this.sprite.position.y = this.yPosition = this.generateY();
     this.ySurfaceOffset = IslandsOffset.getIslandYOffset(type);
-    console.error(type, this.ySurfaceOffset);
   }
   
   generateY() {

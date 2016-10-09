@@ -9,7 +9,7 @@ class Foxy extends PhysicFreeFallObject {
   init() {
     this.state = 0;
     this.stateValue = 0.0;
-    this.stateAcceleration = 0.3;
+    this.stateAcceleration = 0.45;
     this.states = 4;
   
     this.movementState = FoxyState.RUNNING;
@@ -73,14 +73,14 @@ class Foxy extends PhysicFreeFallObject {
       this.resetV();
       this.setY(currentMapY);
       this.movementState = FoxyState.RUNNING;
-    } else {
+    } else if (Math.abs(currentMapY - y) > 10) {
       this.movementState = FoxyState.FLYING;
     }
     this.position.y = Math.min(y, currentMapY);
     
     if (Math.abs(this._v) > 5) {
       let sign = this._v > 0 ? 1 : -1;
-      let rotation = Math.min(2, Math.abs(this._v / 1000));
+      let rotation = Math.min(2, Math.abs(this._v / 700));
       this.sprites[this.state].rotation = sign * rotation;
     } else {
       this.sprites[this.state].rotation = 0;

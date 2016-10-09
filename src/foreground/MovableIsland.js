@@ -3,7 +3,7 @@ class MovableIsland extends Island {
   constructor(type, sprite) {
     super(type, sprite);
     
-    this.sinArg = 0;
+    this.sinArg = Math.random() * 100;
     this.isMovable = true;
     this.selectTransformFunction();
     this.ySurfaceOffset = IslandsOffset.getIslandYOffset(type);
@@ -24,6 +24,6 @@ class MovableIsland extends Island {
   selectTransformFunction() {
     let functions = [ BounceMovableFunction, SinMovableFunction ];
     this.transformFunction = new functions[ Utils.getRandomInt(0, functions.length - 1) ]();
-    this.sinArgAcceleration = this.transformFunction.accelerator;
+    this.sinArgAcceleration = this.transformFunction.accelerator * (Math.random() + 0.5);
   }
 }
