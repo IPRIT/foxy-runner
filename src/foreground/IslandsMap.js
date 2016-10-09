@@ -66,6 +66,9 @@ class IslandsMap extends PIXI.Container {
   addNewSlices() {
     var firstX = -(this.viewportX % IslandsMap.ViewportSliceWidth);
     for (var i = this.viewportSliceX, sliceIndex = 0; i < this.viewportSliceX + IslandsMap.ViewportNumSlices; i++, sliceIndex++) {
+      if (i < 0) {
+        continue;
+      }
       let slice;
       if (this.slices[i]) {
         slice = this.slices[i];

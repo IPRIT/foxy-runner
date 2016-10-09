@@ -31,7 +31,7 @@ class Foxy extends PhysicFreeFallObject {
     let sprite = PIXI.Sprite.fromFrame(frameId);
     sprite.anchor.x = 1;
     sprite.scale.x = -0.2;
-    sprite.scale.y = 0.2;
+    sprite.scale.y = -2;
     this.sprites.push(sprite);
     this.addChild(sprite);
   }
