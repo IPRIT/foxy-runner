@@ -7,7 +7,7 @@ class GameMap extends IslandsMap {
   
   init() {
     this.foxy = new Foxy();
-    this.foxOffsetX = 100;
+    this.foxOffsetX = 200;
     this.position.x += this.foxOffsetX;
     this.addChild(this.foxy);
     this.attachEvents();
@@ -26,7 +26,7 @@ class GameMap extends IslandsMap {
   
   getCurrentMapY() {
     let mapSlices = this.slices;
-    let currentSliceIndex = this.getSliceForViewportX(this.getViewportX() + this.foxOffsetX);
+    let currentSliceIndex = this.getSliceForViewportX(this.getViewportX());
     let slice = mapSlices[ currentSliceIndex ];
     console.log('Current type is', slice.type);
     if (slice && slice.type >= IslandType.BIG_1 && slice.type <= IslandType.MOVABLE_1) {

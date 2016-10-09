@@ -82,7 +82,7 @@ class IslandSlicesPool {
     for (let i = 0; i < repeatsNumber; ++i) {
       let scale = 1;
       let emptyContainer = new PIXI.Container();
-      Utils.highlight(emptyContainer);
+      //Utils.highlight(emptyContainer);
       
       if (objectType === IslandType.EMPTY_SHORT) {
         emptyContainer.scale.x *= scale;
