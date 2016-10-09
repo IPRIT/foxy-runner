@@ -1,0 +1,14 @@
+body, html {
+    max-height: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color: #333;
+    overflow: hidden;
+}
+canvas { background-color: #fff; }
+#game-canvas {
+    box-shadow: 0 1px 3px 4px rgba(0,0,0,0.2);
+}
