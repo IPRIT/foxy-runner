@@ -42,6 +42,8 @@ class GameMap extends IslandsMap {
   
   attachEvents() {
     document.addEventListener('keydown', this.onKeyDown.bind(this));
+    document.addEventListener('mousedown', this.onKeyDown.bind(this));
+    document.addEventListener('touchstart', this.onKeyDown.bind(this));
   }
   
   onKeyDown(event) {
