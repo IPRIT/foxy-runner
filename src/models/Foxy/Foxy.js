@@ -30,8 +30,10 @@ class Foxy extends PhysicFreeFallObject {
   addSprite(frameId) {
     let sprite = PIXI.Sprite.fromFrame(frameId);
     sprite.anchor.x = 1;
-    sprite.scale.x = -0.2;
-    sprite.scale.y = -2;
+    sprite.scale.x = -.2;
+    sprite.scale.y = .2;
+    sprite.anchor.x = 0.5;
+    sprite.anchor.y = 0.5;
     this.sprites.push(sprite);
     this.addChild(sprite);
   }
@@ -79,13 +81,8 @@ class Foxy extends PhysicFreeFallObject {
     if (Math.abs(this._v) > 5) {
       let sign = this._v > 0 ? 1 : -1;
       let rotation = Math.min(2, Math.abs(this._v / 1000));
-      
-      this.sprites[this.state].anchor.x = 0.5;
-      this.sprites[this.state].anchor.y = 0.5;
       this.sprites[this.state].rotation = sign * rotation;
     } else {
-      this.sprites[this.state].anchor.x = 0.5;
-      this.sprites[this.state].anchor.y = 0.5;
       this.sprites[this.state].rotation = 0;
     }
   }

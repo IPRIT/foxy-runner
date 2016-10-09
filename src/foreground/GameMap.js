@@ -32,7 +32,7 @@ class GameMap extends IslandsMap {
     if (slice && slice.type >= IslandType.BIG_1 && slice.type <= IslandType.MOVABLE_1) {
       return slice.yPosition + slice.ySurfaceOffset;
     }
-    return Main.CanvasHeight - 240;
+    return Main.CanvasHeight - 200;
   }
   
   toFront(object) {

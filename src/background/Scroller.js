@@ -18,7 +18,7 @@ class Scroller {
     this.map = new GameMap();
     stage.addChild(this.map);
   
-    this._viewportX = Main.CanvasWidth * 1.5;
+    this._viewportX = 0;
   }
   
   setViewportX(viewportX) {
