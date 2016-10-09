@@ -13,7 +13,11 @@ class IslandSlicesPool {
     this.islands = [];
     let islandsNumber = 4;
     for (let type = IslandType.BIG_1; type <= IslandType.MOVABLE_1; ++type) {
-      this.islands = this.islands.concat(this.addObject(type, 5, `island_0${type % islandsNumber + 1}`));
+      let count = 1;
+      if (type === IslandType.MOVABLE_1) {
+        count *= 10;
+      }
+      this.islands = this.islands.concat(this.addObject(type, count, `island_0${type % islandsNumber + 1}`));
     }
     this.shuffle(this.islands);
   }
@@ -43,7 +47,7 @@ class IslandSlicesPool {
   
   shuffle(array = this.islands) {
     let len = array.length;
-    let shuffles = len * 3;
+    let shuffles = len * 4;
     for (let i = 0; i < shuffles; i++) {
       let foregroundSlice = array.pop();
       let pos = Math.floor(Math.random() * (len - 1));

@@ -4,8 +4,12 @@ class MovableIsland extends Island {
     super(type, sprite);
     
     this.sinArg = 0;
-    this.sinArgAcceleration = 0.03;
+    
     this.isMovable = true;
+    
+    let functions = [ BounceMovableFunction, SquareMovableFunction, SinMovableFunction ];
+    this.transformFunction = new functions[ Utils.getRandomInt(0, functions.length - 1) ]();
+    this.sinArgAcceleration = this.transformFunction.accelerator;
   }
   
   move() {
@@ -13,7 +17,7 @@ class MovableIsland extends Island {
       return;
     }
     this.sinArg += this.sinArgAcceleration;
-    this.yPosition = this.yMiddle + this.offset * Math.sin(this.sinArg) * 2;
+    this.yPosition = this.yMiddle + this.offset * this.transformFunction.compute(this.sinArg) * 2;
     this.sprite.position.y = this.yPosition;
   }
 }
