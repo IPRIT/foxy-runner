@@ -6,6 +6,7 @@ class MovableIsland extends Island {
     this.sinArg = 0;
     this.isMovable = true;
     this.selectTransformFunction();
+    this.ySurfaceOffset = IslandsOffset.getIslandYOffset(type);
   }
   
   move() {
@@ -21,7 +22,7 @@ class MovableIsland extends Island {
   }
   
   selectTransformFunction() {
-    let functions = [ BounceMovableFunction, SquareMovableFunction, SinMovableFunction ];
+    let functions = [ BounceMovableFunction, SinMovableFunction ];
     this.transformFunction = new functions[ Utils.getRandomInt(0, functions.length - 1) ]();
     this.sinArgAcceleration = this.transformFunction.accelerator;
   }

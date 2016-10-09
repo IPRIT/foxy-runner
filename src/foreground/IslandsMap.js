@@ -23,8 +23,8 @@ class IslandsMap extends PIXI.Container {
   }
   
   initMap() {
-    for (let i = 0; i < 8; ++i) {
-      this.slices.push(this.builder.generateNext(this));
+    for (let i = 0; i < 3; ++i) {
+      //this.slices.push(this.builder.generateNext(this));
     }
   }
   
@@ -45,6 +45,22 @@ class IslandsMap extends PIXI.Container {
   
     this.removeOldSlices(prevViewportSliceX);
     this.addNewSlices();
+  }
+  
+  getCurrentSliceIndex() {
+    return this.viewportSliceX;
+  }
+  
+  getSliceForViewportX(viewportX) {
+    return Math.floor(viewportX / IslandsMap.ViewportSliceWidth);
+  }
+  
+  getViewportX() {
+    return this.viewportX;
+  }
+  
+  shiftViewportX(shiftX) {
+    this.setViewportX(this.viewportX + shiftX);
   }
   
   addNewSlices() {
@@ -75,7 +91,7 @@ class IslandsMap extends PIXI.Container {
       slice.reset();
       this.returnIslandSlice(slice);
       this.removeChild(slice.sprite);
-      //this.slices[i] = null;
+      this.slices[i] = null;
     }
   }
   

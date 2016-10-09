@@ -12,15 +12,19 @@ class Settings {
   }
   
   static get ScrollSpeed() {
-    return 20;
+    return 5;
   }
   
   static get MaxScrollSpeed() {
-    return 40;
+    return 15;
   }
   
   static get ScrollSpeedAcceleration() {
-    return 0.004;
+    return 0.009;
+  }
+  
+  static MiddleY() {
+    return
   }
   
   static get CanvasDomId() {

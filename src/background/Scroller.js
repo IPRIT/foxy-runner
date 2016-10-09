@@ -15,11 +15,10 @@ class Scroller {
       this.tiles.push(tile);
       stage.addChild(tile);
     }
-    this.map = new IslandsMap();
+    this.map = new GameMap();
     stage.addChild(this.map);
   
     this._viewportX = Main.CanvasWidth * 1.5;
-    this._viewportY = 0;
   }
   
   setViewportX(viewportX) {
@@ -27,32 +26,15 @@ class Scroller {
     for (let tile of this.tiles) {
       tile.setViewportX(viewportX);
     }
-    this.map.setViewportX(viewportX / 1.2);
-  }
-  
-  setViewportY(viewportY) {
-    this._viewportY = viewportY;
-    for (let tile of this.tiles) {
-      tile.setViewportY(viewportY);
-    }
-    //todo: this.map.setViewportY(viewportY);
   }
   
   getViewportX() {
     return this._viewportX;
   }
   
-  getViewportY() {
-    return this._viewportY;
-  }
-  
   shiftViewportX(value) {
     this.setViewportX(this._viewportX + value);
+    this.map.moveBy(value);
     return this._viewportX;
-  }
-  
-  shiftViewportY(value) {
-    this.setViewportY(this._viewportY + value);
-    return this._viewportY;
   }
 }

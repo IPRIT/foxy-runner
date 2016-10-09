@@ -82,13 +82,7 @@ class IslandSlicesPool {
     for (let i = 0; i < repeatsNumber; ++i) {
       let scale = 1;
       let emptyContainer = new PIXI.Container();
-      
-      let graphics = new PIXI.Graphics();
-      graphics.beginFill(0x0FF0F0);
-      graphics.lineStyle(10, 0xFF0000);
-      graphics.drawRect(0, 0, IslandsMap.ViewportSliceWidth, IslandsMap.ViewportSliceWidth);
-      graphics.blendMode = PIXI.BLEND_MODES.MULTIPLY;
-      //emptyContainer.addChild(graphics);
+      Utils.highlight(emptyContainer);
       
       if (objectType === IslandType.EMPTY_SHORT) {
         emptyContainer.scale.x *= scale;

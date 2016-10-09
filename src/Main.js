@@ -12,6 +12,10 @@ class Main {
     return Main.CanvasWidth / Main.CanvasHeight;
   }
   
+  static get Ratio() {
+    return Utils.getBodyBounds()[0] / Main.CanvasWidth;
+  }
+  
   constructor() {
     this.init();
   }
@@ -59,6 +63,7 @@ class Main {
   loadSpriteSheet(callback) {
     var loader = PIXI.loader;
     loader.add('islands', 'resources/bg/foreground/islands.json');
+    loader.add('foxy', './resources/models/foxy/foxy.json');
     loader.add('bg-01', './resources/bg/bg-01.png');
     loader.add('bg-02', './resources/bg/bg-02.png');
     loader.add('bg-03', './resources/bg/bg-03.png');
