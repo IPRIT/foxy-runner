@@ -72,18 +72,21 @@ class IslandsMap extends PIXI.Container {
       if (!slice) {
         continue;
       }
+      slice.reset();
       this.returnIslandSlice(slice);
       this.removeChild(slice.sprite);
-      this.slices[i] = null;
+      //this.slices[i] = null;
     }
   }
   
   returnIslandSlice(slice) {
     let type = slice.type;
-    if (type >= IslandType.BIG_1 && type <= IslandType.SMALL_4) {
+    if (type >= IslandType.BIG_1 && type <= IslandType.MOVABLE_1) {
       this.builder.returnIsland(slice);
     } else if (type >= IslandType.EMPTY_SHORT && type <= IslandType.EMPTY_LARGE) {
       this.builder.returnEmpty(slice);
+    } else {
+      console.error('WTF!!');
     }
   }
   

@@ -47,7 +47,7 @@ class IslandSlicesPool {
   
   shuffle(array = this.islands) {
     let len = array.length;
-    let shuffles = len * 4;
+    let shuffles = len * 3;
     for (let i = 0; i < shuffles; i++) {
       let foregroundSlice = array.pop();
       let pos = Math.floor(Math.random() * (len - 1));
@@ -56,12 +56,13 @@ class IslandSlicesPool {
   }
   
   borrowIsland() {
-    console.log('Borrowed island');
-    return this.islands.shift();
+    let island = this.islands.shift();
+    console.log('Borrowed island', island.type);
+    return island;
   }
   
   returnIsland(object) {
-    console.log('Returned island');
+    console.log('Returned island', object.type, 'Count:', this.islands.length);
     this.islands.push(object);
   }
   
@@ -87,7 +88,7 @@ class IslandSlicesPool {
       graphics.lineStyle(10, 0xFF0000);
       graphics.drawRect(0, 0, IslandsMap.ViewportSliceWidth, IslandsMap.ViewportSliceWidth);
       graphics.blendMode = PIXI.BLEND_MODES.MULTIPLY;
-      emptyContainer.addChild(graphics);
+      //emptyContainer.addChild(graphics);
       
       if (objectType === IslandType.EMPTY_SHORT) {
         emptyContainer.scale.x *= scale;
@@ -100,12 +101,12 @@ class IslandSlicesPool {
   }
   
   borrowEmpty() {
-    console.log('Borrowed empty');
+    //console.log('Borrowed empty');
     return this.emptySpaces.shift();
   }
   
   returnEmpty(object) {
-    console.log('Returned empty');
+    //console.log('Returned empty', object.type, 'Count:', this.emptySpaces.length);
     this.emptySpaces.push(object);
   }
 }

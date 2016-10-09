@@ -1,9 +1,5 @@
 class Main {
   
-  static get ScrollSpeed() {
-    return Settings.ScrollSpeed;
-  }
-  
   static get CanvasWidth() {
     return Settings.Width;
   }
@@ -74,11 +70,13 @@ class Main {
   
   spriteSheetLoaded() {
     this.scroller = new Scroller(this.stage);
+    this.scroller.speed = Settings.ScrollSpeed;
     this.attachEventsAfterLoad();
   }
   
   update() {
-    this.scroller.shiftViewportX(Main.ScrollSpeed);
+    this.scroller.speed = Math.min(this.scroller.speed + Settings.ScrollSpeedAcceleration, Settings.MaxScrollSpeed);
+    this.scroller.shiftViewportX(this.scroller.speed);
     this.renderer.render(this.stage);
     requestAnimationFrame(this.update.bind(this));
   }

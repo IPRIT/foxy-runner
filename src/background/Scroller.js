@@ -7,6 +7,7 @@ class Scroller {
   
   init(stage) {
     this.tiles = [];
+    this.speed = 1;
     let from = 5;
     let to = 1;
     for (let i = from; i >= to; --i) {
@@ -17,7 +18,7 @@ class Scroller {
     this.map = new IslandsMap();
     stage.addChild(this.map);
   
-    this._viewportX = 4000;
+    this._viewportX = Main.CanvasWidth * 1.5;
     this._viewportY = 0;
   }
   

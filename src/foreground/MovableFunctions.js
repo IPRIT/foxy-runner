@@ -13,11 +13,11 @@ class BounceMovableFunction extends MovableFunction {
   
   constructor() {
     super();
-    this.accelerator = 0.001;
+    this.accelerator = 0.003;
   }
   
   fn(arg) {
-    return Math.cos(arg * arg * arg) * Math.sin(arg * arg * arg) * 2;
+    return Math.cos(arg * arg) * Math.sin(arg * arg);
   }
 }
 
@@ -25,7 +25,7 @@ class SquareMovableFunction extends MovableFunction {
   
   constructor() {
     super();
-    this.accelerator = 0.001;
+    this.accelerator = 0.003;
   }
   
   fn(arg) {

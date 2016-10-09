@@ -3,12 +3,11 @@ class Island {
   constructor(type, sprite) {
     this.type = type;
     this.sprite = sprite;
-    this.sprite.position.y = 0;
   
     this.yMiddle = (1 << 8) + 120;
     this.offset = 1 << 6;
     
-    this.yPosition = this.generateY();
+    this.sprite.position.y = this.yPosition = this.generateY();
   }
   
   generateY() {
@@ -21,5 +20,9 @@ class Island {
   
   getHeight() {
     return this.sprite.height;
+  }
+  
+  reset() {
+    this.yPosition = this.generateY();
   }
 }
