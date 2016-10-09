@@ -20,7 +20,7 @@ class Settings {
   }
   
   static get ScrollSpeedAcceleration() {
-    return 0.01;
+    return 0.004;
   }
   
   static get CanvasDomId() {
