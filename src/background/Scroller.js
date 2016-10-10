@@ -1,13 +1,13 @@
 class Scroller {
   
   constructor(stage) {
-    this.stage = stage;
     this.init(stage);
   }
   
   init(stage) {
     this.tiles = [];
-    this.speed = 1;
+    this._speed = 1;
+    
     let from = 5;
     let to = 1;
     for (let i = from; i >= to; --i) {
@@ -15,10 +15,15 @@ class Scroller {
       this.tiles.push(tile);
       stage.addChild(tile);
     }
-    this.map = new GameMap();
+    
+    this.map = new GameMap(this);
     stage.addChild(this.map);
-  
+    
     this._viewportX = 0;
+  }
+  
+  getViewportX() {
+    return this._viewportX;
   }
   
   setViewportX(viewportX) {
@@ -28,13 +33,17 @@ class Scroller {
     }
   }
   
-  getViewportX() {
-    return this._viewportX;
-  }
-  
   shiftViewportX(value) {
     this.setViewportX(this._viewportX + value);
     this.map.moveBy(value);
     return this._viewportX;
+  }
+  
+  getScrollSpeed() {
+    return this._speed;
+  }
+  
+  setScrollSpeed(speed) {
+    this._speed = speed;
   }
 }

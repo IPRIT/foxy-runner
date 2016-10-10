@@ -2,20 +2,23 @@ class Foxy extends PhysicFreeFallObject {
   
   constructor() {
     super();
-    
     this.init();
   }
   
   init() {
     this.state = 0;
     this.stateValue = 0.0;
-    this.stateAcceleration = 0.45;
+    this.stateAcceleration = 0.2; // [.2-.45]
     this.states = 4;
   
     this.movementState = FoxyState.RUNNING;
     
     this.createSprites();
     this.showState();
+  }
+  
+  setStateAcceleration(acceleration) {
+    this.stateAcceleration = Math.max(Math.min(acceleration, .45), .2);
   }
   
   createSprites() {
@@ -53,7 +56,8 @@ class Foxy extends PhysicFreeFallObject {
   
   nextStateValue() {
     if (this.movementState === FoxyState.FLYING) {
-      this.setFlyingState();
+      this.state = 0;
+      this.stateValue = 0;
       this.showState();
     } else {
       let oldState = this.state;
@@ -67,46 +71,57 @@ class Foxy extends PhysicFreeFallObject {
   }
   
   move(currentMapY) {
+    this.jumpState ? this.loosenGravity() : this.repairGravity();
     this.compute();
-    let y = this.getY();
-    if (y > currentMapY) {
-      this.resetV();
-      this.setY(currentMapY);
-      this.movementState = FoxyState.RUNNING;
-      this.endJump();
-    } else if (Math.abs(currentMapY - y) > 20) {
-      this.movementState = FoxyState.FLYING;
+    let nextY = this.getY();
+    if (nextY - currentMapY > 0 && this._v > 0) {
+      this.putOnSurface(currentMapY);
+      this.running();
     } else {
-      this.movementState = FoxyState.RUNNING;
-      this.endJump();
+      this.flying();
     }
-    
-    this.position.y = Math.min(y, currentMapY);
-    
-    if (Math.abs(this._v) > 10 && this.movementState === FoxyState.FLYING) {
-      let sign = this._v > 0 ? 1 : -1;
-      let rotation = Math.min(2, Math.abs(this._v / 700));
+    this.position.y = Math.min(nextY, currentMapY);
+    this.tilt(this._v);
+  }
+  
+  enableJumpingState() {
+    this.jumpState = true;
+  }
+  
+  disableJumpingState() {
+    this.jumpState = false;
+  }
+  
+  tilt(velocity) {
+    if (this.movementState === FoxyState.FLYING) {
+      let sign = velocity >= 0 ? 1 : -1;
+      let rotation = Math.abs(velocity / 700);
       this.sprites[this.state].rotation = sign * rotation;
     } else {
       this.sprites[this.state].rotation = Math.sin(this.stateValue) / 70 - .05;
     }
   }
   
-  setFlyingState() {
-    this.state = 0;
-    this.stateValue = 0;
-  }
-  
-  startJump() {
-    if (this.movementState === FoxyState.RUNNING) {
-      this.physicJump();
-      this.loosenGravity();
+  running() {
+    this.movementState = FoxyState.RUNNING;
+    if (this.jumpState) {
+      this.jump();
     }
   }
   
-  endJump() {
-    if (this.movementState === FoxyState.FLYING) {
-      this.repairGravity();
-    }
+  flying() {
+    this.movementState = FoxyState.FLYING;
+  }
+  
+  putOnSurface(currentMapY) {
+    this.resetV();
+    this.setY(currentMapY);
+    console.log(this._v, this._y / 10);
+  }
+  
+  jump() {
+    console.info('JUMP');
+    this.physicJump();
+    //this.flying();
   }
 }

@@ -1,7 +1,8 @@
 class GameMap extends IslandsMap {
   
-  constructor() {
+  constructor(parent) {
     super();
+    this._parent = parent;
     this.init();
   }
   
@@ -13,11 +14,16 @@ class GameMap extends IslandsMap {
     this.attachEvents();
   }
   
+  getMapSpeed() {
+    return this._parent.getScrollSpeed();
+  }
+  
   moveBy(shiftX) {
     this.shiftViewportX(shiftX);
     this.toFront(this.foxy);
     this.foxy.nextStateValue();
     this.foxy.move(this.getCurrentMapY());
+    this.foxy.setStateAcceleration(this.getMapSpeed() / Math.sqrt(this.getMapSpeed() * 120));
   }
   
   getCurrentMapY() {
@@ -71,10 +77,10 @@ class GameMap extends IslandsMap {
   }
   
   startJump() {
-    this.foxy.startJump();
+    this.foxy.enableJumpingState();
   }
   
   endJump() {
-    this.foxy.endJump();
+    this.foxy.disableJumpingState();
   }
 }

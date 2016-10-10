@@ -75,7 +75,7 @@ class Main {
   
   spriteSheetLoaded() {
     this.scroller = new Scroller(this.stage);
-    this.scroller.speed = Settings.ScrollSpeed;
+    this.scroller.setScrollSpeed(Settings.ScrollSpeed);
     this.attachEventsAfterLoad();
   }
   
@@ -83,8 +83,10 @@ class Main {
     this.frame++;
     //console.info('FPS:', (this.frame / ((new Date().getTime() - this.firstFrameStartedAt.getTime()) / 1000)));
     
-    this.scroller.speed = Math.min(this.scroller.speed + Settings.ScrollSpeedAcceleration, Settings.MaxScrollSpeed);
-    this.scroller.shiftViewportX(this.scroller.speed);
+    this.scroller.setScrollSpeed(
+      Math.min(this.scroller.getScrollSpeed() + Settings.ScrollSpeedAcceleration, Settings.MaxScrollSpeed)
+    );
+    this.scroller.shiftViewportX(this.scroller.getScrollSpeed());
     this.renderer.render(this.stage);
     requestAnimationFrame(this.update.bind(this));
   }
