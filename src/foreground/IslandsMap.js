@@ -9,7 +9,7 @@ class IslandsMap extends PIXI.Container {
   }
   
   static get ViewportNumSlices() {
-    return Math.ceil(IslandsMap.ViewportWidth / IslandsMap.ViewportSliceWidth) + 2;
+    return Math.ceil(IslandsMap.ViewportWidth / IslandsMap.ViewportSliceWidth);
   }
   
   constructor() {

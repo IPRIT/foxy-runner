@@ -20,15 +20,12 @@ class GameMap extends IslandsMap {
     this.foxy.move(this.getCurrentMapY());
   }
   
-  startJump() {
-    this.foxy.jump();
-  }
-  
   getCurrentMapY() {
     let floorY = Main.CanvasHeight - 200;
     let mapSlices = this.slices;
-    let currentSliceIndex = this.getSliceForViewportX(this.getViewportX() + 50);
+    let currentSliceIndex = this.getSliceForViewportX(this.getViewportX());
     let slice = mapSlices[ currentSliceIndex ];
+    //console.log('Current type is', slice.type);
     if (slice && slice.type >= IslandType.BIG_1 && slice.type <= IslandType.MOVABLE_4) {
       let foxY = this.foxy.getY();
       let surfaceY = slice.yPosition + slice.ySurfaceOffset;
@@ -49,6 +46,14 @@ class GameMap extends IslandsMap {
     document.addEventListener('keydown', this.onKeyDown.bind(this));
     document.addEventListener('mousedown', this.startJump.bind(this));
     document.addEventListener('touchstart', this.startJump.bind(this));
+  
+    document.addEventListener('keyup', this.onKeyUp.bind(this));
+    document.addEventListener('mouseup', this.endJump.bind(this));
+    document.addEventListener('touchend', this.endJump.bind(this));
+  }
+  
+  detachEvents() {
+    // todo: detach events
   }
   
   onKeyDown(event) {
@@ -56,5 +61,20 @@ class GameMap extends IslandsMap {
       return;
     }
     this.startJump();
+  }
+  
+  onKeyUp() {
+    if (event.keyCode !== 32 && event.keyCode !== 87 && event.keyCode !== 38) {
+      return;
+    }
+    this.endJump();
+  }
+  
+  startJump() {
+    this.foxy.startJump();
+  }
+  
+  endJump() {
+    this.foxy.endJump();
   }
 }

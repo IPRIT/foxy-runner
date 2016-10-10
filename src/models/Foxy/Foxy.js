@@ -73,17 +73,21 @@ class Foxy extends PhysicFreeFallObject {
       this.resetV();
       this.setY(currentMapY);
       this.movementState = FoxyState.RUNNING;
-    } else if (Math.abs(currentMapY - y) > 10) {
+      this.endJump();
+    } else if (Math.abs(currentMapY - y) > 20) {
       this.movementState = FoxyState.FLYING;
+    } else {
+      this.movementState = FoxyState.RUNNING;
+      this.endJump();
     }
     this.position.y = Math.min(y, currentMapY);
     
-    if (Math.abs(this._v) > 5) {
+    if (Math.abs(this._v) > 10 && this.movementState === FoxyState.FLYING) {
       let sign = this._v > 0 ? 1 : -1;
       let rotation = Math.min(2, Math.abs(this._v / 700));
       this.sprites[this.state].rotation = sign * rotation;
     } else {
-      this.sprites[this.state].rotation = 0;
+      this.sprites[this.state].rotation = Math.sin(this.stateValue) / 70 - .05;
     }
   }
   
@@ -92,9 +96,16 @@ class Foxy extends PhysicFreeFallObject {
     this.stateValue = 0;
   }
   
-  jump() {
+  startJump() {
     if (this.movementState === FoxyState.RUNNING) {
       this.physicJump();
+      this.loosenGravity();
+    }
+  }
+  
+  endJump() {
+    if (this.movementState === FoxyState.FLYING) {
+      this.repairGravity();
     }
   }
 }
