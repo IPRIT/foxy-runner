@@ -14,7 +14,7 @@ class PhysicFreeFallObject extends PIXI.Container {
     super();
     
     this._y = 0;
-    this._v0 = 50;
+    this._v0 = 100;
     this._v = this._v0;
     this.accelerationType = PhysicAccelerationType.Normal;
   }
@@ -33,7 +33,7 @@ class PhysicFreeFallObject extends PIXI.Container {
   }
   
   physicJump() {
-    this._v -= 250;
+    this._v -= 280;
   }
   
   resetV() {
@@ -44,7 +44,7 @@ class PhysicFreeFallObject extends PIXI.Container {
     if (this.accelerationType === PhysicAccelerationType.Normal) {
       return 9.80665 * 1.7;
     } else if (this.accelerationType === PhysicAccelerationType.KeyHold) {
-      return 9.80665 * .4;
+      return 9.80665 * .45;
     }
   }
   

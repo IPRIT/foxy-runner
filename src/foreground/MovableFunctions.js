@@ -13,7 +13,7 @@ class BounceMovableFunction extends MovableFunction {
   
   constructor() {
     super();
-    this.accelerator = 0.07;
+    this.accelerator = 0.03;
   }
   
   fn(arg) {

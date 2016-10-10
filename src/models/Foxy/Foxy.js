@@ -80,6 +80,7 @@ class Foxy extends PhysicFreeFallObject {
       this.movementState = FoxyState.RUNNING;
       this.endJump();
     }
+    
     this.position.y = Math.min(y, currentMapY);
     
     if (Math.abs(this._v) > 10 && this.movementState === FoxyState.FLYING) {
