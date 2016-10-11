@@ -10,8 +10,8 @@ class Scroller {
     
     this.addTiles(stage);
     
-    this.map = new GameMap(this);
-    stage.addChild(this.map);
+    this.gameMap = new GameMap(this);
+    stage.addChild(this.gameMap);
     
     this._viewportX = 0;
   }
@@ -40,7 +40,7 @@ class Scroller {
   
   shiftViewportX(value) {
     this.setViewportX(this._viewportX + value);
-    this.map.moveBy(value);
+    this.gameMap.moveBy(value);
     return this._viewportX;
   }
   
@@ -53,13 +53,16 @@ class Scroller {
   }
   
   hardViewUpdate() {
-    for (let i = 0; i < this.tiles.length; ++i) {
-      let tile = this.tiles[i];
+    for (let tile of this.tiles) {
       this.stage.removeChild(tile);
       tile.destroy();
     }
-    this.stage.removeChild(this.map);
     this.addTiles(this.stage);
-    this.stage.addChild(this.map);
+    this.toFront(this.gameMap);
+  }
+  
+  toFront(object) {
+    this.stage.removeChild(object);
+    this.stage.addChild(object);
   }
 }
