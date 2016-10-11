@@ -1,7 +1,8 @@
 class Settings {
   
   static get Width() {
-    if (Utils.getBodyBounds()[0] < 1000) {
+    let [ width, height ] = Utils.getBodyBounds();
+    if (width < 1000 && width < height) {
       return 1500;
     }
     return 3072;
