@@ -17,7 +17,7 @@ class Settings {
   }
   
   static get MaxScrollSpeed() {
-    return 35;
+    return 33;
   }
   
   static get ScrollSpeedAcceleration() {

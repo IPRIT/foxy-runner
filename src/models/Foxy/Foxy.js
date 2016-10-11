@@ -6,7 +6,7 @@ class Foxy extends PhysicFreeFallObject {
   }
   
   init() {
-    this.state = 0;
+    this.frame = 0;
     this.stateValue = 0.0;
     this.stateAcceleration = 0.2; // [.2-.45]
     this.states = 4;
@@ -15,6 +15,12 @@ class Foxy extends PhysicFreeFallObject {
     
     this.createSprites();
     this.showState();
+  
+    this.dust = new Dirt();
+    this.dust.position.x -= 80;
+    this.dust.position.y += 25;
+    this.dust.scale.set(this.width / (1.4 * this.dust.width));
+    this.addChild(this.dust);
   }
   
   setStateAcceleration(acceleration) {
@@ -41,11 +47,11 @@ class Foxy extends PhysicFreeFallObject {
   }
   
   showState({ oldState } = {}) {
-    if (this.state === oldState) {
+    if (this.frame === oldState) {
       return;
     }
     this.sprites.forEach((sprite, index) => {
-      if (this.state === index) {
+      if (this.frame === index) {
         sprite.alpha = 1;
       } else {
         sprite.alpha = 0;
@@ -55,14 +61,14 @@ class Foxy extends PhysicFreeFallObject {
   
   nextStateValue() {
     if (this.movementState === FoxyState.FLYING) {
-      this.state = 0;
+      this.frame = 0;
       this.stateValue = 0;
       this.showState();
     } else {
-      let oldState = this.state;
+      let oldState = this.frame;
       this.stateValue += this.stateAcceleration;
-      this.state = Math.floor(this.stateValue) % this.states;
-      if (!this.state && this.stateValue > 1) {
+      this.frame = Math.floor(this.stateValue) % this.states;
+      if (!this.frame && this.stateValue > 1) {
         this.stateValue = 0;
       }
       this.showState({ oldState });
@@ -95,14 +101,16 @@ class Foxy extends PhysicFreeFallObject {
     if (this.movementState === FoxyState.FLYING) {
       let sign = velocity >= 0 ? 1 : -1;
       let rotation = Math.abs(velocity / 700);
-      this.sprites[this.state].rotation = sign * rotation;
+      this.sprites[this.frame].rotation = sign * rotation;
     } else {
-      this.sprites[this.state].rotation = Math.sin(this.stateValue) / 70 - .05;
+      this.sprites[this.frame].rotation = Math.sin(this.stateValue) / 70 - .05;
     }
   }
   
   running() {
     this.movementState = FoxyState.RUNNING;
+    this.dust.alpha = 1;
+    this.dust.animate();
     if (this.jumpState) {
       this.jump();
     }
@@ -110,6 +118,7 @@ class Foxy extends PhysicFreeFallObject {
   
   flying() {
     this.movementState = FoxyState.FLYING;
+    this.dust.alpha = 0;
   }
   
   putOnSurface(currentMapY) {

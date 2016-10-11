@@ -7,7 +7,9 @@ class Chicken extends Animal {
   }
   
   init() {
+    this.createChickenParticles();
     this.createSprite();
+    this.particles.alpha = 0;
   }
   
   createSprite() {
@@ -17,12 +19,29 @@ class Chicken extends Animal {
     this.addChild(this.sprite);
   }
   
+  explode() {
+    if (!this.isExploded) {
+      this.isExploded = true;
+      this.sprite.alpha = 0;
+      this.particles.alpha = 1;
+    }
+    this.particles.scatter();
+  }
+  
   reset() {
     this.sprite.scale.x = .16;
     this.sprite.scale.y = .16;
-    //this.sprite.anchor.x = 0.5;
-    //this.sprite.anchor.y = 0.5;
     this.position.x = 0;
     this.position.y = 0;
+    this.isExploded = false;
+    this.sprite.alpha = 1;
+    this.particles.alpha = 0;
+    this.particles.reset();
+  }
+  
+  createChickenParticles() {
+    this.particles = new ChickenParticles();
+    this.particles.position.set(-200, -200);
+    this.addChild(this.particles);
   }
 }

@@ -22,9 +22,11 @@ class Main {
     this.stage = new PIXI.Container();
     this.renderer = PIXI.autoDetectRenderer(
       width, height, {
-        view: document.getElementById(Settings.CanvasDomId)
+        view: document.getElementById(Settings.CanvasDomId),
+        antialias: true
       }
     );
+    window.isWebGLRenderer = this.renderer instanceof PIXI.WebGLRenderer;
     this.loadResources();
   }
   
@@ -62,6 +64,8 @@ class Main {
     loader.add('islands', 'resources/bg/foreground/islands.json');
     loader.add('foxy', './resources/models/foxy/foxy.json');
     loader.add('chicken', './resources/models/chicken/chicken.png');
+    loader.add('dirt', './resources/models/dirt/dirt.png');
+    loader.add('chicken-particle', './resources/models/chicken/particle.png');
     loader.add('bg-01', './resources/bg/bg-01.png');
     loader.add('bg-02', './resources/bg/bg-02.png');
     loader.add('bg-03', './resources/bg/bg-03.png');

@@ -30,6 +30,7 @@ class IslandsMap extends PIXI.Container {
   
   setViewportX(viewportX) {
     this.viewportX = viewportX;
+    
     this.moveMovableIslands();
   
     var prevViewportSliceX = this.viewportSliceX;
@@ -77,6 +78,11 @@ class IslandsMap extends PIXI.Container {
         this.slices.push(slice);
         this.addChild(slice.sprite);
       }
+      if (sliceIndex < 2) {
+        slice.animals.forEach(animal => {
+          animal.explode();
+        });
+      }
       slice.sprite.position.x = firstX + (sliceIndex * IslandsMap.ViewportSliceWidth);
       slice.sprite.position.y = slice.yPosition || 0;
     }
@@ -90,7 +96,10 @@ class IslandsMap extends PIXI.Container {
         continue;
       }
       let peaceAnimals = slice.unpinAnimals();
-      peaceAnimals.forEach(animal => slice.sprite.removeChild(animal));
+      peaceAnimals.forEach(animal => {
+        animal.reset();
+        slice.sprite.removeChild(animal);
+      });
       this.returnAnimals(peaceAnimals);
       
       slice.reset();
@@ -135,5 +144,9 @@ class IslandsMap extends PIXI.Container {
     let animalOffsets = [65, 25, 50, 65, 50, 30, 50, 70, 70, 55, 25, 45];
     let animalOffset = animalOffsets[ slice.type - 1 ];
     animal.position.y += IslandsOffset.getIslandYOffset(slice.type) + animalOffset;
+  }
+  
+  getNextChicken(x = this.viewportX) {
+    let curSliceIndex = Math.floor(this.viewportX / IslandsMap.ViewportSliceWidth);
   }
 }
