@@ -2,7 +2,18 @@ class IslandsOffset {
   
   static getIslandYOffset(islandType) {
     let offsets = [
-      190, 140, 160, 190, 190, 145, 165, 190, 190, 190, 130, 160
+      175, //1
+      120, //2
+      145, //3
+      190, //4
+      205, //5
+      115, //6
+      150, //7
+      185, //8
+      180, //9
+      180, //10
+      120, //11
+      150  //12
     ];
     return offsets[ islandType - 1 ] || 0;
   }

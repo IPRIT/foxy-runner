@@ -53,12 +53,10 @@ class PhysicFreeFallObject extends PIXI.Container {
   }
   
   loosenGravity() {
-    console.log('loosen gravity');
     this.setAccelerationType(PhysicAccelerationType.KeyHold);
   }
   
   repairGravity() {
-    console.log('repeair gravity');
     this.setAccelerationType(PhysicAccelerationType.Normal);
   }
 }

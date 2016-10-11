@@ -4,8 +4,7 @@ class MapBuilder extends IslandSlicesPool {
     super();
   }
   
-  generateNext(islandsMap) {
-    let lastObject = islandsMap.getLastObject();
+  generateNext(lastObject) {
     if (!lastObject) {
       return this.borrowIsland();
     }

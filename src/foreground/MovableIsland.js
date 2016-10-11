@@ -15,7 +15,7 @@ class MovableIsland extends Island {
   
   reset() {
     this.sinArg = Math.random() * 100;
-    this.yPosition = this.generateY();
+    this.sprite.position.y = this.yPosition = this.generateY();
     this.selectTransformFunction();
   }
   

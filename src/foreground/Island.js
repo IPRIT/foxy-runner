@@ -1,6 +1,7 @@
-class Island {
+class Island extends PIXI.Container {
   
   constructor(type, sprite) {
+    super();
     this.type = type;
     this.sprite = sprite;
   
@@ -9,6 +10,8 @@ class Island {
     
     this.sprite.position.y = this.yPosition = this.generateY();
     this.ySurfaceOffset = IslandsOffset.getIslandYOffset(type);
+    
+    this.animals = [];
   }
   
   generateY() {
@@ -24,6 +27,16 @@ class Island {
   }
   
   reset() {
-    this.yPosition = this.generateY();
+    this.sprite.position.y = this.yPosition = this.generateY();
+  }
+  
+  addAnimal(animal) {
+    this.animals.push(animal);
+  }
+  
+  unpinAnimals() {
+    let animals = this.animals;
+    this.animals = [];
+    return animals;
   }
 }

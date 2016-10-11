@@ -32,9 +32,8 @@ class Foxy extends PhysicFreeFallObject {
   
   addSprite(frameId) {
     let sprite = PIXI.Sprite.fromFrame(frameId);
-    sprite.anchor.x = 1;
-    sprite.scale.x = -.2;
-    sprite.scale.y = .2;
+    sprite.scale.x = -.25;
+    sprite.scale.y = .25;
     sprite.anchor.x = 0.5;
     sprite.anchor.y = 0.5;
     this.sprites.push(sprite);
@@ -116,12 +115,9 @@ class Foxy extends PhysicFreeFallObject {
   putOnSurface(currentMapY) {
     this.resetV();
     this.setY(currentMapY);
-    console.log(this._v, this._y / 10);
   }
   
   jump() {
-    console.info('JUMP');
     this.physicJump();
-    //this.flying();
   }
 }
