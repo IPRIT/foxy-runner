@@ -12,10 +12,6 @@ class Main {
     return Main.CanvasWidth / Main.CanvasHeight;
   }
   
-  static get Ratio() {
-    return Utils.getBodyBounds()[0] / Main.CanvasWidth;
-  }
-  
   constructor() {
     this.init();
   }
@@ -46,6 +42,7 @@ class Main {
     let heightScale = h / Main.CanvasHeight;
     this.stage.scale.x = widthScale;
     this.stage.scale.y = heightScale;
+    this.scroller.hardViewUpdate();
     this.renderer.resize(w, h);
   }
   
