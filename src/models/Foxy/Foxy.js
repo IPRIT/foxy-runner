@@ -21,6 +21,15 @@ class Foxy extends PhysicFreeFallObject {
     this.dust.position.y += 25;
     this.dust.scale.set(this.width / (1.4 * this.dust.width));
     this.addChild(this.dust);
+  
+    let texture = PIXI.loader.resources[`foxy-died`].texture;
+    this.diedFox = new PIXI.Sprite(texture);
+    this.addChild(this.diedFox);
+    this.diedFox.alpha = 0;
+    
+    this.foxyGhost = new Ghost();
+    this.addChild(this.foxyGhost);
+    this.foxyGhost.alpha = 0;
   }
   
   setStateAcceleration(acceleration) {
@@ -159,16 +168,13 @@ class Foxy extends PhysicFreeFallObject {
     this.stateAcceleration = 0;
     this.sprites.forEach(sprite => sprite.alpha = 0);
     
-    let texture = PIXI.loader.resources[`foxy-died`].texture;
-    this.diedFox = new PIXI.Sprite(texture);
+    this.diedFox.alpha = 1;
     this.diedFox.scale.x = -.25;
     this.diedFox.scale.y = .25;
     this.diedFox.anchor.set(.5);
     this.diedFox.position.y += 5;
-    this.addChild(this.diedFox);
     
-    this.foxyGhost = new Ghost();
-    this.addChild(this.foxyGhost);
+    this.foxyGhost.alpha = 1;
     let yGhostAcceleration = 2;
     let xGhostAcceleration = 2;
     this.foxyGhost.position.y -= 50;
