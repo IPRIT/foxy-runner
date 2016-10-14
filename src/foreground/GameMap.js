@@ -101,7 +101,7 @@ class GameMap extends IslandsMap {
     this.score++;
     this.scoreView.setScore(this.score);
     
-    if (isWebGLRenderer && game.getFPS() > 45) {
+    if (isWebGLRenderer && game.getFPS() > 45 && Main.CanvasWidth > 1500) {
       let scoreIncrementerView = new ScoreIncrementer();
       scoreIncrementerView.addScore(1, nearestAnimal.animalType);
       this.addChild(scoreIncrementerView);
