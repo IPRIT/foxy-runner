@@ -138,7 +138,7 @@ class IslandsMap extends PIXI.Container {
   setUpAnimal(animal, slice) {
     let { width, height } = slice.sprite;
     animal.position.x = (width / slice.sprite.scale.x) / 2 + Math.random() * 200 - 100;
-    let animalOffsets = [65, 25, 50, 65, 50, 30, 50, 70, 70, 55, 25, 45];
+    let animalOffsets = [75, 25, 50, 70, 70, 30, 50, 85, 80, 65, 25, 45];
     let animalOffset = animalOffsets[ slice.type - 1 ];
     animal.position.y = IslandsOffset.getIslandYOffset(slice.type) + animalOffset;
   }

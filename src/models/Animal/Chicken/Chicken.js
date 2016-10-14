@@ -2,20 +2,19 @@ class Chicken extends Animal {
   
   constructor() {
     super();
-    this.animalType = AnimalType.Chicken;
     this.init();
   }
   
   init() {
-    this.createChickenParticles();
     this.createSprite();
+    this.createChickenParticles();
     this.reset();
     this._rebornNumber = 0;
   }
   
   createSprite() {
-    let texture = PIXI.loader.resources[`chicken`].texture;
-    this.sprite = new PIXI.Sprite(texture);
+    this.animalType = Utils.getRandomInt(1, 2);
+    this.sprite = PIXI.Sprite.fromFrame(`chicken-0${this.animalType}`);
     this.addChild(this.sprite);
   }
   
@@ -41,7 +40,7 @@ class Chicken extends Animal {
   }
   
   createChickenParticles() {
-    this.particles = new ChickenParticles();
+    this.particles = new ChickenParticles(this.animalType);
     this.particles.position.set(-200, -200);
     this.addChild(this.particles);
   }

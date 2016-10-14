@@ -23,7 +23,7 @@ class Main {
     this.renderer = PIXI.autoDetectRenderer(
       width, height, {
         view: document.getElementById(Settings.CanvasDomId),
-        antialias: true
+        //antialias: true
       }
     );
     window.isWebGLRenderer = this.renderer instanceof PIXI.WebGLRenderer;
@@ -64,9 +64,10 @@ class Main {
     loader.add('islands', 'resources/bg/foreground/islands.json');
     loader.add('foxy', './resources/models/foxy/foxy.json');
     loader.add('foxy-died', './resources/models/foxy/died/foxy-died.png');
-    loader.add('chicken', './resources/models/chicken/chicken.png');
+    loader.add('foxy-ghost', './resources/models/foxy/died/ghost-all.json');
+    loader.add('chicken', './resources/models/chicken/chicken-all.json');
+    loader.add('chicken-particle', './resources/models/chicken/particle/chicken-particle-all.json');
     loader.add('dirt', './resources/models/dirt/dirt.png');
-    loader.add('chicken-particle', './resources/models/chicken/particle.png');
     loader.add('bg-01', './resources/bg/bg-01.png');
     loader.add('bg-02', './resources/bg/bg-02.png');
     loader.add('bg-03', './resources/bg/bg-03.png');
@@ -119,5 +120,18 @@ class Main {
     this.isGameOver = true;
     this.scroller.gameOver();
     console.log('Game over');
+    
+    var colorMatrix = new PIXI.filters.ColorMatrixFilter();
+    this.stage.filters = [colorMatrix];
+    let saturation = 0;
+    AnimationAttractor.getInstance()
+      .append(1, this.stage, (stage) => {
+        colorMatrix.saturate(saturation);
+        saturation -= .02;
+      }, (stage) => {
+        return saturation < -1;
+      }, (stage) => {
+        console.log('Done');
+      });
   }
 }

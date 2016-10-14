@@ -1,6 +1,6 @@
 class ChickenParticles extends PIXI.particles.ParticleContainer {
   
-  constructor() {
+  constructor(animalType) {
     super(isWebGLRenderer ? 100 : 10, {
       scale: true,
       position: true,
@@ -8,7 +8,7 @@ class ChickenParticles extends PIXI.particles.ParticleContainer {
       uvs: true,
       alpha: true
     });
-    
+    this.animalType = animalType;
     this.init();
   }
   
@@ -16,8 +16,13 @@ class ChickenParticles extends PIXI.particles.ParticleContainer {
     let totalParticles = isWebGLRenderer ? 100 : 10;
     this.particles = [];
     for (let i = 0; i < totalParticles; ++i) {
-      let texture = PIXI.loader.resources[`chicken-particle`].texture;
-      let chickenParticle = new PIXI.Sprite(texture);
+      var chickenParticle;
+      if (this.animalType === AnimalType.ChickenWithChucks) {
+        let prob = Utils.getRandomInt(0, 10) >= 5;
+        chickenParticle = new PIXI.Sprite.fromFrame(`particle-0${prob ? 1 : 2}`);
+      } else {
+        chickenParticle = new PIXI.Sprite.fromFrame(`particle-01`);
+      }
       chickenParticle.position.x = 512 / 2 + (Math.random() - .5) * 50;
       chickenParticle.position.y = 512 / 2 + (Math.random() - .5) * 50;
       chickenParticle.anchor.set(0.5, 0.5);
