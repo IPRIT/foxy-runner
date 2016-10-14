@@ -174,7 +174,6 @@ class IslandsMap extends PIXI.Container {
         //Utils.mark([foxyPosition[0] + foxy.getWidth() / 2, foxyPosition[1] + foxy.getHeight() / 2], this);
 
         if (conditions.every(condition => condition)) {
-          console.log('Caught!', animals[ index ].id);
           animalIndex = index;
         }
       });

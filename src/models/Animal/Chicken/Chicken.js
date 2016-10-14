@@ -20,7 +20,6 @@ class Chicken extends Animal {
   
   explode() {
     if (!this.isExploded) {
-      console.info('Explosion');
       this.isExploded = true;
       this.sprite.alpha = 0;
       this.particles.alpha = 1;

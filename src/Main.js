@@ -88,7 +88,6 @@ class Main {
       return;
     }
     this.frame++;
-    //console.info('FPS:', (this.frame / ((new Date().getTime() - this.firstFrameStartedAt.getTime()) / 1000)));
     
     this.scroller.setScrollSpeed(
       Math.min(this.scroller.getScrollSpeed() + Settings.ScrollSpeedAcceleration, Settings.MaxScrollSpeed)
@@ -143,6 +142,12 @@ class Main {
   }
   
   resume() {
+    this.firstFrameStartedAt = new Date();
+    this.frame = 45;
     this.isPaused = false;
+  }
+  
+  getFPS() {
+    return (this.frame / ((new Date().getTime() - this.firstFrameStartedAt.getTime()) / 1000));
   }
 }
