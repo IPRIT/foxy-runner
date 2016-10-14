@@ -34,6 +34,10 @@ class Island extends PIXI.Container {
     this.animals.push(animal);
   }
   
+  getAnimals() {
+    return this.animals;
+  }
+  
   unpinAnimals() {
     let animals = this.animals;
     this.animals = [];

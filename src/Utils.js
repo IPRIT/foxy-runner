@@ -23,4 +23,19 @@ class Utils {
     graphics.blendMode = PIXI.BLEND_MODES.MULTIPLY;
     container.addChild(graphics);
   }
+  
+  static mark(coords, container) {
+    let graphics = new PIXI.Graphics();
+    graphics.beginFill(0x0FF0F0);
+    graphics.lineStyle(2, 0xFF0000);
+    graphics.drawRect(0, 0, 10, 10);
+    graphics.blendMode = PIXI.BLEND_MODES.MULTIPLY;
+    graphics.position.x = coords[0];
+    graphics.position.y = coords[1];
+    setTimeout(() => {
+      container.removeChild(graphics);
+      graphics.destroy();
+    }, 100);
+    container.addChild(graphics);
+  }
 }

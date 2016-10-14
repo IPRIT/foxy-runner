@@ -60,6 +60,9 @@ class Foxy extends PhysicFreeFallObject {
   }
   
   nextStateValue() {
+    if (this.isGameOver) {
+      return;
+    }
     if (this.movementState === FoxyState.FLYING) {
       this.frame = 0;
       this.stateValue = 0;
@@ -76,6 +79,9 @@ class Foxy extends PhysicFreeFallObject {
   }
   
   move(currentMapY) {
+    if (this.isGameOver) {
+      return;
+    }
     this.jumpState ? this.loosenGravity() : this.repairGravity();
     this.compute();
     let nextY = this.getY();
@@ -108,6 +114,9 @@ class Foxy extends PhysicFreeFallObject {
   }
   
   running() {
+    if (this.isGameOver) {
+      return;
+    }
     this.movementState = FoxyState.RUNNING;
     this.dust.alpha = 1;
     this.dust.animate();
@@ -124,9 +133,38 @@ class Foxy extends PhysicFreeFallObject {
   putOnSurface(currentMapY) {
     this.resetV();
     this.setY(currentMapY);
+    let floorY = Main.CanvasHeight - 200;
+    if (currentMapY >= floorY) {
+      game.gameOver();
+    }
   }
   
   jump() {
+    if (this.isGameOver) {
+      return;
+    }
     this.physicJump();
+  }
+  
+  getWidth() {
+    return this.sprites && this.sprites.length && this.sprites[0].width;
+  }
+  
+  getHeight() {
+    return this.sprites && this.sprites.length && this.sprites[0].height;
+  }
+  
+  gameOver() {
+    this.isGameOver = true;
+    this.stateAcceleration = 0;
+    this.sprites.forEach(sprite => sprite.alpha = 0);
+  
+    let texture = PIXI.loader.resources[`foxy-died`].texture;
+    this.diedFox = new PIXI.Sprite(texture);
+    this.diedFox.scale.x = -.25;
+    this.diedFox.scale.y = .25;
+    this.diedFox.anchor.set(.5);
+    this.diedFox.position.y += 5;
+    this.addChild(this.diedFox);
   }
 }

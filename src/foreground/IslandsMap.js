@@ -70,6 +70,7 @@ class IslandsMap extends PIXI.Container {
         
         if (slice.type >= IslandType.BIG_1 && slice.type <= IslandType.MOVABLE_4) {
           let peaceAnimal = this.animalPool.borrowAnimal();
+          peaceAnimal.reset();
           this.setUpAnimal(peaceAnimal, slice);
           slice.addAnimal(peaceAnimal);
           slice.sprite.addChild(peaceAnimal);
@@ -77,11 +78,6 @@ class IslandsMap extends PIXI.Container {
         
         this.slices.push(slice);
         this.addChild(slice.sprite);
-      }
-      if (sliceIndex < 2) {
-        slice.animals.forEach(animal => {
-          animal.explode();
-        });
       }
       slice.sprite.position.x = firstX + (sliceIndex * IslandsMap.ViewportSliceWidth);
       slice.sprite.position.y = slice.yPosition || 0;
@@ -97,7 +93,6 @@ class IslandsMap extends PIXI.Container {
       }
       let peaceAnimals = slice.unpinAnimals();
       peaceAnimals.forEach(animal => {
-        animal.reset();
         slice.sprite.removeChild(animal);
       });
       this.returnAnimals(peaceAnimals);
@@ -133,6 +128,8 @@ class IslandsMap extends PIXI.Container {
       return;
     }
     animals.forEach(animal => {
+      AnimationAttractor.getInstance()
+        .remove(animal);
       animal.reset();
       this.animalPool.returnAnimal(animal);
     });
@@ -140,13 +137,54 @@ class IslandsMap extends PIXI.Container {
   
   setUpAnimal(animal, slice) {
     let { width, height } = slice.sprite;
-    animal.position.x += width + Math.random() * 200 - 100;
+    animal.position.x = (width / slice.sprite.scale.x) / 2 + Math.random() * 200 - 100;
     let animalOffsets = [65, 25, 50, 65, 50, 30, 50, 70, 70, 55, 25, 45];
     let animalOffset = animalOffsets[ slice.type - 1 ];
-    animal.position.y += IslandsOffset.getIslandYOffset(slice.type) + animalOffset;
+    animal.position.y = IslandsOffset.getIslandYOffset(slice.type) + animalOffset;
   }
   
-  getNextChicken(x = this.viewportX) {
-    let curSliceIndex = Math.floor(this.viewportX / IslandsMap.ViewportSliceWidth);
+  getHitAreaAnimal(foxy, foxyPosition, foxOffset) {
+    let curSliceIndex = this.getCurrentSliceIndex();
+    for (let sliceIndex = curSliceIndex; sliceIndex < this.slices.length; ++sliceIndex) {
+      let island = this.slices[ curSliceIndex ];
+      if (!island) {
+        console.error(`Island doesn't exist`);
+        continue;
+      }
+      let animals = island.getAnimals();
+      if (!animals.length) {
+        continue;
+      }
+      let animalIndex = -1;
+      animals.forEach((animal, index) => {
+        if (animalIndex >= 0 || animal.isExploded) {
+          return;
+        }
+        let animalX = island.sprite.position.x + animal.position.x - foxOffset;
+        let animalY = island.sprite.position.y + IslandsOffset.getIslandYOffset(island.type);
+        let animalPosition = [animalX, animalY];
+        //Utils.mark([animalX, animalY], this);
+        let conditions = [
+          this.isBetween([foxyPosition[0] - foxy.getWidth() / 2, foxyPosition[0] + foxy.getWidth() / 2], animalPosition[0]),
+          this.isBetween([foxyPosition[1] - foxy.getHeight() / 2, foxyPosition[1] + foxy.getHeight() / 2], animalPosition[1])
+        ];
+        //Utils.mark([foxyPosition[0] - foxy.getWidth() / 2, foxyPosition[1] - foxy.getHeight() / 2], this);
+        //Utils.mark([foxyPosition[0] + foxy.getWidth() / 2, foxyPosition[1] - foxy.getHeight() / 2], this);
+        //Utils.mark([foxyPosition[0] - foxy.getWidth() / 2, foxyPosition[1] + foxy.getHeight() / 2], this);
+        //Utils.mark([foxyPosition[0] + foxy.getWidth() / 2, foxyPosition[1] + foxy.getHeight() / 2], this);
+
+        if (conditions.every(condition => condition)) {
+          console.log('Caught!', animals[ index ].id);
+          animalIndex = index;
+        }
+      });
+      if (animalIndex >= 0) {
+        return animals[ animalIndex ];
+      }
+    }
+  }
+  
+  isBetween(interval, coord) {
+    return interval[0] <= coord && coord <= interval[1];
   }
 }

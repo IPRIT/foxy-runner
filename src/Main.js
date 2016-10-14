@@ -63,6 +63,7 @@ class Main {
     var loader = PIXI.loader;
     loader.add('islands', 'resources/bg/foreground/islands.json');
     loader.add('foxy', './resources/models/foxy/foxy.json');
+    loader.add('foxy-died', './resources/models/foxy/died/foxy-died.png');
     loader.add('chicken', './resources/models/chicken/chicken.png');
     loader.add('dirt', './resources/models/dirt/dirt.png');
     loader.add('chicken-particle', './resources/models/chicken/particle.png');
@@ -109,5 +110,14 @@ class Main {
   
   onload(cb) {
     this._onloadCallback = cb;
+  }
+  
+  gameOver() {
+    if (this.isGameOver) {
+      return;
+    }
+    this.isGameOver = true;
+    this.scroller.gameOver();
+    console.log('Game over');
   }
 }

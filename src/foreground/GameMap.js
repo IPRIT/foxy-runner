@@ -7,11 +7,13 @@ class GameMap extends IslandsMap {
   }
   
   init() {
+    this.animationAttractor = AnimationAttractor.getInstance();
     this.foxy = new Foxy();
     this.foxOffsetX = 200;
-    this.position.x += this.foxOffsetX;
+    this.foxy.position.x += this.foxOffsetX;
     this.addChild(this.foxy);
     this.attachEvents();
+    this.score = 0;
   }
   
   getMapSpeed() {
@@ -24,12 +26,14 @@ class GameMap extends IslandsMap {
     this.foxy.nextStateValue();
     this.foxy.move(this.getCurrentMapY());
     this.foxy.setStateAcceleration(this.getMapSpeed() / Math.sqrt(this.getMapSpeed() * 120));
+    this.catchAnimals();
+    this.animationAttractor.nextFrame();
   }
   
   getCurrentMapY() {
     let floorY = Main.CanvasHeight - 200;
     let mapSlices = this.slices;
-    let currentSliceIndex = this.getSliceForViewportX(this.getViewportX());
+    let currentSliceIndex = this.getSliceForViewportX(this.getViewportX() + this.foxOffsetX);
     let slice = mapSlices[ currentSliceIndex ];
     //console.log('Current type is', slice.type);
     if (slice && slice.type >= IslandType.BIG_1 && slice.type <= IslandType.MOVABLE_4) {
@@ -82,5 +86,23 @@ class GameMap extends IslandsMap {
   
   endJump() {
     this.foxy.disableJumpingState();
+  }
+  
+  catchAnimals() {
+    let foxyPosition = [this.foxOffsetX, this.foxy.position.y];
+    let nearestAnimal = this.getHitAreaAnimal(this.foxy, foxyPosition, this.foxOffsetX);
+    if (!nearestAnimal) {
+      return;
+    }
+    this.score++;
+    console.log('Score:', this.score);
+    this.animationAttractor.append(nearestAnimal.getRebornNumber(), nearestAnimal, function animate(animal) {
+      return animal.explode();
+    });
+  }
+  
+  gameOver() {
+    this.isGameOver = true;
+    this.foxy.gameOver();
   }
 }

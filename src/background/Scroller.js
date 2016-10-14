@@ -39,6 +39,9 @@ class Scroller {
   }
   
   shiftViewportX(value) {
+    if (this.isPaused()) {
+      //value = 0;
+    }
     this.setViewportX(this._viewportX + value);
     this.gameMap.moveBy(value);
     return this._viewportX;
@@ -49,6 +52,14 @@ class Scroller {
   }
   
   setScrollSpeed(speed) {
+    if (this.isGameOver) {
+      if (!this.gameOverSpeed) {
+        this.gameOverSpeed = speed;
+        this.gameOverSpeedStep = speed / 50;
+      }
+      this._speed = Math.max(0, this.gameOverSpeed -= this.gameOverSpeedStep);
+      return;
+    }
     this._speed = speed;
   }
   
@@ -64,5 +75,23 @@ class Scroller {
   toFront(object) {
     this.stage.removeChild(object);
     this.stage.addChild(object);
+  }
+  
+  pause() {
+    this._isStopped = true;
+  }
+  
+  resume() {
+    this._isStopped = false;
+  }
+  
+  isPaused() {
+    return this._isStopped;
+  }
+  
+  gameOver() {
+    this.pause();
+    this.isGameOver = true;
+    this.gameMap.gameOver();
   }
 }

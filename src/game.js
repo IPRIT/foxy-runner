@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function entryPoint() {
-  var game = new Main();
+  window.game = new Main();
   game.onload(() => {
     game.start();
   });

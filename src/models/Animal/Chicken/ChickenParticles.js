@@ -21,7 +21,7 @@ class ChickenParticles extends PIXI.particles.ParticleContainer {
       chickenParticle.position.x = 512 / 2 + (Math.random() - .5) * 50;
       chickenParticle.position.y = 512 / 2 + (Math.random() - .5) * 50;
       chickenParticle.anchor.set(0.5, 0.5);
-      let startScale = 0.05 + Math.random() / 30;
+      let startScale = .05 + Math.random() / 30;
       chickenParticle.internalState = {
         startScale,
         startX: chickenParticle.position.x,
@@ -38,7 +38,7 @@ class ChickenParticles extends PIXI.particles.ParticleContainer {
   }
   
   scatter() {
-    var animationDone = true;
+    this._animationDone = true;
     this.particles.forEach(particle => {
       let progress = Math.max(
         Math.abs(particle.internalState.startX - particle.position.x) / particle.internalState.maxDeviationX,
@@ -49,17 +49,23 @@ class ChickenParticles extends PIXI.particles.ParticleContainer {
         particle.position.y += particle.internalState.accelerationY;
         particle.scale.set(Math.min(particle.internalState.maxScale, progress / 30 + particle.internalState.startScale));
         particle.alpha = Math.sin((1 - progress) * Math.PI);
-        animationDone = false;
+        this._animationDone = false;
       } else {
         particle.alpha = 0;
       }
     });
-    if (animationDone) {
-      this.alpha = true;
+    if (this._animationDone) {
+      //this.alpha = 0;
     }
+    return this.isAnimationDone();
+  }
+  
+  isAnimationDone() {
+    return this._animationDone;
   }
   
   reset() {
+    this.alpha = 0;
     this.particles.forEach(particle => {
       particle.position.x = particle.internalState.startX;
       particle.position.y = particle.internalState.startY;
