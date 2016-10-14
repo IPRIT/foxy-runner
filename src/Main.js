@@ -23,7 +23,7 @@ class Main {
     this.renderer = PIXI.autoDetectRenderer(
       width, height, {
         view: document.getElementById(Settings.CanvasDomId),
-        //antialias: true
+        antialias: true
       }
     );
     window.isWebGLRenderer = this.renderer instanceof PIXI.WebGLRenderer;
@@ -84,6 +84,9 @@ class Main {
   }
   
   update() {
+    if (this.isPaused) {
+      return;
+    }
     this.frame++;
     //console.info('FPS:', (this.frame / ((new Date().getTime() - this.firstFrameStartedAt.getTime()) / 1000)));
     
@@ -133,5 +136,13 @@ class Main {
       }, (stage) => {
         console.log('Done');
       });
+  }
+  
+  pause() {
+    this.isPaused = true;
+  }
+  
+  resume() {
+    this.isPaused = false;
   }
 }

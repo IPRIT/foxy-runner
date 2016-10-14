@@ -26,8 +26,8 @@ class Ghost extends PIXI.Container {
   
   addSprite(frameId) {
     let sprite = PIXI.Sprite.fromFrame(frameId);
-    sprite.scale.x = .16;
-    sprite.scale.y = .16;
+    sprite.scale.x = .12;
+    sprite.scale.y = .12;
     sprite.anchor.x = 0.5;
     sprite.anchor.y = 0.5;
     this.sprites.push(sprite);

@@ -22,6 +22,14 @@ class Foxy extends PhysicFreeFallObject {
     this.dust.scale.set(this.width / (1.4 * this.dust.width));
     this.addChild(this.dust);
   
+    this.createDiedFox();
+    this.diedFox.alpha = 0;
+    
+    this.createFoxyGhost();
+    this.foxyGhost.alpha = 0;
+  }
+  
+  createDiedFox() {
     let texture = PIXI.loader.resources[`foxy-died`].texture;
     this.diedFox = new PIXI.Sprite(texture);
     this.addChild(this.diedFox);
@@ -29,12 +37,12 @@ class Foxy extends PhysicFreeFallObject {
     this.diedFox.scale.y = .25;
     this.diedFox.anchor.set(.5);
     this.diedFox.position.y += 5;
-    this.diedFox.alpha = 0;
-    
+  }
+  
+  createFoxyGhost() {
     this.foxyGhost = new Ghost();
     this.addChild(this.foxyGhost);
     this.foxyGhost.position.y -= 50;
-    this.foxyGhost.alpha = 0;
   }
   
   setStateAcceleration(acceleration) {
@@ -182,21 +190,17 @@ class Foxy extends PhysicFreeFallObject {
     this.foxyGhost.alpha = 1;
     
     let yGhostAcceleration = 2;
-    let xGhostAcceleration = 2;
+    let xGhostAcceleration = 5;
     
     let ySinArg = 0;
     AnimationAttractor.getInstance()
       .append(1, this.foxyGhost, (ghost) => {
         ghost.nextStateValue();
         this.foxyGhost.position.y -= Math.max(0, yGhostAcceleration -= .01);
-        this.foxyGhost.position.x += Math.max(0, xGhostAcceleration -= .01);
+        this.foxyGhost.position.x += Math.max(0, xGhostAcceleration -= .04);
         if (yGhostAcceleration <= 2) {
           this.foxyGhost.position.y += Math.sin(ySinArg += .1) * 2.5;
         }
-      }, (ghost) => {
-  
-      }, (ghost) => {
-  
       });
   }
 }

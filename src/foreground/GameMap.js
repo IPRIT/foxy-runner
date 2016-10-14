@@ -12,6 +12,10 @@ class GameMap extends IslandsMap {
     this.foxOffsetX = 200;
     this.foxy.position.x += this.foxOffsetX;
     this.addChild(this.foxy);
+    
+    this.scoreView = new ScoreView();
+    this.addChild(this.scoreView);
+    
     this.attachEvents();
     this.score = 0;
   }
@@ -95,6 +99,13 @@ class GameMap extends IslandsMap {
       return;
     }
     this.score++;
+    this.scoreView.setScore(this.score);
+    
+    let scoreIncrementerView = new ScoreIncrementer();
+    console.log(nearestAnimal);
+    scoreIncrementerView.addScore(1, nearestAnimal.animalType);
+    this.addChild(scoreIncrementerView);
+    
     console.log('Score:', this.score);
     this.animationAttractor.append(nearestAnimal.getRebornNumber(), nearestAnimal, function animate(animal) {
       return animal.explode();
