@@ -146,7 +146,9 @@ class Foxy extends PhysicFreeFallObject {
     if (currentMapY >= floorY - 100) {
       this.isGameOver = true;
       this.sprites[this.frame].alpha = 0;
-      game.gameOver();
+      setTimeout(() => {
+        game.gameOver();
+      }, 100);
     }
   }
   
