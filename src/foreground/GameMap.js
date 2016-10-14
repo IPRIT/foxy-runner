@@ -101,12 +101,13 @@ class GameMap extends IslandsMap {
     this.score++;
     this.scoreView.setScore(this.score);
     
-    let scoreIncrementerView = new ScoreIncrementer();
     if (isWebGLRenderer) {
+      let scoreIncrementerView = new ScoreIncrementer();
       scoreIncrementerView.addScore(1, nearestAnimal.animalType);
       this.addChild(scoreIncrementerView);
     }
     console.log('Score:', this.score);
+    
     this.animationAttractor.append(nearestAnimal.getRebornNumber(), nearestAnimal, function animate(animal) {
       return animal.explode();
     });
