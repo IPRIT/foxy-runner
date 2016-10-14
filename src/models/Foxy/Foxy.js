@@ -148,7 +148,7 @@ class Foxy extends PhysicFreeFallObject {
       this.sprites[this.frame].alpha = 0;
       setTimeout(() => {
         game.gameOver();
-      }, 100);
+      }, 0);
     }
   }
   
