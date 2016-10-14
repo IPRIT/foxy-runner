@@ -1,7 +1,7 @@
 class ChickenParticles extends PIXI.particles.ParticleContainer {
   
   constructor(animalType) {
-    super(isWebGLRenderer ? 100 : 10, {
+    super(isWebGLRenderer ? 40 : 10, {
       scale: true,
       position: true,
       rotation: true,
@@ -13,7 +13,7 @@ class ChickenParticles extends PIXI.particles.ParticleContainer {
   }
   
   init() {
-    let totalParticles = isWebGLRenderer ? 100 : 10;
+    let totalParticles = isWebGLRenderer ? 40 : 10;
     this.particles = [];
     for (let i = 0; i < totalParticles; ++i) {
       var chickenParticle;
