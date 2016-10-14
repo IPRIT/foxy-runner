@@ -6,20 +6,15 @@ class ScoreIncrementer extends PIXI.Container {
   }
   
   init() {
-    this._message = new PIXI.Text(
-      this.getMessage(), {
-        fontFamily: 'Fredoka One',
-        fontSize: '80px',
-        fill: 'white'
-      }
-    );
-    
+    this._message = new PIXI.Text(this.getMessage(), {
+      fontFamily: 'Fredoka One',
+      fontSize: '380px',
+      fill: 'white'
+    });
     window.addEventListener('resize', this.resize.bind(this));
-    //this.addChild(this._message);
   }
   
-  addScore(plus, animalType) {
-    this._message.style.fontSize = '380px';
+  addScore(plus, animalType, cb) {
     this._message.text = this.getMessage(plus);
     this._message.position.x -= 550;
     this._message.position.y += 200;
@@ -39,7 +34,7 @@ class ScoreIncrementer extends PIXI.Container {
       xAcceleration: -.5,
       scaleVelocity: -.002
     };
-    let passInterations = 40;
+    let passIterations = 40;
     let currentIteration = 0;
     
     AnimationAttractor.getInstance()
@@ -48,17 +43,17 @@ class ScoreIncrementer extends PIXI.Container {
         let fullDistanceX = animal.internalState.startPoint[0] - animal.internalState.endPoint[0];
         let passedDistanceX = animal.internalState.startPoint[0] - currentPosition[0];
         animal.progress = passedDistanceX / fullDistanceX;
-        if (++currentIteration > passInterations) {
+        if (++currentIteration > passIterations) {
           animal.position.x += (animal.internalState.xVelocity += animal.internalState.xAcceleration);
           animal.scale.x = Math.max(0, animal.scale.x + animal.internalState.scaleVelocity);
           animal.scale.y = Math.max(0, animal.scale.y + animal.internalState.scaleVelocity);
           animal.alpha -= .01;
         } else {
-          if (currentIteration > passInterations / 4) {
+          if (currentIteration > passIterations / 4) {
             return animal.scale.set(.16);
           }
-          animal.scale.x += .16 / passInterations;
-          animal.scale.y += .16 / passInterations;
+          animal.scale.x += .16 / passIterations;
+          animal.scale.y += .16 / passIterations;
         }
       }, (animal) => {
         animal.progress = animal.progress || 0;
@@ -70,11 +65,8 @@ class ScoreIncrementer extends PIXI.Container {
         animal.scale.set(.16);
         animal.alpha = 1;
         ScoreAnimalPool.getInstance().returnAnimal(animal, animalType);
+        cb();
       });
-  }
-  
-  getScore() {
-    return this._score;
   }
   
   getMessage(score = 1) {

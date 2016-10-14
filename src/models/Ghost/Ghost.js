@@ -20,8 +20,8 @@ class Ghost extends PIXI.Container {
   
   createSprites() {
     this.sprites = [];
-    let sprite1 = this.addSprite(`ghost-01`);
-    let sprite2 = this.addSprite(`ghost-02`);
+    this.addSprite(`ghost-01`);
+    this.addSprite(`ghost-02`);
   }
   
   addSprite(frameId) {
@@ -52,5 +52,15 @@ class Ghost extends PIXI.Container {
     this.frameValue += this.frameAcceleration;
     this.frame = Math.floor(this.frameValue) % this.frames;
     this.showState({ oldState });
+  }
+  
+  reset() {
+    this.frame = 0;
+    this.frameValue = 0.0;
+    this.frameAcceleration = 0.25;
+    this.frames = 2;
+    this.position.x = 0;
+    this.position.y = -50;
+    this.showState();
   }
 }

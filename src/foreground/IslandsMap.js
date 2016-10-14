@@ -186,4 +186,28 @@ class IslandsMap extends PIXI.Container {
   isBetween(interval, coord) {
     return interval[0] <= coord && coord <= interval[1];
   }
+  
+  resetMap() {
+    this.viewportX = 0;
+    this.viewportSliceX = 0;
+    this.setViewportX(this.viewportX);
+  
+    for (var i = 0; i < this.slices.length; ++i) {
+      var slice = this.slices[i];
+      if (!slice) {
+        continue;
+      }
+      let peaceAnimals = slice.unpinAnimals();
+      peaceAnimals.forEach(animal => {
+        slice.sprite.removeChild(animal);
+        animal.destroy();
+        animal = null;
+      });
+    
+      slice.destroy();
+      this.slices[i] = null;
+    }
+    
+    this.animalPool.reset();
+  }
 }

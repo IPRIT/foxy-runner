@@ -66,10 +66,6 @@ class GameMap extends IslandsMap {
     document.addEventListener('touchend', this.endJump.bind(this));
   }
   
-  detachEvents() {
-    // todo: detach events
-  }
-  
   onKeyDown(event) {
     if (event.keyCode !== 32 && event.keyCode !== 87 && event.keyCode !== 38) {
       return;
@@ -103,7 +99,11 @@ class GameMap extends IslandsMap {
     
     if (isWebGLRenderer && game.getFPS() > 45 && Main.CanvasWidth > 1500) {
       let scoreIncrementerView = new ScoreIncrementer();
-      scoreIncrementerView.addScore(1, nearestAnimal.animalType);
+      scoreIncrementerView.addScore(1, nearestAnimal.animalType, () => {
+        this.removeChild(scoreIncrementerView);
+        scoreIncrementerView.destroy();
+        scoreIncrementerView = null;
+      });
       this.addChild(scoreIncrementerView);
     }
     console.log('Score:', this.score);
@@ -116,5 +116,18 @@ class GameMap extends IslandsMap {
   gameOver() {
     this.isGameOver = true;
     this.foxy.gameOver();
+  }
+  
+  reset() {
+    this.animationAttractor.reset();
+    this.foxy.reset();
+    this.foxy.destroy();
+    this.score = 0;
+    this.scoreView.reset();
+    this.scoreView.destroy();
+    
+    this.isGameOver = false;
+    
+    this.resetMap();
   }
 }

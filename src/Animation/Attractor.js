@@ -37,4 +37,12 @@ class AnimationAttractor {
       }
     });
   }
+  
+  reset() {
+    this._animationCore.forEach((element, index) => {
+      let [ reborn, object, animate, check, done ] = element;
+      this._animationCore.splice(index, 1);
+    });
+    this._animationCore = [];
+  }
 }

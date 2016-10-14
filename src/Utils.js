@@ -38,4 +38,18 @@ class Utils {
     }, 100);
     container.addChild(graphics);
   }
+  
+  static clear(object) {
+    if (typeof object === 'object' && object !== null) {
+      for (let prop in object) {
+        clear(object[ prop ]);
+      }
+    } else if (Array.isArray(object)) {
+      for (let i = 0; i < object.length; ++i) {
+        clear(object[ i ]);
+      }
+    } else {
+      object = null;
+    }
+  }
 }

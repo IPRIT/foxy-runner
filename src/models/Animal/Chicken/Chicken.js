@@ -47,4 +47,8 @@ class Chicken extends Animal {
   getRebornNumber() {
     return this._rebornNumber;
   }
+  
+  resetAnimal() {
+    this.particles.destroy();
+  }
 }

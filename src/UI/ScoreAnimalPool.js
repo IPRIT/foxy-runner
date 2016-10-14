@@ -43,4 +43,16 @@ class ScoreAnimalPool {
   returnAnimal(animal, animalType) {
     return this.getAnimals(animalType).push(animal);
   }
+  
+  reset() {
+    Object.keys(this.animals).forEach(key => {
+      if (this.animals[key]) {
+        this.animals[key].forEach(animal => {
+          animal.destroy();
+        });
+      }
+    });
+    this.animals = null;
+    window._scoreAnimalPool = new ScoreAnimalPool()
+  }
 }

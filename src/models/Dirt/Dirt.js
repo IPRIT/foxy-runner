@@ -58,4 +58,23 @@ class Dirt extends PIXI.particles.ParticleContainer {
       }
     });
   }
+  
+  reset() {
+    for (let dustParticle of this.dust) {
+      dustParticle.position.x = Math.random() * 512;
+      dustParticle.position.y = Math.random() * 10;
+      dustParticle.anchor.y = -.5;
+      let startScale = 0.03 + Math.random() / 30;
+      dustParticle.internalState = {
+        startScale,
+        startX: dustParticle.position.x,
+        startY: dustParticle.position.y,
+        accelerationX: -Math.random() * 30,
+        accelerationY: Math.random() - 3,
+        maxDeviationX: 300 + Math.random() * 200,
+        maxDeviationY: 50 + Math.random() * 50,
+        maxScale: startScale * 1.5
+      };
+    }
+  }
 }

@@ -29,4 +29,11 @@ class AnimalPool {
   returnAnimal(animal) {
     this.animals.push(animal);
   }
+  
+  reset() {
+    this.animals.forEach(animal => {
+      animal.resetAnimal();
+      animal.destroy();
+    });
+  }
 }

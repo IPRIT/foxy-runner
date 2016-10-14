@@ -7,13 +7,11 @@ class ScoreView extends PIXI.Container {
   
   init() {
     this._score = 0;
-    this._message = new PIXI.Text(
-      this.getMessage(), {
-        fontFamily: 'Fredoka One',
-        fontSize: '48px',
-        fill: 'white'
-      }
-    );
+    this._message = new PIXI.Text(this.getMessage(), {
+      fontFamily: 'Fredoka One',
+      fontSize: '48px',
+      fill: 'white'
+    });
   
     let sprite = PIXI.Sprite.fromFrame(`chicken-01`);
     sprite.scale.x = .1;
@@ -42,5 +40,11 @@ class ScoreView extends PIXI.Container {
   
   getMessage() {
     return `Score: ${this.getScore()}`
+  }
+  
+  reset() {
+    this._score = 0;
+    this.update();
+    ScoreAnimalPool.getInstance().reset();
   }
 }

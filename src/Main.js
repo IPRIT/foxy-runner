@@ -150,4 +150,24 @@ class Main {
   getFPS() {
     return (this.frame / ((new Date().getTime() - this.firstFrameStartedAt.getTime()) / 1000));
   }
+  
+  restart() {
+    this.reset();
+  }
+  
+  reset() {
+    this.pause();
+    
+    if (this.stage.filters && this.stage.filters.length) {
+      this.stage.filters[0].saturate(0);
+    }
+    this.scroller.reset();
+    Utils.clear(this.scroller);
+    
+    this.scroller = new Scroller(this.stage);
+    this.scroller.setScrollSpeed(Settings.ScrollSpeed);
+    this.isGameOver = false;
+    
+    this.resume();
+  }
 }

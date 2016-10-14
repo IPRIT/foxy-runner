@@ -39,9 +39,6 @@ class Scroller {
   }
   
   shiftViewportX(value) {
-    if (this.isPaused()) {
-      //value = 0;
-    }
     this.setViewportX(this._viewportX + value);
     this.gameMap.moveBy(value);
     return this._viewportX;
@@ -93,5 +90,20 @@ class Scroller {
     this.pause();
     this.isGameOver = true;
     this.gameMap.gameOver();
+  }
+  
+  reset() {
+    this._speed = 1;
+    this.gameMap.reset();
+    this.gameMap.destroy();
+    
+    this._viewportX = 0;
+    this.setViewportX(this._viewportX);
+    
+    this.isGameOver = false;
+    this.gameOverSpeed = null;
+    this.tiles.forEach(tile => {
+      tile.destroy();
+    })
   }
 }

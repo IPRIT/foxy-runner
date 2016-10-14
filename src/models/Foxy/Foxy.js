@@ -203,4 +203,24 @@ class Foxy extends PhysicFreeFallObject {
         }
       });
   }
+  
+  reset() {
+    this.isGameOver = false;
+    this.position.y = 0;
+    
+    this.frame = 0;
+    this.stateValue = 0.0;
+    this.stateAcceleration = 0.2;
+    this.states = 4;
+    this.movementState = FoxyState.RUNNING;
+  
+    this.showState();
+  
+    this.dust.reset();
+  
+    this.diedFox.alpha = 0;
+    this.foxyGhost.reset();
+    
+    this.foxyGhost.alpha = 0;
+  }
 }
