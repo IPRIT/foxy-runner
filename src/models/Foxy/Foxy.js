@@ -25,10 +25,15 @@ class Foxy extends PhysicFreeFallObject {
     let texture = PIXI.loader.resources[`foxy-died`].texture;
     this.diedFox = new PIXI.Sprite(texture);
     this.addChild(this.diedFox);
+    this.diedFox.scale.x = -.25;
+    this.diedFox.scale.y = .25;
+    this.diedFox.anchor.set(.5);
+    this.diedFox.position.y += 5;
     this.diedFox.alpha = 0;
     
     this.foxyGhost = new Ghost();
     this.addChild(this.foxyGhost);
+    this.foxyGhost.position.y -= 50;
     this.foxyGhost.alpha = 0;
   }
   
@@ -146,6 +151,7 @@ class Foxy extends PhysicFreeFallObject {
     if (currentMapY >= floorY - 100) {
       this.isGameOver = true;
       this.sprites[this.frame].alpha = 0;
+      this.diedFox.alpha = 1;
       setTimeout(() => {
         game.gameOver();
       }, 0);
@@ -173,15 +179,11 @@ class Foxy extends PhysicFreeFallObject {
     this.sprites.forEach(sprite => sprite.alpha = 0);
     
     this.diedFox.alpha = 1;
-    this.diedFox.scale.x = -.25;
-    this.diedFox.scale.y = .25;
-    this.diedFox.anchor.set(.5);
-    this.diedFox.position.y += 5;
-    
     this.foxyGhost.alpha = 1;
+    
     let yGhostAcceleration = 2;
     let xGhostAcceleration = 2;
-    this.foxyGhost.position.y -= 50;
+    
     let ySinArg = 0;
     AnimationAttractor.getInstance()
       .append(1, this.foxyGhost, (ghost) => {
