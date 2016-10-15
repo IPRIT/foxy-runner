@@ -42,13 +42,13 @@ class Utils {
   static clear(object) {
     if (typeof object === 'object' && object !== null) {
       for (let prop in object) {
-        clear(object[ prop ]);
-        object[ prop ] = null;
+        if (object.hasOwnProperty(prop)) {
+          Utils.clear(object[ prop ]);
+        }
       }
     } else if (Array.isArray(object)) {
       for (let i = 0; i < object.length; ++i) {
-        clear(object[ i ]);
-        object[ i ] = null;
+        Utils.clear(object[ i ]);
       }
     } else {
       object = null;

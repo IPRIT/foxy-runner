@@ -163,6 +163,10 @@ class Main {
       }, (stage) => {
         console.log('Done');
       });
+    
+    setTimeout(() => {
+      this.restart();
+    }, 3000);
   }
   
   pause() {
@@ -190,9 +194,11 @@ class Main {
       this.stage.filters[0].saturate(0);
     }
     this.scroller.reset();
-    this.greetingScroller.reset();
-    Utils.clear(this.scroller);
-    Utils.clear(this.greetingScroller);
+    if (this.greetingScroller) {
+      this.greetingScroller.reset();
+    }
+    this.scroller = null;
+    this.greetingScroller = null;
     
     this.scroller = new Scroller(this.stage);
     this.scroller.setScrollSpeed(Settings.ScrollSpeed);
@@ -202,6 +208,8 @@ class Main {
   }
   
   start() {
-    
+    this.gameState = GameState.Started;
+    this.greetingScroller.reset();
+    this.scroller.alpha = 1;
   }
 }
