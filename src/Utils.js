@@ -43,10 +43,12 @@ class Utils {
     if (typeof object === 'object' && object !== null) {
       for (let prop in object) {
         clear(object[ prop ]);
+        object[ prop ] = null;
       }
     } else if (Array.isArray(object)) {
       for (let i = 0; i < object.length; ++i) {
         clear(object[ i ]);
+        object[ i ] = null;
       }
     } else {
       object = null;

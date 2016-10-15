@@ -1,3 +1,18 @@
+class GameState {
+  
+  static get Started() {
+    return 1;
+  }
+  
+  static get Greeting() {
+    return 2;
+  }
+  
+  static get LeaderBoard() {
+    return 3;
+  }
+}
+
 class Main {
   
   static get CanvasWidth() {
@@ -14,6 +29,7 @@ class Main {
   
   constructor() {
     this.init();
+    this.gameState = GameState.Greeting;
   }
   
   init() {
@@ -44,7 +60,11 @@ class Main {
     let heightScale = h / Main.CanvasHeight;
     this.stage.scale.x = widthScale;
     this.stage.scale.y = heightScale;
-    this.scroller.hardViewUpdate();
+    if (this.gameState === GameState.Started) {
+      this.scroller.hardViewUpdate();
+    } else {
+      this.greetingScroller.hardViewUpdate();
+    }
     this.renderer.resize(w, h);
   }
   
@@ -80,7 +100,10 @@ class Main {
   spriteSheetLoaded() {
     this.scroller = new Scroller(this.stage);
     this.scroller.setScrollSpeed(Settings.ScrollSpeed);
+    this.greetingScroller = new GreetingScroller(this.stage);
     this.attachEventsAfterLoad();
+    
+    this.scroller.alpha = 0;
   }
   
   update() {
@@ -89,10 +112,15 @@ class Main {
     }
     this.frame++;
     
-    this.scroller.setScrollSpeed(
-      Math.min(this.scroller.getScrollSpeed() + Settings.ScrollSpeedAcceleration, Settings.MaxScrollSpeed)
-    );
-    this.scroller.shiftViewportX(this.scroller.getScrollSpeed());
+    if (this.gameState === GameState.Started) {
+      this.scroller.setScrollSpeed(
+        Math.min(this.scroller.getScrollSpeed() + Settings.ScrollSpeedAcceleration, Settings.MaxScrollSpeed)
+      );
+      this.scroller.shiftViewportX(this.scroller.getScrollSpeed());
+    } else if (this.gameState === GameState.Greeting) {
+      this.greetingScroller.shiftViewportX(this.greetingScroller.getScrollSpeed());
+    }
+    
     this.renderer.render(this.stage);
     requestAnimationFrame(this.update.bind(this));
   }
@@ -102,7 +130,7 @@ class Main {
     this.resize();
   }
   
-  start() {
+  run() {
     if (!this.isResourcesLoaded) {
       return console.error('Resources not loaded yet');
     }
@@ -162,12 +190,18 @@ class Main {
       this.stage.filters[0].saturate(0);
     }
     this.scroller.reset();
+    this.greetingScroller.reset();
     Utils.clear(this.scroller);
+    Utils.clear(this.greetingScroller);
     
     this.scroller = new Scroller(this.stage);
     this.scroller.setScrollSpeed(Settings.ScrollSpeed);
     this.isGameOver = false;
     
     this.resume();
+  }
+  
+  start() {
+    
   }
 }

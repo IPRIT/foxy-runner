@@ -1,4 +1,4 @@
-class Scroller extends PIXI.Container {
+class GreetingScroller extends PIXI.Container {
   
   constructor(stage) {
     super();
@@ -8,12 +8,7 @@ class Scroller extends PIXI.Container {
   
   init(stage) {
     this._speed = 1;
-    
     this.addTiles(stage);
-    
-    this.gameMap = new GameMap(this);
-    stage.addChild(this.gameMap);
-    
     this._viewportX = 0;
   }
   
@@ -28,10 +23,6 @@ class Scroller extends PIXI.Container {
     }
   }
   
-  getViewportX() {
-    return this._viewportX;
-  }
-  
   setViewportX(viewportX) {
     this._viewportX = viewportX;
     for (let tile of this.tiles) {
@@ -41,7 +32,6 @@ class Scroller extends PIXI.Container {
   
   shiftViewportX(value) {
     this.setViewportX(this._viewportX + value);
-    this.gameMap.moveBy(value);
     return this._viewportX;
   }
   
@@ -50,14 +40,6 @@ class Scroller extends PIXI.Container {
   }
   
   setScrollSpeed(speed) {
-    if (this.isGameOver) {
-      if (!this.gameOverSpeed) {
-        this.gameOverSpeed = speed;
-        this.gameOverSpeedStep = speed / 50;
-      }
-      this._speed = Math.max(0, this.gameOverSpeed -= this.gameOverSpeedStep);
-      return;
-    }
     this._speed = speed;
   }
   
@@ -67,7 +49,6 @@ class Scroller extends PIXI.Container {
       tile.destroy();
     }
     this.addTiles(this.stage);
-    this.toFront(this.gameMap);
   }
   
   toFront(object) {
@@ -75,36 +56,14 @@ class Scroller extends PIXI.Container {
     this.stage.addChild(object);
   }
   
-  pause() {
-    this._isStopped = true;
-  }
-  
-  resume() {
-    this._isStopped = false;
-  }
-  
-  isPaused() {
-    return this._isStopped;
-  }
-  
-  gameOver() {
-    this.pause();
-    this.isGameOver = true;
-    this.gameMap.gameOver();
-  }
-  
   reset() {
     this._speed = 1;
-    this.gameMap.reset();
-    this.gameMap.destroy();
-    
     this._viewportX = 0;
     this.setViewportX(this._viewportX);
-    
-    this.isGameOver = false;
-    this.gameOverSpeed = null;
     this.tiles.forEach(tile => {
       tile.destroy();
-    })
+      tile = null;
+    });
+    this.tiles = [];
   }
 }

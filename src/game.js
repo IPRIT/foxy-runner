@@ -5,6 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function entryPoint() {
   window.game = new Main();
   game.onload(() => {
-    game.start();
+    game.run();
   });
 }
