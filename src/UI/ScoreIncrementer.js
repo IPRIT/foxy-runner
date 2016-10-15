@@ -1,4 +1,8 @@
-class ScoreIncrementer extends PIXI.Container {
+import { ScoreAnimalPool } from "./ScoreAnimalPool";
+import { AnimationAttractor } from "../Animation/Attractor";
+import { Main } from "../Main";
+
+export class ScoreIncrementer extends PIXI.Container {
   
   constructor() {
     super();

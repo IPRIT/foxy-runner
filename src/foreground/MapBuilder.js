@@ -1,4 +1,7 @@
-class MapBuilder extends IslandSlicesPool {
+import { IslandSlicesPool } from "./IslandSlicesPool";
+import { IslandType } from "./SliceType";
+
+export class MapBuilder extends IslandSlicesPool {
   
   constructor() {
     super();

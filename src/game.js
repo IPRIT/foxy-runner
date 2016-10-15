@@ -1,5 +1,9 @@
+import { Main } from "./Main";
+
 document.addEventListener('DOMContentLoaded', () => {
-  entryPoint();
+  setTimeout(() => {
+    entryPoint();
+  }, 2000);
 });
 
 function entryPoint() {

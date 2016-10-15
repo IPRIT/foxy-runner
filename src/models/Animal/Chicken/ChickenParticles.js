@@ -1,4 +1,7 @@
-class ChickenParticles extends PIXI.particles.ParticleContainer {
+import { AnimalType } from "../AnimalType";
+import { Utils } from "../../../Utils";
+
+export class ChickenParticles extends PIXI.particles.ParticleContainer {
   
   constructor(animalType) {
     super(isWebGLRenderer ? 40 : 10, {

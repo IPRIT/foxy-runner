@@ -1,4 +1,11 @@
-class IslandsMap extends PIXI.Container {
+import { AnimationAttractor } from "../Animation/Attractor";
+import { Settings } from "../Settings";
+import { MapBuilder } from "./MapBuilder";
+import { AnimalPool } from "../models/Animal/AnimalPool";
+import { IslandType } from "./SliceType";
+import { IslandsOffset } from "./IslandsOffset";
+
+export class IslandsMap extends PIXI.Container {
   
   static get ViewportWidth() {
     return Settings.Width;

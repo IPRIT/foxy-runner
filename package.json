@@ -1,0 +1,55 @@
+{
+  "name": "foxy-runner",
+  "version": "1.0.0",
+  "description": "Foxy Runner Game",
+  "main": "dist/index.html",
+  "scripts": {
+    "test": "mocha",
+    "build": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IPRIT/foxy-runner.git"
+  },
+  "keywords": [
+    "telegram"
+  ],
+  "author": {
+    "name": "Alexander Belov",
+    "email": "ipritoflex@yandex.ru",
+    "url": "http://github.com/IPRIT/"
+  },
+  "maintainers": [
+    {
+      "name": "IPRIT",
+      "email": "ipritoflex@yandex.ru"
+    }
+  ],
+  "license": "Private",
+  "dependencies": {
+    "angular": "1.5.8",
+    "pixi.js": "4.0.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-plugin-syntax-async-functions": "^6.8.0",
+    "babel-plugin-transform-regenerator": "^6.9.0",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "browserify": "latest",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglify": "^2.0.0",
+    "merge-stream": "^1.0.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "vinyl-transform": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}

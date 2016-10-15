@@ -1,4 +1,7 @@
-class Scroller extends PIXI.Container {
+import { BackgroundTile } from "./BackgroundTile";
+import { GameMap } from "../foreground/GameMap";
+
+export class Scroller extends PIXI.Container {
   
   constructor(stage) {
     super();

@@ -1,4 +1,4 @@
-class FoxyState {
+export class FoxyState {
   
   static get RUNNING() {
     return 1;

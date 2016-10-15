@@ -1,4 +1,7 @@
-# Created by .ignore support plugin (hsz.mobi)
-
-.idea/
-node_modules/
+# IntelliJ project files
+.idea
+.editorconfig
+node_modules
+yarn.lock
+dist/core
+dist/resources

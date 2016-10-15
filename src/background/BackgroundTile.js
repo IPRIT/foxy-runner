@@ -1,4 +1,6 @@
-class BackgroundTile extends PIXI.extras.TilingSprite {
+import { Settings } from "../Settings";
+
+export class BackgroundTile extends PIXI.extras.TilingSprite {
   
   static get DeltaX() {
     return 0.128;

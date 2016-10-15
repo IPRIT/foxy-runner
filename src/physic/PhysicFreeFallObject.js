@@ -1,4 +1,4 @@
-class PhysicAccelerationType {
+export class PhysicAccelerationType {
   
   static get Normal() {
     return 1;
@@ -8,7 +8,7 @@ class PhysicAccelerationType {
   }
 }
 
-class PhysicFreeFallObject extends PIXI.Container {
+export class PhysicFreeFallObject extends PIXI.Container {
   
   constructor() {
     super();

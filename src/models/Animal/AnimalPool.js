@@ -1,4 +1,6 @@
-class AnimalPool {
+import { Chicken } from "./Chicken/Chicken";
+
+export class AnimalPool {
   
   constructor() {
     this.animals = [];

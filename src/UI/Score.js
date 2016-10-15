@@ -1,4 +1,6 @@
-class ScoreView extends PIXI.Container {
+import { AnimationAttractor as ScoreAnimalPool } from "../Animation/Attractor";
+
+export class ScoreView extends PIXI.Container {
   
   constructor() {
     super();

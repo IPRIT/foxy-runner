@@ -1,4 +1,5 @@
-class Settings {
+import { Utils } from "./Utils";
+export class Settings {
   
   static get Width() {
     let [ width, height ] = Utils.getBodyBounds();

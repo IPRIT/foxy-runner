@@ -1,4 +1,4 @@
-class MovableFunction {
+export class MovableFunction {
   
   compute(argX) {
     return this.fn(argX);
@@ -9,7 +9,7 @@ class MovableFunction {
   }
 }
 
-class BounceMovableFunction extends MovableFunction {
+export class BounceMovableFunction extends MovableFunction {
   
   constructor() {
     super();
@@ -21,7 +21,7 @@ class BounceMovableFunction extends MovableFunction {
   }
 }
 
-class SinMovableFunction extends MovableFunction {
+export class SinMovableFunction extends MovableFunction {
   
   constructor() {
     super();

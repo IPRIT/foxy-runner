@@ -1,4 +1,4 @@
-class Ghost extends PIXI.Container {
+export class Ghost extends PIXI.Container {
   
   constructor() {
     super();

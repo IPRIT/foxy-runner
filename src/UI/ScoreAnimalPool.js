@@ -1,4 +1,6 @@
-class ScoreAnimalPool {
+import { AnimalType } from "../models/Animal/AnimalType";
+
+export class ScoreAnimalPool {
   
   static getInstance() {
     return window._scoreAnimalPool || (window._scoreAnimalPool = new ScoreAnimalPool());

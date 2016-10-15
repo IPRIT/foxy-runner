@@ -1,4 +1,4 @@
-class Dirt extends PIXI.particles.ParticleContainer {
+export class Dirt extends PIXI.particles.ParticleContainer {
   
   constructor() {
     super(isWebGLRenderer ? 50 : 10, {

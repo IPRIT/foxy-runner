@@ -1,4 +1,4 @@
-class IslandType {
+export class IslandType {
   
   static get BIG_1() {
     return 1;

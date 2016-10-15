@@ -1,4 +1,4 @@
-class Utils {
+export class Utils {
   
   static getBodyBounds() {
     let width = window.innerWidth

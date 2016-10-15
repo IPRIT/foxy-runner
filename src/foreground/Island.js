@@ -1,4 +1,6 @@
-class Island extends PIXI.Container {
+import { IslandsOffset } from "./IslandsOffset";
+import { Utils } from "../Utils";
+export class Island extends PIXI.Container {
   
   constructor(type, sprite) {
     super();

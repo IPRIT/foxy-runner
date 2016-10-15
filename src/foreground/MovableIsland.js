@@ -1,4 +1,10 @@
-class MovableIsland extends Island {
+import { Island } from "./Island";
+import { IslandsOffset } from "./IslandsOffset";
+import { BounceMovableFunction } from "./MovableFunctions";
+import { SinMovableFunction } from "./MovableFunctions";
+import { Utils } from "../Utils";
+
+export class MovableIsland extends Island {
   
   constructor(type, sprite) {
     super(type, sprite);

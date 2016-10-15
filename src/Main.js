@@ -1,4 +1,10 @@
-class GameState {
+import { GreetingScroller } from "./background/GreetingScroller";
+import { Scroller } from "./background/Scroller";
+import { AnimationAttractor } from "./Animation/Attractor";
+import { Settings } from "./Settings";
+import { Utils } from "./Utils";
+
+export class GameState {
   
   static get Started() {
     return 1;
@@ -13,7 +19,7 @@ class GameState {
   }
 }
 
-class Main {
+export class Main {
   
   static get CanvasWidth() {
     return Settings.Width;

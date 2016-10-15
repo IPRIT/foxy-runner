@@ -1,4 +1,4 @@
-class Animal extends PIXI.Container {
+export class Animal extends PIXI.Container {
   
   constructor() {
     super();

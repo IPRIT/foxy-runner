@@ -1,4 +1,4 @@
-class AnimationAttractor {
+export class AnimationAttractor {
   
   static getInstance() {
     return window._animationAttractor || (window._animationAttractor = new AnimationAttractor());

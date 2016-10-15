@@ -1,4 +1,12 @@
-class GameMap extends IslandsMap {
+import { AnimationAttractor } from "../Animation/Attractor";
+import { IslandsMap } from "./IslandsMap";
+import { Main } from "../Main";
+import { IslandType } from "./SliceType";
+import { ScoreIncrementer } from "../UI/ScoreIncrementer";
+import { ScoreView } from "../UI/Score";
+import { Foxy } from "../models/Foxy/Foxy";
+
+export class GameMap extends IslandsMap {
   
   constructor(parent) {
     super();

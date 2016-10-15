@@ -1,4 +1,6 @@
-class GreetingScroller extends PIXI.Container {
+import { BackgroundTile } from "./BackgroundTile";
+
+export class GreetingScroller extends PIXI.Container {
   
   constructor(stage) {
     super();

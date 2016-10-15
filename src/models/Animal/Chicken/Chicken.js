@@ -1,4 +1,8 @@
-class Chicken extends Animal {
+import { ChickenParticles } from "./ChickenParticles";
+import { Animal } from "../Animal";
+import { Utils } from "../../../Utils";
+
+export class Chicken extends Animal {
   
   constructor() {
     super();

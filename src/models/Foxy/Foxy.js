@@ -1,4 +1,11 @@
-class Foxy extends PhysicFreeFallObject {
+import { FoxyState } from "./FoxyState";
+import { AnimationAttractor } from "../../Animation/Attractor";
+import { Ghost } from "../Ghost/Ghost";
+import { Dirt } from "../Dirt/Dirt";
+import { Main } from "../../Main";
+import { PhysicFreeFallObject } from "../../physic/PhysicFreeFallObject";
+
+export class Foxy extends PhysicFreeFallObject {
   
   constructor() {
     super();

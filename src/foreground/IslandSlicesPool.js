@@ -1,4 +1,9 @@
-class IslandSlicesPool {
+import { IslandsMap } from "./IslandsMap";
+import { IslandType } from "./SliceType";
+import { MovableIsland } from "./MovableIsland";
+import { Island } from "./Island";
+
+export class IslandSlicesPool {
   
   constructor() {
     this.init();

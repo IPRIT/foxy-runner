@@ -1,4 +1,4 @@
-class IslandsOffset {
+export class IslandsOffset {
   
   static getIslandYOffset(islandType) {
     let offsets = [
