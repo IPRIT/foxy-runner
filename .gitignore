@@ -4,4 +4,4 @@
 node_modules
 yarn.lock
 dist/core
-dist/resources
+2dist/resources
