@@ -28,6 +28,7 @@
   "license": "Private",
   "dependencies": {
     "angular": "1.5.8",
+    "deap": "^1.0.0",
     "pixi.js": "4.0.3"
   },
   "devDependencies": {

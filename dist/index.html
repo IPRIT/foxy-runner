@@ -1,17 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="FoxyRunnerApp" ng-controller="PageCtrl as vm">
 <head>
   <!-- TODO: ADD META TAGS FOR CRAWLERS -->
   <!-- TODO: ADD A TELEGRAM SCRIPT -->
   <meta charset="UTF-8">
   <title>A Telegram game</title>
   <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
-  <link rel="stylesheet" href="./css/foxy-style.css">
+  <link rel="stylesheet" href="css/foxy-style.css">
   <meta name="viewport" content="initial-scale=0.5, user-scalable=no">
 </head>
-<body>
-  <div align="center">
+<body ng-cloak>
+  <div class="page" align="center">
     <canvas id="game-canvas"></canvas>
+
+    <div class="canvas-overlay" ng-cloak>
+      <div class="content content-greeting" ng-if="vm.pageType === 'greeting'" ng-cloak>
+        <img class="image" ng-attr-style="width: {{(vm.logoSize || 50) + '%'}}; margin: 100px auto;" src="resources/images/logo_text_stroke.png" alt="">
+      </div>
+      <div class="content content-gameover" ng-if="vm.pageType === 'gameover'">
+        <h3>Game Over</h3>
+        {{vm.pageType}}
+        {{vm.test()}}
+      </div>
+    </div>
   </div>
   <script src="core/foxy-runner.min.js"></script>
 </body>

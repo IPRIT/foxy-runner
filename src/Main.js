@@ -39,6 +39,7 @@ export class Main {
   }
   
   init() {
+    window.gameFullScreenNeeded = true;
     let [width, height] = Utils.getBodyBounds();
     this.ratio = Main.CanvasRatio;
     this.stage = new PIXI.Container();
@@ -169,10 +170,6 @@ export class Main {
       }, (stage) => {
         console.log('Done');
       });
-    
-    setTimeout(() => {
-      this.restart();
-    }, 3000);
   }
   
   pause() {
@@ -215,7 +212,18 @@ export class Main {
   
   start() {
     this.gameState = GameState.Started;
+    window.gameFullScreenNeeded = false;
+    this.resize();
     this.greetingScroller.reset();
     this.scroller.alpha = 1;
+    this.hideOverlay();
+  }
+  
+  hideOverlay() {
+    angular.element(document.querySelector('.canvas-overlay')).addClass('canvas-overlay__hidden');
+  }
+  
+  showOverlay() {
+    angular.element(document.querySelector('.canvas-overlay')).removeClass('canvas-overlay__hidden');
   }
 }

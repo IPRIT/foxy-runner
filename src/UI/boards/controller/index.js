@@ -1,0 +1,1 @@
+export PageCtrl from './PageCtrl';

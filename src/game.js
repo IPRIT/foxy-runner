@@ -1,9 +1,8 @@
 import { Main } from "./Main";
+import * as app from './UI/boards/app';
 
 document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    entryPoint();
-  }, 2000);
+  entryPoint();
 });
 
 function entryPoint() {
@@ -12,6 +11,6 @@ function entryPoint() {
     game.run();
     setTimeout(() => {
       game.start();
-    }, 2000);
+    }, 5000);
   });
 }

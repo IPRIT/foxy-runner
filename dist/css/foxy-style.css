@@ -5,10 +5,50 @@ body, html {
     margin: 0;
 }
 body {
-    background-color: #333;
+    background-color: #fff;
     overflow: hidden;
 }
-canvas { background-color: #fff; }
+canvas {
+    background-color: #fff;
+}
 #game-canvas {
-    box-shadow: 0 1px 3px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 6px -2px rgba(0, 0, 0, 0.5);
+}
+
+.canvas-overlay {
+    display: block;
+    position: absolute;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    opacity: 1;
+    pointer-events: auto;
+}
+.canvas-overlay__hidden {
+    pointer-events: none;
+    opacity: 0;
+}
+.page {
+    position: relative;
+}
+[ng-cloak] {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+}
+.image {
+    -webkit-transition: all .35s ease-in-out;
+    -moz-transition: all .35s ease-in-out;
+    -ms-transition: all .35s ease-in-out;
+    -o-transition: all .35s ease-in-out;
+    transition: all .35s ease-in-out;
 }
