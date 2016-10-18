@@ -9,14 +9,45 @@
   <link rel="stylesheet" href="css/foxy-style.css">
   <meta name="viewport" content="initial-scale=0.5, user-scalable=no">
 </head>
-<body ng-cloak>
+<body ng-cloak style="background: #9DC1C6;">
+
+  <div class="loading-overlay">
+    <div class="loading-overlay__inner">
+      <div class="loading-overlay__block logo"></div>
+      <div class="loading-overlay__block progress">
+        <div class="progress__line">
+          <div class="progress__line-loaded"></div>
+          <span class="progress__line-loading">Loading... 0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="greeting-overlay overlay__hidden" ng-if="vm.pageType === 'greeting'">
+
+    <div class="greeting-overlay__bg">
+      <div class="bg greeting-overlay__bg-1"></div>
+      <div class="bg greeting-overlay__bg-2-2"></div>
+      <div class="bg greeting-overlay__bg-3"></div>
+      <div class="bg greeting-overlay__bg-4"></div>
+      <div class="bg greeting-overlay__bg-5"></div>
+      <div class="bg greeting-overlay__bg-2"></div>
+    </div>
+
+    <div class="greeting-overlay__inner">
+      <div class="greeting-overlay__block logo"></div>
+      <div class="greeting-overlay__block greeting-overlay__block-content">
+        <h3>Welcome to Tricky Foxy game!</h3>
+        {{vm.pageType}}
+        {{vm.test()}}
+      </div>
+    </div>
+  </div>
+
   <div class="page" align="center">
     <canvas id="game-canvas"></canvas>
 
     <div class="canvas-overlay" ng-cloak>
-      <div class="content content-greeting" ng-if="vm.pageType === 'greeting'" ng-cloak>
-        <img class="image" ng-attr-style="width: {{(vm.logoSize || 50) + '%'}}; margin: 100px auto;" src="resources/images/logo_text_stroke.png" alt="">
-      </div>
       <div class="content content-gameover" ng-if="vm.pageType === 'gameover'">
         <h3>Game Over</h3>
         {{vm.pageType}}

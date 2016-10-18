@@ -102,6 +102,12 @@ export class Main {
     loader.add('bg-05', './resources/bg/bg-05.png');
     loader.once('complete', callback);
     loader.load();
+    let progressInterval = setInterval(() => {
+      this.onLoaderProgress(Math.min(100, loader.progress));
+      if (Math.min(100, loader.progress) >= 100) {
+        clearInterval(progressInterval);
+      }
+    }, 10);
   }
   
   spriteSheetLoaded() {
@@ -216,14 +222,34 @@ export class Main {
     this.resize();
     this.greetingScroller.reset();
     this.scroller.alpha = 1;
-    this.hideOverlay();
+    this.hideGreetingOverlay();
   }
   
-  hideOverlay() {
-    angular.element(document.querySelector('.canvas-overlay')).addClass('canvas-overlay__hidden');
+  hideGreetingOverlay() {
+    console.log(1);
+    let greetingOverlay = angular.element(document.querySelector('.greeting-overlay'));
+    greetingOverlay.addClass('overlay__hidden');
   }
   
-  showOverlay() {
-    angular.element(document.querySelector('.canvas-overlay')).removeClass('canvas-overlay__hidden');
+  showGreetingOverlay() {
+    let greetingOverlay = angular.element(document.querySelector('.greeting-overlay'));
+    greetingOverlay.removeClass('overlay__hidden');
+  }
+  
+  onLoaderProgress(progress = 0) {
+    let progressLine = document.querySelector('.progress__line-loaded');
+    let progressLineText = document.querySelector('.progress__line-loading');
+    progressLine.style.width = `${progress || 0}%`;
+    if (progress === 100) {
+      progressLineText.innerHTML = `Rendering chickens...`;
+      setTimeout(() => {
+        let overlay = document.querySelector('.loading-overlay');
+        angular.element(overlay).addClass('overlay__hidden');
+        let greetingOverlay = document.querySelector('.greeting-overlay');
+        angular.element(greetingOverlay).removeClass('overlay__hidden');
+      }, 2000)
+    } else {
+      progressLineText.innerHTML = `Loading... ${progress.toFixed(0) || 0}%`;
+    }
   }
 }

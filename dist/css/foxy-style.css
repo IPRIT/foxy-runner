@@ -7,6 +7,7 @@ body, html {
 body {
     background-color: #fff;
     overflow: hidden;
+    font-family: 'Fredoka One', sans-serif;
 }
 canvas {
     background-color: #fff;
@@ -51,4 +52,167 @@ canvas {
     -ms-transition: all .35s ease-in-out;
     -o-transition: all .35s ease-in-out;
     transition: all .35s ease-in-out;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    background-color: #9DC1C6;
+    background-image: url(../resources/images/bg-1.svg);
+    background-size: contain;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    z-index: 1000;
+    animation: bg-offset 10000s infinite linear .4s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    transform: translateZ(0);
+}
+.overlay__hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+.loading-overlay__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+}
+.loading-overlay__block {
+    flex: 1;
+}
+.logo {
+    background-image: url(../resources/images/logo_text_stroke.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    flex: 4;
+    margin: 2%;
+    margin-top: 50px;
+    box-sizing: border-box;
+}
+@keyframes bg-offset {
+    0% {  background-position: 0 bottom;  }
+    100% {  background-position-x: -200000px; background-position-y: bottom;  }
+}
+@-khtml-keyframes bg-offset {
+    0% {  background-position: 0 bottom;  }
+    100% {  background-position-x: -200000px; background-position-y: bottom;  }
+}
+@-webkit-keyframes bg-offset {
+    0% {  background-position: 0 bottom;  }
+    100% {  background-position-x: -200000px; background-position-y: bottom;  }
+}
+.progress {
+    padding: 20px;
+}
+.progress__line {
+    box-shadow: 0 0 0 9px #fff;
+    height: 20px;
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 50px;
+    background: #d99822;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+    font-size: .9em;
+    position: relative;
+}
+.progress__line-loaded {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background: #F5C14B;
+}
+.progress__line-loading {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left: 0;
+}
+.greeting-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    z-index: 999;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.greeting-overlay__bg {
+    background-color: #B2D0D0;
+    height: 100%;
+    width: 100%;
+}
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    z-index: 1000;
+    transform: translateZ(0);
+}
+.greeting-overlay__bg-1 {
+    background-image: url(../resources/images/greeting/bg-3-1.svg);
+    animation: bg-offset 10000s infinite linear .4s;
+}
+.greeting-overlay__bg-2 {
+    background-image: url(../resources/images/greeting/bg-3-2-1.svg);
+    animation: bg-offset 2000s infinite linear .4s;
+}
+.greeting-overlay__bg-2-2 {
+    background-image: url(../resources/images/greeting/bg-3-2-2.svg);
+    animation: bg-offset 5000s infinite linear .4s;
+}
+.greeting-overlay__bg-3 {
+    background-image: url(../resources/images/greeting/bg-3-3.svg);
+    animation: bg-offset 6000s infinite linear .4s;
+}
+.greeting-overlay__bg-4 {
+    background-image: url(../resources/images/greeting/bg-3-4.svg);
+    animation: bg-offset 4000s infinite linear .4s;
+}
+.greeting-overlay__bg-5 {
+    background-image: url(../resources/images/greeting/bg-3-5.svg);
+    animation: bg-offset 2000s infinite linear .4s;
 }

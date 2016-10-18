@@ -8,6 +8,8 @@ var gulp        = require('gulp')
   , babel       = require('gulp-babel')
 	, uglify 			= require('gulp-uglify')
   , del         = require('del')
+	, watch 			= require('gulp-watch')
+  , batch       = require('gulp-batch')
 	, browserify 	= require('browserify')
 	, concat 	    = require('gulp-concat')
 	, source 			= require('vinyl-source-stream')
@@ -41,6 +43,12 @@ gulp.task('clean', function() {
 
 gulp.task('build', [ 'clean', 'build:js' ], function () {
   return del([ 'dist/core/temp' ]);
+});
+
+gulp.task('watch', ['build'], function () {
+  watch('src/**/*.js', batch(function (events, done) {
+    gulp.start('build', done);
+  }));
 });
 
 gulp.task('default', [ 'build' ]);

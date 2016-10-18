@@ -4,9 +4,6 @@ export class Settings {
   
   static get Width() {
     let [ width, height ] = Utils.getBodyBounds();
-    if (window.gameFullScreenNeeded) {
-      return width;
-    }
     if (width < 1000 && width < height) {
       return 1500;
     }
@@ -14,10 +11,6 @@ export class Settings {
   }
   
   static get Height() {
-    let [ width, height ] = Utils.getBodyBounds();
-    if (window.gameFullScreenNeeded) {
-      //return height;
-    }
     return 1536;
   }
   

@@ -1,5 +1,6 @@
 import { BackgroundTile } from "./BackgroundTile";
 import { GameMap } from "../foreground/GameMap";
+import { Settings } from "../Settings";
 
 export class Scroller extends PIXI.Container {
   
@@ -45,6 +46,10 @@ export class Scroller extends PIXI.Container {
   shiftViewportX(value) {
     this.setViewportX(this._viewportX + value);
     this.gameMap.moveBy(value);
+    let [ minSpeed, maxSpeed ] = [ Settings.ScrollSpeed, Settings.MaxScrollSpeed ];
+    let progressSpeed = (value - minSpeed) / (maxSpeed - minSpeed);
+    let compressRatio = Math.min(1 - progressSpeed / 100, 1);
+    this.gameMap.scale.set(compressRatio);
     return this._viewportX;
   }
   
