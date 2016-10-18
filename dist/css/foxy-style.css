@@ -332,4 +332,7 @@ canvas {
     .greeting-overlay__block-content {
         width: 80%;
     }
+    .score-table__item-name {
+        font-size: 1.1em;
+    }
 }
