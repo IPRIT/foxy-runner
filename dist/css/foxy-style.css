@@ -328,7 +328,10 @@ canvas {
     background: #ffcc22;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
+    body {
+        font-size: 1.2em;
+    }
     .greeting-overlay__block-content {
         width: 80%;
     }
