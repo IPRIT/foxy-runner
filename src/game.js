@@ -10,7 +10,7 @@ function entryPoint() {
   game.onload(() => {
     game.run();
     setTimeout(() => {
-      //game.start();
+      game.start();
     }, 5000);
   });
 }
