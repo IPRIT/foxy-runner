@@ -69,8 +69,6 @@ export class Main {
     this.stage.scale.y = heightScale;
     if (this.gameState === GameState.Started) {
       this.scroller.hardViewUpdate();
-    } else {
-      this.greetingScroller.hardViewUpdate();
     }
     this.renderer.resize(w, h);
   }
@@ -113,7 +111,6 @@ export class Main {
   spriteSheetLoaded() {
     this.scroller = new Scroller(this.stage);
     this.scroller.setScrollSpeed(Settings.ScrollSpeed);
-    this.greetingScroller = new GreetingScroller(this.stage);
     this.attachEventsAfterLoad();
     
     this.scroller.alpha = 0;
@@ -130,8 +127,6 @@ export class Main {
         Math.min(this.scroller.getScrollSpeed() + Settings.ScrollSpeedAcceleration, Settings.MaxScrollSpeed)
       );
       this.scroller.shiftViewportX(this.scroller.getScrollSpeed());
-    } else if (this.gameState === GameState.Greeting) {
-      this.greetingScroller.shiftViewportX(this.greetingScroller.getScrollSpeed());
     }
     
     this.renderer.render(this.stage);
@@ -203,11 +198,7 @@ export class Main {
       this.stage.filters[0].saturate(0);
     }
     this.scroller.reset();
-    if (this.greetingScroller) {
-      this.greetingScroller.reset();
-    }
     this.scroller = null;
-    this.greetingScroller = null;
     
     this.scroller = new Scroller(this.stage);
     this.scroller.setScrollSpeed(Settings.ScrollSpeed);
@@ -220,13 +211,11 @@ export class Main {
     this.gameState = GameState.Started;
     window.gameFullScreenNeeded = false;
     this.resize();
-    this.greetingScroller.reset();
     this.scroller.alpha = 1;
     this.hideGreetingOverlay();
   }
   
   hideGreetingOverlay() {
-    console.log(1);
     let greetingOverlay = angular.element(document.querySelector('.greeting-overlay'));
     greetingOverlay.addClass('overlay__hidden');
   }
@@ -245,8 +234,7 @@ export class Main {
       setTimeout(() => {
         let overlay = document.querySelector('.loading-overlay');
         angular.element(overlay).addClass('overlay__hidden');
-        let greetingOverlay = document.querySelector('.greeting-overlay');
-        angular.element(greetingOverlay).removeClass('overlay__hidden');
+        this.showGreetingOverlay();
       }, 2000)
     } else {
       progressLineText.innerHTML = `Loading... ${progress.toFixed(0) || 0}%`;
