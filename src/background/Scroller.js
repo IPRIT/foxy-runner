@@ -115,4 +115,8 @@ export class Scroller extends PIXI.Container {
       tile.destroy();
     })
   }
+  
+  getScore() {
+    return this.gameMap.score;
+  }
 }

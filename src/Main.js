@@ -157,6 +157,7 @@ export class Main {
     }
     this.isGameOver = true;
     this.scroller.gameOver();
+    let totalScore = this.scroller.getScore();
     console.log('Game over');
     
     var colorMatrix = new PIXI.filters.ColorMatrixFilter();
@@ -171,6 +172,10 @@ export class Main {
       }, (stage) => {
         console.log('Done');
       });
+    
+    setTimeout(() => {
+      this.showGameoverOverlay(totalScore);
+    }, 1500);
   }
   
   pause() {
@@ -189,6 +194,12 @@ export class Main {
   
   restart() {
     this.reset();
+    this.gameState = GameState.Started;
+    this.resize();
+    this.scroller.alpha = 1;
+    this.hideGreetingOverlay();
+    this.hideGameoverOverlay();
+    this.hideGameoverOverlay();
   }
   
   reset() {
@@ -209,7 +220,6 @@ export class Main {
   
   start() {
     this.gameState = GameState.Started;
-    window.gameFullScreenNeeded = false;
     this.resize();
     this.scroller.alpha = 1;
     this.hideGreetingOverlay();
@@ -225,6 +235,18 @@ export class Main {
     greetingOverlay.removeClass('overlay__hidden');
   }
   
+  hideGameoverOverlay() {
+    let gameoverOverlay = angular.element(document.querySelector('.gameover-overlay'));
+    gameoverOverlay.addClass('overlay__hidden');
+  }
+  
+  showGameoverOverlay(totalScore = 0) {
+    let gameoverOverlay = angular.element(document.querySelector('.gameover-overlay'));
+    gameoverOverlay.removeClass('overlay__hidden');
+    let totalScoreLayout = angular.element(document.querySelector('.gameover-overlay__total-score'));
+    totalScoreLayout.text(`You scored ${totalScore}`);
+  }
+  
   onLoaderProgress(progress = 0) {
     let progressLine = document.querySelector('.progress__line-loaded');
     let progressLineText = document.querySelector('.progress__line-loading');
@@ -234,6 +256,7 @@ export class Main {
       setTimeout(() => {
         let overlay = document.querySelector('.loading-overlay');
         angular.element(overlay).addClass('overlay__hidden');
+        document.body.style.background = '#B2D0D0';
         this.showGreetingOverlay();
       }, 2000)
     } else {

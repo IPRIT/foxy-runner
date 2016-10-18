@@ -24,7 +24,7 @@ export class IslandsMap extends PIXI.Container {
     this.builder = new MapBuilder();
     this.animalPool = new AnimalPool();
     this.slices = [];
-    this.viewportX = 0;
+    this.viewportX = 900;
     this.viewportSliceX = 0;
   }
   

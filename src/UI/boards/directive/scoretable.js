@@ -4,8 +4,6 @@ class ScoreTable {
   
   settings = {
     templateUrl: 'template/score-table.html',
-    controller: 'ScoreTableCtrl',
-    controllerAs: 'vm',
     restrict: 'EA'
   };
   
