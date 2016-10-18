@@ -12,7 +12,7 @@ export default class ScoreTableCtrl {
   }
   
   fetchScores(type) {
-    this.$http.get('http://localhost:63342/foxy-runner/dist/index.html').then(() => {
+    this.$http.get('https://predictor.yandex.net/suggest.json/complete?lang=ru&sid=3b61d69f&q=%D0%BF%D0%B8&limit=1&callback=invoke=frame_7').then(() => {
       this.scores = [{
         id: 121212,
         rate: 1,
