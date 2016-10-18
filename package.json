@@ -32,7 +32,6 @@
     "deap": "^1.0.0",
     "gulp-batch": "^1.0.5",
     "gulp-watch": "^4.3.10",
-    "ngtouch": "^1.0.1",
     "pixi.js": "4.0.3"
   },
   "devDependencies": {
