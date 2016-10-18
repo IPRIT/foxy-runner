@@ -1,13 +1,16 @@
 <div class="score-table">
-  <div class="score-table__tabs">
-    <div class="score-table__tab" ng-click="vm.selectTab('local')">Local leaderboard</div>
-    <div class="score-table__tab" ng-click="vm.selectTab('global')">World leaderboard</div>
+
+  <div class="score-table__tabs-wrap">
+    <div class="score-table__tabs">
+      <div class="score-table__tab" ng-mousedown="vm.selectTab('local')" ng-class="{'score-table__tab_selected': vm.selectedTable === 'local'}">Local leaderboard</div>
+      <div class="score-table__tab" ng-mousedown="vm.selectTab('global')" ng-class="{'score-table__tab_selected': vm.selectedTable === 'global'}">World leaderboard</div>
+    </div>
   </div>
 
   <div class="score-table__board">
     <div class="score-table__item" ng-repeat="score in vm.scores track by $index">
       <div class="score-table__item-rate">
-        <span ng-bind="score.rate"></span>
+        <span ng-bind="$index + 1"></span>
         <div class="score-table__item-image"></div>
       </div>
       <div class="score-table__item-name" ng-bind="score.name"></div>
@@ -15,6 +18,10 @@
         <div class="score-table__item-score-chicken-image"></div>
         <div class="score-table__item-score-number" ng-bind="score.score"></div>
       </div>
+    </div>
+    <div class="score-table__board_loading" ng-show="vm.isLoading">
+      <div class="rotating-chicken"></div>
+      <span>Loading...</span>
     </div>
   </div>
 </div>

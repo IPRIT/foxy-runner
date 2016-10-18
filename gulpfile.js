@@ -29,11 +29,11 @@ gulp.task('build:js', [ 'build:es6-commonjs' ], function() {
 		]),
     browserify('./dist/core/temp/game.js')
       .bundle()
-      .pipe(source('foxy-runner.min.js'))
+      .pipe(source('tricky-foxy.min.js'))
       .pipe(buffer())
       .pipe(uglify())
   )
-    .pipe(concat('foxy-runner.min.js'))
+    .pipe(concat('tricky-foxy.min.js'))
 		.pipe(gulp.dest('./dist/core'));
 });
 
