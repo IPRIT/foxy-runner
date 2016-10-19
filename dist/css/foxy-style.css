@@ -266,6 +266,7 @@ canvas {
     box-sizing: border-box;
     color: #333;
     position: relative;
+    font-size: 1.1em;
 }
 .score-table__board {
     overflow-y: auto;
@@ -437,10 +438,10 @@ canvas {
     transition: all .05s ease-in-out;
 }
 .score-table__tab:first-of-type {
-    margin-right: 3px;
+    margin-right: 6px;
 }
 .score-table__tab:last-of-type {
-    margin-left: 3px;
+    margin-left: 6px;
 }
 .score-table__tab:hover {
     background: rgba(255, 204, 34, 0.11);
