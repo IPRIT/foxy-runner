@@ -199,7 +199,6 @@ export class Main {
     this.scroller.alpha = 1;
     this.hideGreetingOverlay();
     this.hideGameoverOverlay();
-    this.hideGameoverOverlay();
   }
   
   reset() {
@@ -228,21 +227,30 @@ export class Main {
   hideGreetingOverlay() {
     let greetingOverlay = angular.element(document.querySelector('.greeting-overlay'));
     greetingOverlay.addClass('overlay__hidden');
+    setTimeout(() => {
+      greetingOverlay.remove();
+      document.body.style.background = '#fff';
+    }, 200);
   }
   
   showGreetingOverlay() {
     let greetingOverlay = angular.element(document.querySelector('.greeting-overlay'));
+    greetingOverlay.css({display: 'block'});
     greetingOverlay.removeClass('overlay__hidden');
   }
   
   hideGameoverOverlay() {
     let gameoverOverlay = angular.element(document.querySelector('.gameover-overlay'));
     gameoverOverlay.addClass('overlay__hidden');
+    setTimeout(() => {
+      gameoverOverlay.css({display: 'none'});
+    }, 2000);
   }
   
   showGameoverOverlay(totalScore = 0) {
     let gameoverOverlay = angular.element(document.querySelector('.gameover-overlay'));
-    gameoverOverlay.removeClass('overlay__hidden');
+    gameoverOverlay.css({display: 'block'});
+    setTimeout(() => gameoverOverlay.removeClass('overlay__hidden'));
     let totalScoreLayout = angular.element(document.querySelector('.gameover-overlay__total-score'));
     totalScoreLayout.text(`You scored ${totalScore}`);
   }
@@ -256,6 +264,9 @@ export class Main {
       setTimeout(() => {
         let overlay = document.querySelector('.loading-overlay');
         angular.element(overlay).addClass('overlay__hidden');
+        setTimeout(() => {
+          angular.element(overlay).remove();
+        }, 300);
         document.body.style.background = '#B2D0D0';
         this.showGreetingOverlay();
       }, 2000)
