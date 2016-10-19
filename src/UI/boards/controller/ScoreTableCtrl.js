@@ -46,7 +46,7 @@ export default class ScoreTableCtrl {
         id: 32324234,
         rate: 4,
         worldRate: 10024,
-        name: 'Хитрый Лис',
+        name: 'DiCaprio',
         score: 21
       }, {
         id: 121212,
@@ -58,7 +58,7 @@ export default class ScoreTableCtrl {
         id: 32324234,
         rate: 2,
         worldRate: 10024,
-        name: 'Хитрый Лис',
+        name: 'DiCaprio',
         score: 21
       }, {
         id: 121212,
@@ -70,25 +70,13 @@ export default class ScoreTableCtrl {
         id: 32324234,
         rate: 2,
         worldRate: 10024,
-        name: 'Хитрый Лис',
+        name: 'DiCaprio',
         score: 21
       }, {
         id: 32324234,
         rate: 2,
         worldRate: 10024,
-        name: 'Хитрый Лис',
-        score: 21
-      }, {
-        id: 121212,
-        rate: 1,
-        worldRate: 1023,
-        name: 'Alexander Belov',
-        score: 66
-      }, {
-        id: 32324234,
-        rate: 2,
-        worldRate: 10024,
-        name: 'Хитрый Лис',
+        name: 'DiCaprio',
         score: 21
       }, {
         id: 121212,
@@ -100,7 +88,7 @@ export default class ScoreTableCtrl {
         id: 32324234,
         rate: 2,
         worldRate: 10024,
-        name: 'Хитрый Лис',
+        name: 'DiCaprio',
         score: 21
       }, {
         id: 121212,
@@ -112,7 +100,19 @@ export default class ScoreTableCtrl {
         id: 32324234,
         rate: 2,
         worldRate: 10024,
-        name: 'Хитрый Лис',
+        name: 'DiCaprio',
+        score: 21
+      }, {
+        id: 121212,
+        rate: 1,
+        worldRate: 1023,
+        name: 'Alexander Belov',
+        score: 66
+      }, {
+        id: 32324234,
+        rate: 2,
+        worldRate: 10024,
+        name: 'DiCaprio',
         score: 21
       }];
       if (type === 'global') {
@@ -120,7 +120,7 @@ export default class ScoreTableCtrl {
       }
       this.$timeout(() => {
         this.isLoading = false;
-      }, 100);
+      }, 500);
       return this.scores;
     });
   }
