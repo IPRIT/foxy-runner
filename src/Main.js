@@ -236,7 +236,7 @@ export class Main {
   showGreetingOverlay() {
     let greetingOverlay = angular.element(document.querySelector('.greeting-overlay'));
     greetingOverlay.css({display: 'block'});
-    greetingOverlay.removeClass('overlay__hidden');
+    setTimeout(() => greetingOverlay.removeClass('overlay__hidden'), 50);
   }
   
   hideGameoverOverlay() {
@@ -253,6 +253,11 @@ export class Main {
     setTimeout(() => gameoverOverlay.removeClass('overlay__hidden'), 50);
     let totalScoreLayout = angular.element(document.querySelector('.gameover-overlay__total-score'));
     totalScoreLayout.text(`You scored ${totalScore}`);
+    let tableLayout = angular.element(document.querySelector('.score-table'));
+    let targetScope = tableLayout.scope();
+    targetScope.vm.cacheStore = null;
+    targetScope.vm.cacheStore = {};
+    targetScope.vm.fetchScores('local', true);
   }
   
   onLoaderProgress(progress = 0) {

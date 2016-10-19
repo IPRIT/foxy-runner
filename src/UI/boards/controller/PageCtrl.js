@@ -1,5 +1,3 @@
-import deap from 'deap';
-
 export default class PageCtrl {
   
   static $inject = [ '$scope', '$rootScope', '$timeout' ];
@@ -14,12 +12,10 @@ export default class PageCtrl {
   play() {
     this.pageType = 'started';
     window.game.start();
-    this.$rootScope.$broadcast('leaderboards.cache.reset');
   }
   
   restart() {
     this.pageType = 'started';
     window.game.restart();
-    this.$rootScope.$broadcast('leaderboards.cache.reset');
   }
 }

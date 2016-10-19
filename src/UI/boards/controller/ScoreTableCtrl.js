@@ -15,7 +15,6 @@ export default class ScoreTableCtrl {
     this.fetchScores(this.selectedTable);
     this.cacheStore = {};
     this.isLoading = false;
-    this.attachEvents.call($scope);
   }
   
   fetchScores(type, force = false) {
@@ -129,14 +128,5 @@ export default class ScoreTableCtrl {
     let oldTableId = this.selectedTable;
     this.selectedTable = tabId;
     this.fetchScores(tabId, oldTableId === tabId);
-  }
-  
-  attachEvents() {
-    this.$on('leaderboards.cache.reset', (ev, args) => {
-      console.log('Cache resetting...');
-      this.vm.cacheStore = null;
-      this.vm.cacheStore = {};
-      this.vm.fetchScores('local');
-    });
   }
 }
