@@ -250,7 +250,7 @@ export class Main {
   showGameoverOverlay(totalScore = 0) {
     let gameoverOverlay = angular.element(document.querySelector('.gameover-overlay'));
     gameoverOverlay.css({display: 'block'});
-    setTimeout(() => gameoverOverlay.removeClass('overlay__hidden'));
+    setTimeout(() => gameoverOverlay.removeClass('overlay__hidden'), 50);
     let totalScoreLayout = angular.element(document.querySelector('.gameover-overlay__total-score'));
     totalScoreLayout.text(`You scored ${totalScore}`);
   }
