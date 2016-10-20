@@ -47,6 +47,13 @@
         <score-table></score-table>
       </div>
     </div>
+
+    <div class="greeting-overlay__howto" ng-init="vm.isGotIt = false" ng-if="!vm.isGotIt">
+      <div class="greeting-overlay__howto-img"></div>
+      <div class="greeting-overlay__howto-controls">
+        <div class="button greeting-overlay__howto-gotit" ng-click="vm.isGotIt = true">Got it. Close!</div>
+      </div>
+    </div>
   </div>
 
   <div class="gameover-overlay overlay__hidden" style="display: none">
