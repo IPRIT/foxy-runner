@@ -403,7 +403,7 @@ canvas {
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
-.play:hover {
+.play.desktop:hover, .play.mobile.ng-button-touched {
     -webkit-transform: scale(.9);
     -moz-transform: scale(.9);
     -ms-transform: scale(.9);
@@ -564,7 +564,7 @@ canvas {
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
-.restart:hover {
+.restart.desktop:hover, .restart.mobile.ng-button-touched {
     -webkit-transform: scale(.9);
     -moz-transform: scale(.9);
     -ms-transform: scale(.9);
@@ -641,6 +641,9 @@ canvas {
 }
 
 @media screen and (max-width: 900px) {
+    .desktop {
+        display: none;
+    }
     body {
         font-size: 1.5em;
     }
@@ -712,5 +715,8 @@ canvas {
         -ms-transform: scale(.97);
         -o-transform: scale(.97);
         transform: scale(.97);
+    }
+    .mobile {
+        display: none;
     }
 }
