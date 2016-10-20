@@ -238,7 +238,7 @@ export class Main {
     let canvasLayout = angular.element(document.querySelector('.page'));
     greetingOverlay.css({display: 'block'});
     setTimeout(() => greetingOverlay.removeClass('overlay__hidden'), 50);
-    setTimeout(() => canvasLayout.css({display: 'block'}), 250);
+    setTimeout(() => canvasLayout.css({display: 'block'}), 300);
   }
   
   hideGameoverOverlay() {
