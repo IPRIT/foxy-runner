@@ -264,6 +264,7 @@ export class Main {
     let progressLine = document.querySelector('.progress__line-loaded');
     let progressLineText = document.querySelector('.progress__line-loading');
     progressLine.style.width = `${progress || 0}%`;
+    
     if (progress === 100) {
       progressLineText.innerHTML = `Rendering chickens...`;
       setTimeout(() => {
