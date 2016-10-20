@@ -447,7 +447,7 @@ canvas {
 .score-table__tab:hover {
     background: rgba(255, 204, 34, 0.11);
 }
-.score-table__tab:active {
+.score-table__tab.ng-touch-started {
     -webkit-transform: scale(.97);
     -moz-transform: scale(.97);
     -ms-transform: scale(.97);
@@ -697,5 +697,20 @@ canvas {
     }
     .button {
         cursor: default;
+        padding: 15px 30px;
+        font-size: 1.4em;
+    }
+    .greeting-overlay__howto-controls {
+        padding: 6px 24px 30px;
+    }
+}
+
+@media screen and (min-width: 901px) {
+    .score-table__tab:active {
+        -webkit-transform: scale(.97);
+        -moz-transform: scale(.97);
+        -ms-transform: scale(.97);
+        -o-transform: scale(.97);
+        transform: scale(.97);
     }
 }
