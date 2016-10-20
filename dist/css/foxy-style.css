@@ -592,6 +592,12 @@ canvas {
     }
     .play, .restart {
         cursor: default;
+        width: 200px;
+        height: 200px;
+    }
+    .play-text {
+        font-size: 3.2em;
+        margin-top: 20px;
     }
     .score-table__tab {
         cursor: default;
