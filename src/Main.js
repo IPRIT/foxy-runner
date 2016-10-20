@@ -246,7 +246,7 @@ export class Main {
     gameoverOverlay.addClass('overlay__hidden');
     setTimeout(() => {
       gameoverOverlay.css({display: 'none'});
-    }, 2000);
+    }, 200);
   }
   
   showGameoverOverlay(totalScore = 0) {
