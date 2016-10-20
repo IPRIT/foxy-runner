@@ -102,10 +102,10 @@ export class Scroller extends PIXI.Container {
   }
   
   reset() {
-    this._speed = 1;
     this.gameMap.reset();
     this.gameMap.destroy();
-    
+  
+    this._speed = 1;
     this._viewportX = 0;
     this.setViewportX(this._viewportX);
     
