@@ -41,7 +41,6 @@
         <div class="play-wrap">
           <div class="play desktop" ng-click="play()"></div>
           <div class="play mobile" ng-touchstart="vm.playTouched = true" ng-touchend="vm.playTouched = false; play()" ng-class="{'ng-button-touched': vm.playTouched}"></div>
-
           <div class="play-text">Play</div>
         </div>
       </div>
@@ -75,7 +74,6 @@
         <div class="restart-wrap">
           <div class="restart desktop" ng-click="restart()"></div>
           <div class="restart mobile" ng-touchstart="vm.playTouched = true" ng-touchend="vm.playTouched = false; restart()" ng-class="{'ng-button-touched': vm.playTouched}"></div>
-
           <div class="restart-text">Restart</div>
         </div>
         <div class="gameover-overlay__total-score"></div>
