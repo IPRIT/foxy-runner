@@ -386,7 +386,7 @@ canvas {
 }
 .play-button {
     flex: 1;
-    max-height: 400px;
+    max-height: 300px;
 }
 .play {
     width: 150px;
@@ -547,7 +547,7 @@ canvas {
 }
 .restart-button {
     flex: 1;
-    max-height: 400px;
+    max-height: 230px;
 }
 .restart {
     width: 100px;
@@ -592,6 +592,12 @@ canvas {
     }
     .score-table__item-name {
         font-size: 1.1em;
+    }
+    .restart-button {
+        max-height: 430px;
+    }
+    .play-button {
+        max-height: 400px;
     }
     .play, .restart {
         cursor: default;
