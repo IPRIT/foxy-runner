@@ -132,7 +132,7 @@ export class Main {
         volume: .3
       }, {
         name: "music",
-        volume: .25,
+        volume: .45,
         loop: true,
         multiplay: false
       }],
