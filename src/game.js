@@ -11,12 +11,7 @@ function entryPoint() {
   setupSettings();
   
   window.game = new Main();
-  game.onload(() => {
-    game.run();
-    setTimeout(() => {
-      //game.start();
-    }, 5000);
-  });
+  game.onload(() => game.run());
 }
 
 function setupSettings() {
