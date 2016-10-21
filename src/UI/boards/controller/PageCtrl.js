@@ -35,7 +35,7 @@ export default class PageCtrl {
     window.gameMusic = !window.gameMusic;
     if (window.gameMusic) {
       target.removeClass('music-off');
-      game.gameState === GameState.Started && ion.sound.play(`music`);
+      game.gameState !== GameState.Started && ion.sound.play(`music`);
     } else {
       target.addClass('music-off');
       ion.sound.stop(`music`);
