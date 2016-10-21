@@ -55,7 +55,7 @@ export class Main {
   
   resize() {
     this.ratio = Main.CanvasRatio;
-    let [width, height] = Utils.getBodyBounds();
+    let [ width, height ] = Utils.getBodyBounds();
     if (width / height >= this.ratio) {
       var w = height * this.ratio;
       var h = height;
@@ -63,14 +63,29 @@ export class Main {
       w = width;
       h = width / this.ratio;
     }
+    /*U.resize(d, f);
+    ga.width = d * J;
+    ga.height = f * J;
+    ga.style.width = d + "px";
+    ga.style.height = f + "px";*/
+  
+    let devicePixelRatio = window.devicePixelRatio;
+    2 < devicePixelRatio && (devicePixelRatio = 2);
+    this.renderer.resize(w * devicePixelRatio, h * devicePixelRatio);
+    let canvas = document.getElementById('game-canvas');
+    canvas.width = w * devicePixelRatio;
+    canvas.height = h * devicePixelRatio;
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${h}px`;
+  
     let widthScale = w / Main.CanvasWidth;
     let heightScale = h / Main.CanvasHeight;
-    this.stage.scale.x = widthScale;
-    this.stage.scale.y = heightScale;
+    this.stage.scale.x = widthScale * devicePixelRatio;
+    this.stage.scale.y = heightScale * devicePixelRatio;
+    
     if (this.gameState === GameState.Started) {
       this.scroller.hardViewUpdate();
     }
-    this.renderer.resize(w, h);
   }
   
   loadResources() {
