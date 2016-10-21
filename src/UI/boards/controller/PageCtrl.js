@@ -62,7 +62,7 @@ export default class PageCtrl {
   
   acceptRules() {
     this.isRulesAccepted = true;
-    let settings = ds.get('settings');
+    let settings = ds.get('settings') || {};
     ds.set('settings', deap.extend(settings, {
       isRulesAccepted: this.isRulesAccepted
     }));
