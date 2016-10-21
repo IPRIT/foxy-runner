@@ -21,7 +21,7 @@ function entryPoint() {
 
 function setupSettings() {
   let settings = ds.get('settings') || {};
-  let { gameMusic, gameSounds } = settings;
+  let { gameMusic, gameSounds } = settings || {};
   window.gameMusic = isType('Boolean', gameMusic) ? gameMusic : true;
   window.gameSounds = isType('Boolean', gameSounds) ? gameSounds : true;
   if (!window.gameMusic) {

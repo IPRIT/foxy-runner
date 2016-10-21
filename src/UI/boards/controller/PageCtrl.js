@@ -16,7 +16,7 @@ export default class PageCtrl {
   
   init() {
     this.pageType = 'greeting';
-    let settings = ds.get('settings');
+    let settings = ds.get('settings') || {};
     this.isRulesAccepted = settings.isRulesAccepted || false;
   }
   
