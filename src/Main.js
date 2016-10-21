@@ -120,19 +120,19 @@ export class Main {
     ion.sound({
       sounds: [{
         name: "fall",
-        volume: .5
+        volume: .7
       }, {
         name: "chicken_1",
-        volume: .3
+        volume: .7
       }, {
         name: "chicken_2",
         volume: .2
       }, {
         name: "chicken_3",
-        volume: .3
+        volume: .7
       }, {
         name: "music",
-        volume: .45,
+        volume: .65,
         loop: true,
         multiplay: false
       }],
