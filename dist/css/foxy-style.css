@@ -654,14 +654,14 @@ canvas {
     -o-transform: scale(.97);
     transform: scale(.97);
 }
-.music-controls {
+.ui-controls {
     position: fixed;
     z-index: 1005;
     right: 0;
     top: 0;
     padding: 10px;
 }
-.button-music, .button-sounds {
+.button-music, .button-sounds, .button-resume, .button-pause {
     width: 40px;
     height: 40px;
     padding: 0;
@@ -670,8 +670,12 @@ canvas {
     background-color: #FFCC22;
     background-repeat: no-repeat;
     background-position: center center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
-.button-music:active .music-off:after, .button-sounds:active .music-off:after {
+.button-music:active.music-off:after, .button-sounds:active.music-off:after {
     border-color: #daae1d;
 }
 .button-music {
@@ -679,6 +683,12 @@ canvas {
 }
 .button-sounds {
     background-image: url(../resources/images/ic_volume_up_white_24px.svg);
+}
+.button-resume {
+    background-image: url(../resources/images/ic_play_arrow_white_24px.svg);
+}
+.button-pause {
+    background-image: url(../resources/images/ic_pause_white_24px.svg);
 }
 .music-off:after {
     position: absolute;
@@ -696,6 +706,9 @@ canvas {
     -moz-transition: all .05s ease-in-out;
     -o-transition: all .05s ease-in-out;
     transition: all .05s ease-in-out;
+}
+.button-hidden {
+    display: none;
 }
 
 @media screen and (max-width: 900px) {

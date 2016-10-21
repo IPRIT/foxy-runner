@@ -155,7 +155,7 @@ export class Main {
   
   update() {
     if (this.isPaused) {
-      return;
+      return requestAnimationFrame(this.update.bind(this));
     }
     this.frame++;
     
@@ -173,6 +173,14 @@ export class Main {
   attachEventsAfterLoad() {
     window.addEventListener('resize', this.resize.bind(this));
     this.resize();
+    
+    window.addEventListener('keydown', (ev) => {
+      if (ev.keyCode === 80 && this.gameState === GameState.Started) {
+        (Array.from(
+          document.querySelectorAll('.button-pause:not(.button-hidden),.button-resume:not(.button-hidden)')
+        ) || []).forEach(element => element.click());
+      }
+    });
   }
   
   run() {
@@ -210,7 +218,8 @@ export class Main {
       }, (stage) => {
         console.log('Done');
       });
-    
+  
+    angular.element(document.querySelectorAll('.button-pause, .button-resume')).addClass('button-hidden');
     angular.element(document.body).addClass('bg1-gray');
     setTimeout(() => {
       this.showGameoverOverlay(totalScore);
@@ -240,6 +249,8 @@ export class Main {
     this.hideGreetingOverlay();
     this.hideGameoverOverlay();
     ion.sound.stop(`music`);
+    angular.element(document.querySelectorAll('.button-pause')).removeClass('button-hidden');
+    angular.element(document.querySelectorAll('.button-resume')).addClass('button-hidden');
   }
   
   reset() {
@@ -264,6 +275,9 @@ export class Main {
     this.scroller.alpha = 1;
     this.hideGreetingOverlay();
     ion.sound.stop(`music`);
+  
+    angular.element(document.querySelectorAll('.button-pause')).removeClass('button-hidden');
+    angular.element(document.querySelectorAll('.button-resume')).addClass('button-hidden');
   }
   
   hideGreetingOverlay() {

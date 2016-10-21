@@ -30,12 +30,14 @@
     "angular": "1.5.8",
     "bluebird": "^3.4.6",
     "deap": "^1.0.0",
+    "fm-localstorage": "^1.0.1",
     "gulp-batch": "^1.0.5",
     "gulp-watch": "^4.3.10",
     "ion-sound": "^3.0.7",
     "ngtouch": "^1.0.1",
     "ngtouchstart": "^1.0.1",
-    "pixi.js": "4.0.3"
+    "pixi.js": "4.0.3",
+    "type-check": "^0.3.2"
   },
   "devDependencies": {
     "babel-core": "^6.11.4",

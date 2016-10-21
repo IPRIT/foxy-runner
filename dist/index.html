@@ -42,7 +42,10 @@
 </head>
 <body ng-cloak style="background: #9DC1C6;">
 
-  <div class="music-controls">
+  <div class="ui-controls">
+    <div class="button button-pause button-hidden" ng-click="vm.gamePause($event)"></div>
+    <div class="button button-resume button-hidden" ng-click="vm.gameResume($event)"></div>
+
     <div class="button button-music" ng-click="vm.toggleMusic($event)"></div>
     <div class="button button-sounds" ng-click="vm.toggleSounds($event)"></div>
   </div>
@@ -84,11 +87,11 @@
       </div>
     </div>
 
-    <div class="greeting-overlay__howto" ng-init="vm.isGotIt = false" ng-if="!vm.isGotIt">
+    <div class="greeting-overlay__howto" ng-if="!vm.isRulesAccepted">
       <div class="greeting-overlay__howto-img"></div>
       <div class="greeting-overlay__howto-controls">
-        <div class="button greeting-overlay__howto-gotit desktop" ng-click="vm.isGotIt = true">Got it. Close!</div>
-        <div class="button greeting-overlay__howto-gotit mobile" ng-touchstart="vm.isGotIt = true">Got it. Close!</div>
+        <div class="button greeting-overlay__howto-gotit desktop" ng-click="vm.acceptRules()">Got it. Close!</div>
+        <div class="button greeting-overlay__howto-gotit mobile" ng-touchstart="vm.acceptRules()">Got it. Close!</div>
       </div>
     </div>
   </div>
