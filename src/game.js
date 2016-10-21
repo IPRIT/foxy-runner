@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function entryPoint() {
+  window.gameMusic = true;
+  window.gameSounds = true;
   window.game = new Main();
   game.onload(() => {
     game.run();

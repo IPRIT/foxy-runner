@@ -1,8 +1,8 @@
-import { GreetingScroller } from "./background/GreetingScroller";
 import { Scroller } from "./background/Scroller";
 import { AnimationAttractor } from "./Animation/Attractor";
 import { Settings } from "./Settings";
 import { Utils } from "./Utils";
+import * as ionModule from 'ion-sound';
 
 export class GameState {
   
@@ -63,11 +63,6 @@ export class Main {
       w = width;
       h = width / this.ratio;
     }
-    /*U.resize(d, f);
-    ga.width = d * J;
-    ga.height = f * J;
-    ga.style.width = d + "px";
-    ga.style.height = f + "px";*/
   
     let devicePixelRatio = window.devicePixelRatio;
     2 < devicePixelRatio && (devicePixelRatio = 2);
@@ -121,12 +116,39 @@ export class Main {
         clearInterval(progressInterval);
       }
     }, 10);
+    
+    ion.sound({
+      sounds: [{
+        name: "fall",
+        volume: .5
+      }, {
+        name: "chicken_1",
+        volume: .1
+      }, {
+        name: "chicken_2",
+        volume: .2
+      }, {
+        name: "chicken_3",
+        volume: .1
+      }, {
+        name: "music",
+        volume: .05,
+        loop: true,
+        multiplay: false
+      }],
+      volume: 1,
+      path: "./resources/sounds/",
+      preload: true,
+      multiplay: true
+    });
   }
   
   spriteSheetLoaded() {
     this.scroller = new Scroller(this.stage);
     this.scroller.setScrollSpeed(Settings.ScrollSpeed);
     this.attachEventsAfterLoad();
+  
+    gameMusic && ion.sound.play(`music`);
     
     this.scroller.alpha = 0;
   }
@@ -170,6 +192,7 @@ export class Main {
     if (this.isGameOver) {
       return;
     }
+    gameSounds && ion.sound.play("fall");
     this.isGameOver = true;
     this.scroller.gameOver();
     let totalScore = this.scroller.getScore();
@@ -187,10 +210,11 @@ export class Main {
       }, (stage) => {
         console.log('Done');
       });
-  
+    
     angular.element(document.body).addClass('bg1-gray');
     setTimeout(() => {
       this.showGameoverOverlay(totalScore);
+      gameMusic && ion.sound.play(`music`);
     }, 1500);
   }
   
@@ -215,6 +239,7 @@ export class Main {
     this.scroller.alpha = 1;
     this.hideGreetingOverlay();
     this.hideGameoverOverlay();
+    ion.sound.stop(`music`);
   }
   
   reset() {
@@ -238,6 +263,7 @@ export class Main {
     this.resize();
     this.scroller.alpha = 1;
     this.hideGreetingOverlay();
+    ion.sound.stop(`music`);
   }
   
   hideGreetingOverlay() {

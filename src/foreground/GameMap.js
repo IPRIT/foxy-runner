@@ -5,6 +5,7 @@ import { IslandType } from "./SliceType";
 import { ScoreIncrementer } from "../UI/ScoreIncrementer";
 import { ScoreView } from "../UI/Score";
 import { Foxy } from "../models/Foxy/Foxy";
+import { Utils } from "../Utils";
 
 export class GameMap extends IslandsMap {
   
@@ -103,6 +104,12 @@ export class GameMap extends IslandsMap {
       return;
     }
     this.score++;
+    let prob = Utils.getRandomInt(0, 100) / 100;
+    if (prob < .9) {
+      gameSounds && ion.sound.play(`chicken_3`);
+    } else {
+      gameSounds && ion.sound.play(`chicken_1`);
+    }
     this.scoreView.setScore(this.score);
     
     if (isWebGLRenderer && game.getFPS() > 45 && Main.CanvasWidth > 1500) {

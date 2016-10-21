@@ -637,7 +637,7 @@ canvas {
     -moz-transition: all .05s ease-in-out;
     -o-transition: all .05s ease-in-out;
     transition: all .05s ease-in-out;
-    background: #FFCC22;
+    background-color: #FFCC22;
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -647,12 +647,55 @@ canvas {
     display: inline-block;
 }
 .button:active {
-    background: #daae1d;
+    background-color: #daae1d;
     -webkit-transform: scale(.97);
     -moz-transform: scale(.97);
     -ms-transform: scale(.97);
     -o-transform: scale(.97);
     transform: scale(.97);
+}
+.music-controls {
+    position: fixed;
+    z-index: 1005;
+    right: 0;
+    top: 0;
+    padding: 10px;
+}
+.button-music, .button-sounds {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 5px;
+    background-size: 70%;
+    background-color: #FFCC22;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.button-music:active .music-off:after, .button-sounds:active .music-off:after {
+    border-color: #daae1d;
+}
+.button-music {
+    background-image: url(../resources/images/ic_music_note_white_24px.svg);
+}
+.button-sounds {
+    background-image: url(../resources/images/ic_volume_up_white_24px.svg);
+}
+.music-off:after {
+    position: absolute;
+    content: '';
+    height: 2px;
+    width: 80%;
+    -webkit-transform: rotate(45deg) translate(-6%, 304%);
+    -moz-transform: rotate(45deg) translate(-6%, 304%);
+    -ms-transform: rotate(45deg) translate(-6%, 304%);
+    -o-transform: rotate(45deg) translate(-6%, 304%);
+    transform: rotate(45deg) translate(-6%, 304%);
+    background: #fff;
+    border: 3px solid #FFCC22;
+    -webkit-transition: all .05s ease-in-out;
+    -moz-transition: all .05s ease-in-out;
+    -o-transition: all .05s ease-in-out;
+    transition: all .05s ease-in-out;
 }
 
 @media screen and (max-width: 900px) {

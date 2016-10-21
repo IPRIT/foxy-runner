@@ -42,6 +42,11 @@
 </head>
 <body ng-cloak style="background: #9DC1C6;">
 
+  <div class="music-controls">
+    <div class="button button-music" ng-click="vm.toggleMusic($event)"></div>
+    <div class="button button-sounds" ng-click="vm.toggleSounds($event)"></div>
+  </div>
+
   <div class="loading-overlay">
     <div class="loading-overlay__inner">
       <div class="loading-overlay__block logo"></div>
