@@ -27,6 +27,9 @@ body {
 }
 canvas {
     background-color: #fff;
+    outline: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
 }
 .page {
     position: absolute;
