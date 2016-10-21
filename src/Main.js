@@ -172,7 +172,8 @@ export class Main {
       }, (stage) => {
         console.log('Done');
       });
-    
+  
+    angular.element(document.body).addClass('bg1-gray');
     setTimeout(() => {
       this.showGameoverOverlay(totalScore);
     }, 1500);
@@ -229,7 +230,7 @@ export class Main {
     greetingOverlay.addClass('overlay__hidden');
     setTimeout(() => {
       greetingOverlay.remove();
-      document.body.style.background = '#fff';
+      angular.element(document.body).addClass('bg1');
     }, 200);
   }
   
@@ -244,6 +245,7 @@ export class Main {
   hideGameoverOverlay() {
     let gameoverOverlay = angular.element(document.querySelector('.gameover-overlay'));
     gameoverOverlay.addClass('overlay__hidden');
+    angular.element(document.body).removeClass('bg1-gray');
     setTimeout(() => {
       gameoverOverlay.css({display: 'none'});
     }, 200);
