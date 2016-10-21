@@ -123,16 +123,16 @@ export class Main {
         volume: .5
       }, {
         name: "chicken_1",
-        volume: .1
+        volume: .3
       }, {
         name: "chicken_2",
         volume: .2
       }, {
         name: "chicken_3",
-        volume: .1
+        volume: .3
       }, {
         name: "music",
-        volume: .05,
+        volume: .25,
         loop: true,
         multiplay: false
       }],
