@@ -206,7 +206,7 @@ export class Main {
     let totalScore = this.scroller.getScore();
     console.log('Game over');
     
-    var colorMatrix = new PIXI.filters.ColorMatrixFilter();
+    /*var colorMatrix = new PIXI.filters.ColorMatrixFilter();
     this.stage.filters = [colorMatrix];
     let saturation = 0;
     AnimationAttractor.getInstance()
@@ -217,7 +217,7 @@ export class Main {
         return saturation < -1;
       }, (stage) => {
         console.log('Done');
-      });
+      });*/
   
     angular.element(document.querySelectorAll('.button-pause, .button-resume')).addClass('button-hidden');
     angular.element(document.body).addClass('bg1-gray');
