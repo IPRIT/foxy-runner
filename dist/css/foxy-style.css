@@ -30,6 +30,11 @@ canvas {
     outline: none !important;
     border: 0 !important;
     box-shadow: none !important;
+    user-focus: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .page {
     position: absolute;
