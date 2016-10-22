@@ -49,6 +49,7 @@ export class Main {
         antialias: true
       }
     );
+    this.renderer.roundPixels = true;
     window.isWebGLRenderer = this.renderer instanceof PIXI.WebGLRenderer;
     this.loadResources();
   }
