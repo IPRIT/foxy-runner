@@ -45,8 +45,7 @@ export class Main {
     this.stage = new PIXI.Container();
     this.renderer = PIXI.autoDetectRenderer(
       width, height, {
-        view: document.getElementById(Settings.CanvasDomId),
-        antialias: true
+        view: document.getElementById(Settings.CanvasDomId)
       }
     );
     this.renderer.roundPixels = true;
