@@ -112,7 +112,7 @@ export default class PageCtrl {
   
     let hash = encryption.encrypt(config, JSON.stringify(result).split('').reverse().join(''));
     this.ApiService.setScore(hash).then(result => {
-      console.log('Saved!');
+      this.updateMe();
     });
   }
 }
