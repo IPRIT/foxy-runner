@@ -18,7 +18,7 @@
         <span ng-bind="$index + 1"></span>
         <div class="score-table__item-image desktop"></div>
       </div>
-      <a target="_blank" class="score-table__item-name" ng-href="{{score.username ? 'https://telegram.me/' + score.username : ''}}">
+      <a target="_blank" class="score-table__item-name" ng-href="{{score.username ? '' : ''}}">
         <span>
           <span data-user-id="{{score.id}}" title="Not an easter egg"></span>
           <span ng-if="score.id === me.from_id" class="you" title="Your score"></span>

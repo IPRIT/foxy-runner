@@ -318,6 +318,7 @@ export class Main {
     let targetScope = tableLayout.scope();
     targetScope.vm.cacheStore = null;
     targetScope.vm.cacheStore = {};
+    targetScope.vm.selectedTable = 'local';
     targetScope.vm.fetchScores('local', true);
   }
   
