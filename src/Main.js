@@ -63,6 +63,8 @@ export class Main {
       w = width;
       h = width / this.ratio;
     }
+    window.bounds = [ width, height ];
+    window.isCached = true;
   
     let devicePixelRatio = window.devicePixelRatio;
     2 < devicePixelRatio && (devicePixelRatio = 2);

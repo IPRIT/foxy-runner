@@ -2,11 +2,12 @@ import deap from 'deap';
 
 export default class ScoreTableCtrl {
   
-  static $inject = [ '$scope', '$rootScope', '$http', '$timeout' ];
+  static $inject = [ '$scope', '$rootScope', '$http', '$timeout', 'ApiService' ];
   
   selectedTable = 'local';
   
-  constructor($scope, $rootScope, $http, $timeout) {
+  constructor($scope, $rootScope, $http, $timeout, ApiService) {
+    this.ApiService = ApiService;
     deap.extend(this, {
       $http, $timeout
     });
@@ -22,105 +23,17 @@ export default class ScoreTableCtrl {
       return (this.scores = this.cacheStore[type]);
     }
     this.isLoading = true;
-    this.$http.get('https://predictor.yandex.net/suggest.json/complete?lang=ru&sid=3b61d69f&q=%D0%BF%D0%B8&limit=1&callback=invoke=frame_7').then(() => {
-      this.scores = this.cacheStore[type] = [{
-        id: 121212,
-        rate: 1,
-        worldRate: 1023,
-        name: 'Alexander Belov',
-        score: 66
-      }, {
-        id: 32324234,
-        rate: 2,
-        worldRate: 10024,
-        name: 'Foxy fox',
-        score: 21
-      }, {
-        id: 121212,
-        rate: 3,
-        worldRate: 1023,
-        name: 'ﺾ	ﻀ	ﺿ	ﺽ',
-        score: 66
-      }, {
-        id: 32324234,
-        rate: 4,
-        worldRate: 10024,
-        name: 'DiCaprio',
-        score: 21
-      }, {
-        id: 121212,
-        rate: 1,
-        worldRate: 1023,
-        name: 'Alexander Belov',
-        score: 66
-      }, {
-        id: 32324234,
-        rate: 2,
-        worldRate: 10024,
-        name: 'DiCaprio',
-        score: 21
-      }, {
-        id: 121212,
-        rate: 1,
-        worldRate: 1023,
-        name: 'Alexander Belov',
-        score: 66
-      }, {
-        id: 32324234,
-        rate: 2,
-        worldRate: 10024,
-        name: 'DiCaprio',
-        score: 21
-      }, {
-        id: 32324234,
-        rate: 2,
-        worldRate: 10024,
-        name: 'DiCaprio',
-        score: 21
-      }, {
-        id: 121212,
-        rate: 1,
-        worldRate: 1023,
-        name: 'Alexander Belov',
-        score: 66
-      }, {
-        id: 32324234,
-        rate: 2,
-        worldRate: 10024,
-        name: 'DiCaprio',
-        score: 21
-      }, {
-        id: 121212,
-        rate: 1,
-        worldRate: 1023,
-        name: 'Alexander Belov',
-        score: 66
-      }, {
-        id: 32324234,
-        rate: 2,
-        worldRate: 10024,
-        name: 'DiCaprio',
-        score: 21
-      }, {
-        id: 121212,
-        rate: 1,
-        worldRate: 1023,
-        name: 'Alexander Belov',
-        score: 66
-      }, {
-        id: 32324234,
-        rate: 2,
-        worldRate: 10024,
-        name: 'DiCaprio',
-        score: 21
-      }];
-      if (type === 'global') {
-        this.scores.reverse();
-      }
-      this.$timeout(() => {
-        this.isLoading = false;
-      }, 500);
-      return this.scores;
+    let promiseFulfilled;
+    if (type === 'local') {
+      promiseFulfilled = this.ApiService.getLocalLeaderboard();
+    } else if (type === 'global') {
+      promiseFulfilled = this.ApiService.getGlobalLeaderboard();
+    }
+    promiseFulfilled.then(scores => {
+      scores = this.ensureScores(scores);
+      this.scores = this.cacheStore[ type ] = scores || [];
+    }).finally(() => {
+      this.isLoading = false;
     });
   }
   
@@ -128,5 +41,23 @@ export default class ScoreTableCtrl {
     let oldTableId = this.selectedTable;
     this.selectedTable = tabId;
     this.fetchScores(tabId, oldTableId === tabId);
+  }
+  
+  ensureScores(scores = []) {
+    return scores.map(score => {
+      let { first_name, last_name, id } = score || {};
+      if (first_name && last_name) {
+        score.viewName = `${first_name} ${last_name}`;
+      } else if (first_name) {
+        score.viewName = `${first_name}`;
+      } else if (last_name) {
+        score.viewName = `${last_name}`;
+      } else if (id) {
+        score.viewName = `user:${id}`;
+      } else {
+        score.viewName = 'Unknown player';
+      }
+      return score;
+    });
   }
 }

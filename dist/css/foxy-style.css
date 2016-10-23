@@ -253,7 +253,7 @@ canvas {
     z-index: 1001;
 }
 .greeting-overlay__block-content, .gameover-overlay__block-content {
-    width: 40%;
+    width: 50%;
     min-width: 450px;
     max-width: 1024px;
     padding-bottom: 12px;
@@ -321,7 +321,6 @@ canvas {
     justify-content: flex-start;
     padding: 0 12px;
     border-radius: 3px;
-    margin-right: 4px;
     overflow: hidden;
 }
 .score-table__item-rate {
@@ -340,6 +339,9 @@ canvas {
     font-size: 1.1em;
     flex: 1;
     font-family: 'Comfortaa', 'Fredoka One', sans-serif;
+    display: block;
+    text-decoration: none;
+    color: inherit;
 }
 .score-table__item-score {
     display: flex;
@@ -724,6 +726,38 @@ canvas {
 .button-hidden {
     display: none;
 }
+.you {
+    width: 12px;
+    height: 12px;
+    border-radius: 10px;
+    background: #FFCC22;
+    display: inline-block;
+    box-shadow: 0 0 0 3px #FFF;
+    margin-right: 5px;
+}
+span[data-user-id="615945"] {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    margin-right: 5px;
+    background: transparent url(../resources/images/0xf3f5ee.png) no-repeat center center;
+    background-size: contain;
+    box-shadow: none;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    pointer-events: none;
+}
+.score-table__no-scores {
+    padding: 20px;
+    color: #555;
+    text-align: center;
+}
+.score-table__item-username {
+    font-size: .7em;
+    position: relative;
+    top: -2px;
+}
 
 @media screen and (max-width: 900px) {
     .desktop {
@@ -757,6 +791,7 @@ canvas {
     .score-table__item-name {
         padding: 8px 0 8px 11px;
         font-size: .8em;
+        cursor: default;
     }
     .score-table__item {
         padding: 5px 12px;

@@ -36,6 +36,7 @@
     "ion-sound": "^3.0.7",
     "ngtouch": "^1.0.1",
     "ngtouchstart": "^1.0.1",
+    "one-encryption": "^2.7.1",
     "pixi.js": "4.0.3",
     "type-check": "^0.3.2"
   },

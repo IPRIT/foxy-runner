@@ -6,6 +6,7 @@ import { ScoreIncrementer } from "../UI/ScoreIncrementer";
 import { ScoreView } from "../UI/Score";
 import { Foxy } from "../models/Foxy/Foxy";
 import { Utils } from "../Utils";
+import deap from "deap";
 
 export class GameMap extends IslandsMap {
   
@@ -27,6 +28,7 @@ export class GameMap extends IslandsMap {
     
     this.attachEvents();
     this.score = 0;
+    this._passIslands = null;
   }
   
   getMapSpeed() {
@@ -111,6 +113,24 @@ export class GameMap extends IslandsMap {
       gameSounds && ion.sound.play(`chicken_1`);
     }
     this.scoreView.setScore(this.score);
+  
+    if (!this._passIslands) {
+      this._passIslands = {};
+    }
+    let c = {
+      _s: this.score.toString(20),
+      _f: foxyPosition,
+      _p: prob,
+      _r: Math.random() * prob,
+      _t: new Date().getTime()
+    };
+    let head = this.getListHead(this._passIslands);
+    if (head._t) {
+      head._n = c;
+    } else {
+      deap.extend(head, c);
+    }
+    console.log('Map\'s finger print:', this._passIslands);
     
     if (isWebGLRenderer && game.getFPS() > 45 && Main.CanvasWidth > 1500) {
       let scoreIncrementerView = new ScoreIncrementer();
@@ -131,6 +151,23 @@ export class GameMap extends IslandsMap {
   gameOver() {
     this.isGameOver = true;
     this.foxy.gameOver();
+  
+    if (!window.gameMe
+      || !window.gameMe._shard
+      || window.gameMe.localHighscore >= this.score) {
+      return;
+    }
+    
+    let body = angular.element(document.body);
+    let scope = body.scope && body.scope();
+    scope.vm.saveResults(this._passIslands);
+  }
+  
+  getListHead(obj = {}) {
+    if (!obj._n) {
+      return obj;
+    }
+    return this.getListHead(obj._n);
   }
   
   reset() {
@@ -138,6 +175,7 @@ export class GameMap extends IslandsMap {
     this.foxy.reset();
     this.foxy.destroy();
     this.score = 0;
+    this._passIslands = null;
     this.scoreView.reset();
     this.scoreView.destroy();
     
