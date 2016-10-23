@@ -130,7 +130,6 @@ export class GameMap extends IslandsMap {
     } else {
       deap.extend(head, c);
     }
-    console.log('Map\'s finger print:', this._passIslands);
     
     if (isWebGLRenderer && game.getFPS() > 45 && Main.CanvasWidth > 1500) {
       let scoreIncrementerView = new ScoreIncrementer();
@@ -141,7 +140,6 @@ export class GameMap extends IslandsMap {
       });
       this.addChild(scoreIncrementerView);
     }
-    console.log('Score:', this.score);
     
     this.animationAttractor.append(nearestAnimal.getRebornNumber(), nearestAnimal, function animate(animal) {
       return animal.explode();
