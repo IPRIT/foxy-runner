@@ -758,6 +758,28 @@ span[data-user-id="615945"] {
     position: relative;
     top: -2px;
 }
+.share-button {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: .8em;
+    border: 3px solid;
+    position: relative;
+    border-radius: 40px;
+    top: -2px;
+    margin-left: 13px;
+    cursor: pointer;
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    -ms-transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+.share-button:hover {
+    background: rgba(255, 255, 255, .1);
+}
+.share-button:active {
+    background: rgba(255, 255, 255, .2);
+}
 
 @media screen and (max-width: 900px) {
     .desktop {
@@ -802,6 +824,9 @@ span[data-user-id="615945"] {
     }
     .gameover-overlay__total-score {
         padding-bottom: 13px;
+    }
+    .share-button {
+        cursor: default;
     }
 }
 
