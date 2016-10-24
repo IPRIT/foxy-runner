@@ -76,8 +76,6 @@ canvas {
     background-repeat: repeat-x;
     background-position: bottom;
     z-index: 1000;
-    animation: bg-offset 10000s infinite linear .4s;
-    -webkit-animation: bg-offset 10000s infinite linear .4s;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
