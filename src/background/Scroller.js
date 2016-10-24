@@ -23,7 +23,7 @@ export class Scroller extends PIXI.Container {
   
   addTiles(stage) {
     this.tiles = [];
-    let from = 5;
+    let from = window.bgSpritesNumber;
     let to = 1;
     for (let i = from; i >= to; --i) {
       let tile = BackgroundTile.fromFrameIndex(i);

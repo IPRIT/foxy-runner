@@ -105,11 +105,23 @@ export class Main {
     loader.add('chicken', './resources/models/chicken/chicken-all.json');
     loader.add('chicken-particle', './resources/models/chicken/particle/chicken-particle-all.json');
     loader.add('dirt', './resources/models/dirt/dirt.png');
-    loader.add('bg-01', './resources/bg/bg-01.png');
-    loader.add('bg-02', './resources/bg/bg-02.png');
-    loader.add('bg-03', './resources/bg/bg-03.png');
-    loader.add('bg-04', './resources/bg/bg-04.png');
-    loader.add('bg-05', './resources/bg/bg-05.png');
+    if (window.bgType === 1) {
+      window.bgSpritesNumber = 4;
+    } else if (window.bgType === 2) {
+      window.bgSpritesNumber = 5;
+    } else if (window.bgType === 3) {
+      window.bgSpritesNumber = 5;
+    } else if (window.bgType === 4) {
+      window.bgSpritesNumber = 6;
+    } else {
+      window.bgType = 3;
+      window.bgSpritesNumber = 5;
+      console.error('Unexpected behavior');
+    }
+    for (let i = 1; i <= window.bgSpritesNumber; ++i) {
+      loader.add(`bg-0${i}`, `./resources/bg/${window.bgType}/bg-0${i}.png`);
+    }
+    
     loader.once('complete', callback);
     loader.load();
     let progressInterval = setInterval(() => {
@@ -222,7 +234,6 @@ export class Main {
       });*/
   
     angular.element(document.querySelectorAll('.button-pause, .button-resume')).addClass('button-hidden');
-    angular.element(document.body).addClass('bg1-gray');
     setTimeout(() => {
       this.showGameoverOverlay(totalScore);
       gameMusic && ion.sound.play(`music`);
@@ -287,7 +298,7 @@ export class Main {
     greetingOverlay.addClass('overlay__hidden');
     setTimeout(() => {
       greetingOverlay.remove();
-      angular.element(document.body).addClass('bg1');
+      angular.element(document.body).addClass(`bg${window.bgType}`);
     }, 200);
   }
   
@@ -302,7 +313,6 @@ export class Main {
   hideGameoverOverlay() {
     let gameoverOverlay = angular.element(document.querySelector('.gameover-overlay'));
     gameoverOverlay.addClass('overlay__hidden');
-    angular.element(document.body).removeClass('bg1-gray');
     setTimeout(() => {
       gameoverOverlay.css({display: 'none'});
     }, 200);
@@ -335,7 +345,7 @@ export class Main {
         setTimeout(() => {
           angular.element(overlay).remove();
         }, 300);
-        document.body.style.background = '#B2D0D0';
+        //document.body.style.background = '#B2D0D0';
         this.showGreetingOverlay();
       }, 2000)
     } else {
