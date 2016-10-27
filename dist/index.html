@@ -77,8 +77,7 @@
     <div class="greeting-overlay__inner">
       <div class="greeting-overlay__block play-button">
         <div class="play-wrap">
-          <div class="play desktop" ng-click="play()"></div>
-          <div class="play mobile" ng-touchstart="vm.playTouched = true" ng-touchend="vm.playTouched = false; play()" ng-class="{'ng-button-touched': vm.playTouched}"></div>
+          <div class="play" ng-click="play()"></div>
           <div class="play-text">Play</div>
         </div>
       </div>
@@ -90,8 +89,7 @@
     <div class="greeting-overlay__howto" ng-if="!vm.isRulesAccepted">
       <div class="greeting-overlay__howto-img"></div>
       <div class="greeting-overlay__howto-controls">
-        <div class="button greeting-overlay__howto-gotit desktop" ng-click="vm.acceptRules()">Got it. Close!</div>
-        <div class="button greeting-overlay__howto-gotit mobile" ng-touchstart="vm.acceptRules()">Got it. Close!</div>
+        <div class="button greeting-overlay__howto-gotit" ng-click="vm.acceptRules()">Got it. Close!</div>
       </div>
     </div>
   </div>
@@ -111,8 +109,7 @@
     <div class="gameover-overlay__inner">
       <div class="gameover-overlay__block restart-button">
         <div class="restart-wrap">
-          <div class="restart desktop" ng-click="restart()"></div>
-          <div class="restart mobile" ng-touchstart="vm.playTouched = true" ng-touchend="vm.playTouched = false; restart()" ng-class="{'ng-button-touched': vm.playTouched}"></div>
+          <div class="restart" ng-click="restart()"></div>
           <div class="restart-text">
             <span>Restart</span>
             <span class="share-button" onclick="TelegramGameProxy.shareScore()">Share</span>

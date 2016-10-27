@@ -489,7 +489,7 @@ canvas {
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
-.play.desktop:hover, .play.mobile.ng-button-touched {
+.play:hover {
     -webkit-transform: scale(.9);
     -moz-transform: scale(.9);
     -ms-transform: scale(.9);
@@ -656,7 +656,7 @@ canvas {
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
-.restart.desktop:hover, .restart.mobile.ng-button-touched {
+.restart:hover {
     -webkit-transform: scale(.9);
     -moz-transform: scale(.9);
     -ms-transform: scale(.9);
