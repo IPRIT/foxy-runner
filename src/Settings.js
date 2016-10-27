@@ -19,7 +19,7 @@ export class Settings {
   }
   
   static get MaxScrollSpeed() {
-    return 36;
+    return 33;
   }
   
   static get ScrollSpeedAcceleration() {

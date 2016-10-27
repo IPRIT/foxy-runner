@@ -9,7 +9,7 @@ export class Island extends PIXI.Container {
     this.sprite = sprite;
   
     this.yMiddle = (1 << 8) + 120;
-    this.offset = (1 << 6) + 15;
+    this.offset = (1 << 6) + 10;
     
     this.sprite.position.y = this.yPosition = this.generateY();
     this.ySurfaceOffset = IslandsOffset.getIslandYOffset(type);
