@@ -41,7 +41,7 @@ gulp.task('clean', function() {
 	return del([ 'dist/core' ]);
 });
 
-gulp.task('build', [ 'clean', 'build:js' ], function () {
+gulp.task('build', [ 'build:js' ], function () {
   return del([ 'dist/core/temp' ]);
 });
 

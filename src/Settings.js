@@ -15,15 +15,15 @@ export class Settings {
   }
   
   static get ScrollSpeed() {
-    return 10;
+    return 12;
   }
   
   static get MaxScrollSpeed() {
-    return 33;
+    return 36;
   }
   
   static get ScrollSpeedAcceleration() {
-    return 0.015;
+    return 0.011;
   }
   
   static get CanvasDomId() {
