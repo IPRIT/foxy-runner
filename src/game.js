@@ -39,7 +39,7 @@ function attachEvents() {
 
 function resize() {
   let [ layer, boards ] = [ document.body, document.querySelectorAll('.score-table__board') ];
-  if (!layer || !board || !layer.offsetHeight) {
+  if (!layer || !boards || !boards.length || !layer.offsetHeight) {
     return;
   }
   for (let board of boards) {
