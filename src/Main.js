@@ -148,21 +148,24 @@ export class Main {
         name: "music",
         volume: .65,
         loop: true,
-        multiplay: false
+        multiplay: false,
+        ready_callback: () => {
+          gameMusic && ion.sound.play(`music`);
+        }
       }],
       volume: 1,
       path: "./resources/sounds/",
       preload: true,
       multiplay: true
     });
+    
+    
   }
   
   spriteSheetLoaded() {
     this.scroller = new Scroller(this.stage);
     this.scroller.setScrollSpeed(Settings.ScrollSpeed);
     this.attachEventsAfterLoad();
-  
-    gameMusic && ion.sound.play(`music`);
     
     this.scroller.alpha = 0;
   }
