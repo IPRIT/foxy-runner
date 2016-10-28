@@ -108,19 +108,31 @@ export class Foxy extends PhysicFreeFallObject {
   }
   
   move(currentMapY) {
-    if (this.isGameOver) {
-      return;
-    }
     this.jumpState ? this.loosenGravity() : this.repairGravity();
     this.compute();
     let nextY = this.getY();
+    this.position.y = Math.min(nextY, currentMapY);
+    if (this.isGameOver) {
+      this.repairGravity();
+      this.dust.alpha = 0;
+      if (nextY - currentMapY > 0 && this._v > 0) {
+        this.dust.alpha = 1;
+        this.resetV();
+        this.setY(currentMapY);
+        let floorY = Main.CanvasHeight - 200;
+        if (currentMapY >= floorY - 100) {
+          this.sprites[this.frame].alpha = 0;
+          this.diedFox.alpha = 1;
+        }
+      }
+      return;
+    }
     if (nextY - currentMapY > 0 && this._v > 0) {
       this.putOnSurface(currentMapY);
       this.running();
     } else {
       this.flying();
     }
-    this.position.y = Math.min(nextY, currentMapY);
     this.tilt(this._v);
   }
   

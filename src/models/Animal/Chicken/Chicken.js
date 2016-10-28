@@ -14,6 +14,8 @@ export class Chicken extends Animal {
     this.createChickenParticles();
     this.reset();
     this._rebornNumber = 0;
+    this.scaleAcceleration = -0.0005;
+    this.scaleVelocity = 0.01;
   }
   
   createSprite() {
@@ -25,9 +27,11 @@ export class Chicken extends Animal {
   explode() {
     if (!this.isExploded) {
       this.isExploded = true;
-      this.sprite.alpha = 0;
+      this.sprite.alpha = 1;
+      this.sprite.scale.set(.16);
       this.particles.alpha = 1;
     }
+    this.explodeAnimationNextFrame();
     return this.particles.scatter();
   }
   
@@ -36,6 +40,10 @@ export class Chicken extends Animal {
     this.sprite.scale.x = .16;
     this.sprite.scale.y = .16;
     this.sprite.alpha = 1;
+    this.sprite.position.x = 0;
+    this.sprite.position.y = 0;
+    this.scaleAcceleration = -0.0005;
+    this.scaleVelocity = 0.01;
     this.position.x = 0;
     this.position.y = 0;
     this.particles.reset();
@@ -54,5 +62,16 @@ export class Chicken extends Animal {
   
   resetAnimal() {
     this.particles.destroy();
+  }
+  
+  explodeAnimationNextFrame() {
+    this.sprite.alpha = Math.max(0, this.sprite.alpha - .05);
+    this.scaleVelocity += this.scaleAcceleration;
+    this.scaleVelocity = Math.max(0, this.scaleVelocity);
+    this.sprite.scale.set(
+      Math.min(1, this.sprite.scale.x + this.scaleVelocity),
+      Math.min(1, this.sprite.scale.x + this.scaleVelocity)
+    );
+    this.sprite.position.y -= 10;
   }
 }
