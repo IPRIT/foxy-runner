@@ -4,7 +4,7 @@ import { Utils } from "../../../Utils";
 export class ChickenParticles extends PIXI.particles.ParticleContainer {
   
   constructor(animalType) {
-    super(isWebGLRenderer ? 40 : 10, {
+    super(isWebGLRenderer ? 50 : 10, {
       scale: true,
       position: true,
       rotation: true,
@@ -34,11 +34,11 @@ export class ChickenParticles extends PIXI.particles.ParticleContainer {
         startScale,
         startX: chickenParticle.position.x,
         startY: chickenParticle.position.y,
-        accelerationX: (Math.random() - .5) * 30,
+        accelerationX: (Math.random() - .2) * 30,
         accelerationY: (Math.random() - .5) * 30,
-        maxDeviationX: 512 / 4 + (Math.random() - .5) * 256,
+        maxDeviationX: 512 / 4 + (Math.random() - .2) * 256,
         maxDeviationY: 512 / 4 + (Math.random() - .5) * 256,
-        maxScale: startScale * 1.5
+        maxScale: startScale * 2
       };
       this.particles.push(chickenParticle);
       this.addChild(chickenParticle);
