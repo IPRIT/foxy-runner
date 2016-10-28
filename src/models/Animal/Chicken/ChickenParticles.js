@@ -21,7 +21,7 @@ export class ChickenParticles extends PIXI.particles.ParticleContainer {
     for (let i = 0; i < totalParticles; ++i) {
       var chickenParticle;
       if (this.animalType === AnimalType.ChickenWithChucks) {
-        let prob = Utils.getRandomInt(0, 10) >= 5;
+        let prob = Utils.getRandomInt(0, 10) >= 6;
         chickenParticle = new PIXI.Sprite.fromFrame(`particle-0${prob ? 1 : 2}`);
       } else {
         chickenParticle = new PIXI.Sprite.fromFrame(`particle-01`);
