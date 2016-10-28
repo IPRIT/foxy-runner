@@ -20,11 +20,12 @@ export class ChickenParticles extends PIXI.particles.ParticleContainer {
     this.particles = [];
     for (let i = 0; i < totalParticles; ++i) {
       var chickenParticle;
+      let secondProb = Utils.getRandomInt(0, 10) >= 9;
       if (this.animalType === AnimalType.ChickenWithChucks) {
         let prob = Utils.getRandomInt(0, 10) >= 6;
-        chickenParticle = new PIXI.Sprite.fromFrame(`particle-0${prob ? 1 : 2}`);
+        chickenParticle = new PIXI.Sprite.fromFrame(`particle-0${secondProb ? 3 : prob ? 1 : 2}`);
       } else {
-        chickenParticle = new PIXI.Sprite.fromFrame(`particle-01`);
+        chickenParticle = new PIXI.Sprite.fromFrame(`particle-0${secondProb ? 3 : 1}`);
       }
       chickenParticle.position.x = 512 / 2 + (Math.random() - .5) * 50;
       chickenParticle.position.y = 512 / 2 + (Math.random() - .5) * 50;
