@@ -150,7 +150,9 @@ export class Main {
         loop: true,
         multiplay: false,
         ready_callback: () => {
-          gameMusic && ion.sound.play(`music`);
+          setTimeout(() => {
+            gameMusic && ion.sound.play(`music`);
+          }, 200);
         }
       }],
       volume: 1,
