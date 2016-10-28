@@ -158,8 +158,6 @@ export class Main {
       preload: true,
       multiplay: true
     });
-    
-    
   }
   
   spriteSheetLoaded() {

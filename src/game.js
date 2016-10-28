@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function entryPoint() {
   setupSettings();
+  attachEvents();
   
   window.game = new Main();
   game.onload(() => game.run());
@@ -29,4 +30,17 @@ function setupSettings() {
   if (!window.gameSounds) {
     angular.element(document.querySelector('.button-sounds')).addClass('music-off');
   }
+}
+
+function attachEvents() {
+  window.addEventListener('resize', resize);
+  setTimeout(resize, 500);
+}
+
+function resize() {
+  let [ layer, board ] = [ document.body, document.querySelector('.score-table__board') ];
+  if (!layer || !board || !layer.offsetHeight) {
+    return;
+  }
+  board.style.maxHeight = `${layer.offsetHeight / 2}px`;
 }
