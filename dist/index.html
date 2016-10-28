@@ -49,7 +49,7 @@
     <div class="greeting-overlay__inner">
       <div class="greeting-overlay__block play-button">
         <div class="play-wrap">
-          <div class="play" ng-mousedown="vm.play(); play()"></div>
+          <div class="play" ng-click="play(); vm.play()"></div>
           <div class="play-text">Play</div>
         </div>
       </div>
@@ -81,7 +81,7 @@
     <div class="gameover-overlay__inner">
       <div class="gameover-overlay__block restart-button">
         <div class="restart-wrap">
-          <div class="restart" ng-mousedown="vm.restart(); restart()"></div>
+          <div class="restart" ng-click="restart(); vm.restart()"></div>
           <div class="restart-text">
             <span>Restart</span>
             <span class="share-button" onclick="TelegramGameProxy.shareScore()">Share</span>
