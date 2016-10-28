@@ -38,9 +38,11 @@ function attachEvents() {
 }
 
 function resize() {
-  let [ layer, board ] = [ document.body, document.querySelector('.score-table__board') ];
+  let [ layer, boards ] = [ document.body, document.querySelectorAll('.score-table__board') ];
   if (!layer || !board || !layer.offsetHeight) {
     return;
   }
-  board.style.maxHeight = `${layer.offsetHeight / 2}px`;
+  for (let board of boards) {
+    board.style.maxHeight = `${layer.offsetHeight / 2}px`;
+  }
 }
