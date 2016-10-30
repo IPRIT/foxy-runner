@@ -15,6 +15,10 @@ export class Utils {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   
+  static probabilityTest(probability = 1) {
+    return Math.random() <= probability;
+  }
+  
   static highlight(container) {
     let graphics = new PIXI.Graphics();
     graphics.beginFill(0x0FF0F0);

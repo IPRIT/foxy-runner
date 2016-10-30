@@ -43,7 +43,10 @@ export default class ScoreTableCtrl {
     this.fetchScores(tabId, oldTableId === tabId);
   }
   
-  ensureScores(scores = []) {
+  ensureScores(scores) {
+    if (!Array.isArray(scores)) {
+      return [];
+    }
     return scores.map(score => {
       let { first_name, last_name, id } = score || {};
       if (first_name && last_name) {

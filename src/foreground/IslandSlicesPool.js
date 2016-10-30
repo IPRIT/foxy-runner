@@ -66,6 +66,16 @@ export class IslandSlicesPool {
     return island;
   }
   
+  borrowIslandByType(filterFn) {
+    for (let i = 0; i < this.islands.length; ++i) {
+      if (filterFn(this.islands[ i ])) {
+        let island = this.islands.splice(i, 1)[0];
+        console.log('Borrowed island [by type]', island.type);
+        return island;
+      }
+    }
+  }
+  
   returnIsland(object) {
     console.log('Returned island', object.type, 'Count:', this.islands.length);
     this.islands.push(object);

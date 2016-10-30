@@ -1,6 +1,6 @@
 import { ScoreAnimalPool } from "./ScoreAnimalPool";
-import { AnimationAttractor } from "../Animation/Attractor";
-import { Main } from "../Main";
+import { AnimationAttractor } from "../../Animation/Attractor";
+import { Main } from "../../Main";
 
 export class ScoreIncrementer extends PIXI.Container {
   

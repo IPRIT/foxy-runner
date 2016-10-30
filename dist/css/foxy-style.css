@@ -583,6 +583,9 @@ canvas {
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
+.bg2 .play {
+    background-color: #E91E63;
+}
 .play.desktop:hover, .play.mobile.ng-button-touched {
     -webkit-transform: scale(.9);
     -ms-transform: scale(.9);
@@ -651,13 +654,23 @@ canvas {
 .score-table__tab:hover {
     background: rgba(255, 204, 34, 0.11);
 }
+.bg2 .score-table__tab:hover {
+    background: #F8CED0;
+}
 .score-table__tab.ng-touch-started {
     -webkit-transform: scale(.97);
     -ms-transform: scale(.97);
     transform: scale(.97);
 }
+.bg2 .score-table__tab.ng-touch-started {
+    background: #F8CED0;
+}
 .score-table__tab_selected, .score-table__tab:active {
-    background: rgba(255, 204, 34, 1) !important;
+    background: #FFCC22 !important;
+}
+.bg2 .score-table__tab_selected, .bg2 .score-table__tab:active {
+    color: #fff;
+    background: #E91E63 !important;
 }
 .score-table__board_loading {
     position: absolute;
@@ -755,6 +768,9 @@ canvas {
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
+.bg2 .restart {
+    background-color: #E91E63;
+}
 .restart.desktop:hover, .restart.mobile.ng-button-touched {
     -webkit-transform: scale(.9);
     -ms-transform: scale(.9);
@@ -770,6 +786,9 @@ canvas {
     font-size: 2.2em;
     text-align: center;
     padding-bottom: 25px;
+}
+.bg2 .gameover-overlay__total-score {
+    color: #E91E63;
 }
 .greeting-overlay__howto {
     position: absolute;

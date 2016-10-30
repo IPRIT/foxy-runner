@@ -1,4 +1,4 @@
-import { AnimationAttractor as ScoreAnimalPool } from "../Animation/Attractor";
+import { AnimationAttractor as ScoreAnimalPool } from "../../Animation/Attractor";
 
 export class ScoreView extends PIXI.Container {
   

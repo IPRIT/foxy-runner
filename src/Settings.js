@@ -10,23 +10,13 @@ export class Settings {
     return 3072;
   }
   
-  static get Height() {
-    return 1536;
-  }
+  static Height = 1536;
   
-  static get ScrollSpeed() {
-    return 12;
-  }
+  static ScrollSpeed = 12;
   
-  static get MaxScrollSpeed() {
-    return 33;
-  }
+  static MaxScrollSpeed = 40;
   
-  static get ScrollSpeedAcceleration() {
-    return 0.011;
-  }
+  static ScrollSpeedAcceleration = 0.011;
   
-  static get CanvasDomId() {
-    return 'game-canvas';
-  }
+  static CanvasDomId = 'game-canvas';
 }

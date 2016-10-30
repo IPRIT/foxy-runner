@@ -1,4 +1,4 @@
-import { AnimalType } from "../models/Animal/AnimalType";
+import { AnimalType } from "../../models/Animal/AnimalType";
 
 export class ScoreAnimalPool {
   

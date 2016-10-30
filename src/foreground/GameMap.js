@@ -2,8 +2,9 @@ import { AnimationAttractor } from "../Animation/Attractor";
 import { IslandsMap } from "./IslandsMap";
 import { Main } from "../Main";
 import { IslandType } from "./SliceType";
-import { ScoreIncrementer } from "../UI/ScoreIncrementer";
-import { ScoreView } from "../UI/Score";
+import { ScoreIncrementer } from "../UI/score/ScoreIncrementer";
+import { ScoreView } from "../UI/score/Score";
+import { HealthView } from "../UI/health/HealthView";
 import { Foxy } from "../models/Foxy/Foxy";
 import { Utils } from "../Utils";
 import deap from "deap";
@@ -25,6 +26,12 @@ export class GameMap extends IslandsMap {
     
     this.scoreView = new ScoreView();
     this.addChild(this.scoreView);
+  
+    this.healthView = new HealthView();
+    this.healthView.scale.set(.15);
+    this.healthView.position.x = Main.CanvasWidth / 2 - this.healthView.width / 2;
+    this.healthView.position.y = this.healthView.height / 2 + 50;
+    this.addChild(this.healthView);
     
     this.attachEvents();
     this.score = 0;
@@ -75,6 +82,8 @@ export class GameMap extends IslandsMap {
     document.addEventListener('keyup', this.onKeyUp.bind(this));
     document.addEventListener('mouseup', this.endJump.bind(this));
     document.addEventListener('touchend', this.endJump.bind(this));
+    
+    window.addEventListener('resize', this.resize.bind(this));
   }
   
   onKeyDown(event) {
@@ -105,7 +114,7 @@ export class GameMap extends IslandsMap {
     if (!nearestAnimal) {
       return;
     }
-    this.score++;
+    window.score = ++this.score;
     let prob = Utils.getRandomInt(0, 100) / 100;
     if (prob < .9) {
       gameSounds && ion.sound.play(`chicken_3`);
@@ -161,11 +170,22 @@ export class GameMap extends IslandsMap {
     scope.vm.saveResults(this._passIslands);
   }
   
+  destroyHp(hp) {
+    this.healthView.setHealth(this.healthView.getHealth() - hp);
+    if (this.healthView.getHealth() <= 0) {
+      game.gameOver();
+    }
+  }
+  
   getListHead(obj = {}) {
     if (!obj._n) {
       return obj;
     }
     return this.getListHead(obj._n);
+  }
+  
+  resize() {
+    this.healthView.position.x = Main.CanvasWidth / 2 - this.healthView.width / 2;
   }
   
   reset() {

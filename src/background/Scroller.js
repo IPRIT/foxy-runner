@@ -119,4 +119,8 @@ export class Scroller extends PIXI.Container {
   getScore() {
     return this.gameMap.score;
   }
+  
+  destroyHp(hp) {
+    this.gameMap.destroyHp(hp);
+  }
 }

@@ -39,7 +39,6 @@ export class Main {
   }
   
   init() {
-    window.gameFullScreenNeeded = true;
     let [width, height] = Utils.getBodyBounds();
     this.ratio = Main.CanvasRatio;
     this.stage = new PIXI.Container();
@@ -105,6 +104,7 @@ export class Main {
     loader.add('chicken', './resources/models/chicken/chicken-all.json');
     loader.add('chicken-particle', './resources/models/chicken/particle/chicken-particle-all.json');
     loader.add('dirt', './resources/models/dirt/dirt.png');
+    loader.add('health', './resources/models/health/health.png');
     if (window.bgType === 1) {
       window.bgSpritesNumber = 4;
     } else if (window.bgType === 2) {
@@ -245,6 +245,7 @@ export class Main {
   }
   
   restart() {
+    window.score = 0;
     this.reset();
     this.gameState = GameState.Started;
     this.resize();
@@ -341,5 +342,9 @@ export class Main {
     } else {
       progressLineText.innerHTML = `Loading... ${progress.toFixed(0) || 0}%`;
     }
+  }
+  
+  destroyHp(hp = 1) {
+    this.scroller.destroyHp(hp);
   }
 }

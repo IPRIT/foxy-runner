@@ -30,6 +30,7 @@ function setupSettings() {
   if (!window.gameSounds) {
     angular.element(document.querySelector('.button-sounds')).addClass('music-off');
   }
+  window.score = 0;
 }
 
 function attachEvents() {

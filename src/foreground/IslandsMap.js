@@ -4,6 +4,7 @@ import { MapBuilder } from "./MapBuilder";
 import { AnimalPool } from "../models/Animal/AnimalPool";
 import { IslandType } from "./SliceType";
 import { IslandsOffset } from "./IslandsOffset";
+import { Utils } from "../Utils";
 
 export class IslandsMap extends PIXI.Container {
   
@@ -11,9 +12,7 @@ export class IslandsMap extends PIXI.Container {
     return Settings.Width;
   }
   
-  static get ViewportSliceWidth() {
-    return 550;
-  }
+  static ViewportSliceWidth = 550;
   
   static get ViewportNumSlices() {
     return Math.ceil(IslandsMap.ViewportWidth / IslandsMap.ViewportSliceWidth) + 1;
@@ -28,9 +27,9 @@ export class IslandsMap extends PIXI.Container {
     this.viewportSliceX = 0;
   }
   
-  getLastObject() {
+  getLastObjects(number = 1) {
     if (this.slices.length) {
-      return this.slices[ this.slices.length - 1 ];
+      return this.slices.slice(-number);
     }
     return null;
   }
@@ -66,6 +65,7 @@ export class IslandsMap extends PIXI.Container {
   addNewSlices() {
     var firstX = -(this.viewportX % IslandsMap.ViewportSliceWidth);
     for (var i = this.viewportSliceX - 1, sliceIndex = -1; i < this.viewportSliceX + IslandsMap.ViewportNumSlices; i++, sliceIndex++) {
+      var specialSlice = false;
       if (i < 0) {
         continue;
       }
@@ -73,7 +73,7 @@ export class IslandsMap extends PIXI.Container {
       if (this.slices[i]) {
         slice = this.slices[i];
       } else {
-        slice = this.builder.generateNext(this.getLastObject());
+        slice = this.builder.generateNext(this.getLastObjects(3), window.score);
         
         if (slice.type >= IslandType.BIG_1 && slice.type <= IslandType.MOVABLE_4) {
           let peaceAnimal = this.animalPool.borrowAnimal();
@@ -81,13 +81,24 @@ export class IslandsMap extends PIXI.Container {
           this.setUpAnimal(peaceAnimal, slice);
           slice.addAnimal(peaceAnimal);
           slice.sprite.addChild(peaceAnimal);
+          if (this.slices.length && this.slices[i - 1]
+            && this.slices[i - 1].type >= IslandType.BIG_1
+            && this.slices[i - 1].type <= IslandType.SMALL_4) {
+            slice.yPosition = slice.sprite.position.y
+              = this.slices[i - 1].sprite.position.y
+              + (IslandsOffset.getIslandYOffset(this.slices[i - 1].type)
+              - IslandsOffset.getIslandYOffset(slice.type));
+            specialSlice = true;
+          }
         }
         
         this.slices.push(slice);
         this.addChild(slice.sprite);
       }
       slice.sprite.position.x = firstX + (sliceIndex * IslandsMap.ViewportSliceWidth);
-      slice.sprite.position.y = slice.yPosition || 0;
+      if (!specialSlice) {
+        slice.sprite.position.y = slice.yPosition || 0;
+      }
     }
   }
   
@@ -100,6 +111,9 @@ export class IslandsMap extends PIXI.Container {
       }
       let peaceAnimals = slice.unpinAnimals();
       peaceAnimals.forEach(animal => {
+        if (!animal.isExploded) {
+          window.game.destroyHp(1);
+        }
         slice.sprite.removeChild(animal);
       });
       this.returnAnimals(peaceAnimals);
@@ -172,13 +186,13 @@ export class IslandsMap extends PIXI.Container {
         let animalPosition = [animalX, animalY];
         //Utils.mark([animalX, animalY], this);
         let conditions = [
-          this.isBetween([foxyPosition[0] - foxy.getWidth() / 2, foxyPosition[0] + foxy.getWidth() / 2], animalPosition[0]),
+          this.isBetween([foxyPosition[0] - foxy.getWidth() / 2 - 30, foxyPosition[0] + foxy.getWidth() / 2 + 30], animalPosition[0]),
           this.isBetween([foxyPosition[1] - foxy.getHeight() / 2, foxyPosition[1] + foxy.getHeight() / 2], animalPosition[1])
         ];
-        //Utils.mark([foxyPosition[0] - foxy.getWidth() / 2, foxyPosition[1] - foxy.getHeight() / 2], this);
-        //Utils.mark([foxyPosition[0] + foxy.getWidth() / 2, foxyPosition[1] - foxy.getHeight() / 2], this);
-        //Utils.mark([foxyPosition[0] - foxy.getWidth() / 2, foxyPosition[1] + foxy.getHeight() / 2], this);
-        //Utils.mark([foxyPosition[0] + foxy.getWidth() / 2, foxyPosition[1] + foxy.getHeight() / 2], this);
+        /*Utils.mark([foxyPosition[0] - foxy.getWidth() / 2 - 30, foxyPosition[1] - foxy.getHeight() / 2], this);
+        Utils.mark([foxyPosition[0] + foxy.getWidth() / 2 + 30, foxyPosition[1] - foxy.getHeight() / 2], this);
+        Utils.mark([foxyPosition[0] - foxy.getWidth() / 2 - 30, foxyPosition[1] + foxy.getHeight() / 2], this);
+        Utils.mark([foxyPosition[0] + foxy.getWidth() / 2 + 30, foxyPosition[1] + foxy.getHeight() / 2], this);*/
 
         if (conditions.every(condition => condition)) {
           animalIndex = index;
