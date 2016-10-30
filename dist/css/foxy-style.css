@@ -790,6 +790,16 @@ canvas {
 .bg2 .gameover-overlay__total-score {
     color: #E91E63;
 }
+.score-table__news {
+    color: #4CAF50;
+    text-align: center;
+    font-size: .8em;
+    font-family: 'Comfortaa', 'Fredoka One', sans-serif;
+    padding: 0 0 11px;
+}
+.bg2 .score-table__news {
+    color: #E91E63;
+}
 .greeting-overlay__howto {
     position: absolute;
     top: 1em;

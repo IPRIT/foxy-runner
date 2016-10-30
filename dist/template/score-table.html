@@ -1,5 +1,7 @@
 <div class="score-table" ng-controller="ScoreTableCtrl as vm">
 
+  <div class="score-table__news">Game has been updated!</div>
+
   <div class="score-table__tabs-wrap">
     <div class="score-table__tabs">
       <div class="score-table__tab mobile" ng-init="vm.ngTouchLocal = false" ng-touchstart="vm.ngTouchLocal = true; vm.selectTab('local')" ng-touchend="vm.ngTouchLocal = false" ng-class="{'score-table__tab_selected': vm.selectedTable === 'local', 'ng-touch-started': vm.ngTouchLocal}">Local leaderboard</div>
