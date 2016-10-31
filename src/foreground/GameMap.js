@@ -29,7 +29,7 @@ export class GameMap extends IslandsMap {
   
     this.healthView = new HealthView();
     this.healthView.scale.set(.15);
-    this.healthView.position.x = Main.CanvasWidth / 2 - this.healthView.width / 2;
+    this.healthView.position.x = Main.CanvasWidth / 2 - this.healthView.width / 2 + 30;
     this.healthView.position.y = this.healthView.height / 2 + 50;
     this.addChild(this.healthView);
     
@@ -185,7 +185,7 @@ export class GameMap extends IslandsMap {
   }
   
   resize() {
-    this.healthView.position.x = Main.CanvasWidth / 2 - this.healthView.width / 2;
+    this.healthView.position.x = Main.CanvasWidth / 2 - this.healthView.width / 2 + 30;
   }
   
   reset() {
