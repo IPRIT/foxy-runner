@@ -14,7 +14,7 @@ export class Settings {
   
   static ScrollSpeed = 12;
   
-  static MaxScrollSpeed = 40;
+  static MaxScrollSpeed = 45;
   
   static ScrollSpeedAcceleration = 0.011;
   

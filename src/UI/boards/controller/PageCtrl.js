@@ -27,7 +27,7 @@ export default class PageCtrl {
   init() {
     this.pageType = 'greeting';
     let settings = ds.get('settings') || {};
-    this.isRulesAccepted = settings.isRulesAccepted || false;
+    this.isRulesAccepted = settings.isRulesAccepted2 || false;
     
     window.gameMe = this.me = {};
     this.updateMe();
@@ -77,7 +77,7 @@ export default class PageCtrl {
     this.isRulesAccepted = true;
     let settings = ds.get('settings') || {};
     ds.set('settings', deap.extend(settings, {
-      isRulesAccepted: this.isRulesAccepted
+      isRulesAccepted2: this.isRulesAccepted
     }));
   }
   

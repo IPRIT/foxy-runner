@@ -14,31 +14,47 @@ export class HealthView extends PIXI.Container {
     this._healths = [];
     this.addText();
     this.addSprites();
+    this.position.set(137, 125);
     this.update();
   }
   
   addText() {
     this._text = new PIXI.Text(this.getMessage(), {
       fontFamily: 'Fredoka One',
-      fontSize: '480px',
+      fontSize: '48px',
       fill: 'white'
     });
     this._text.anchor.set(.5);
-    this._text.position.x -= 500;
     this.addChild(this._text);
+  /*
+    this._rule = new PIXI.Text(this.getRuleMessage(), {
+      fontFamily: 'Fredoka One',
+      fontSize: '200px',
+      fill: 'white'
+    });
+    this._rule.anchor.set(.5);
+    this._rule.position.x += 500;
+    this._rule.position.y += 512 + 100;
+    this.addChild(this._rule);*/
   }
   
   getMessage() {
-    return Math.min(this._healthMax, this._health).toString();
+    return `Health:`;
+  }
+  
+  getRuleMessage() {
+    return `You will lose a health if you miss a chicken`;
   }
   
   addSprites() {
-    let marginRight = 20;
+    let marginRight = 8;
     for (let i = 0; i < this._healthMax; ++i) {
       let texture = PIXI.loader.resources[`health`].texture;
       let health = new PIXI.Sprite(texture);
       health.anchor.set(.5);
-      health.position.x = (health.width + marginRight) * i;
+      health.scale.set(.08);
+      health.position.x = 130 + (health.width + marginRight) * i;
+      health.position.y = 5;
       this._healths.push(health);
       this.addChild(health);
     }
@@ -51,7 +67,6 @@ export class HealthView extends PIXI.Container {
         this.bounceAnimation(this._healths[ i ]);
       }
     }
-    this._text.text = this.getMessage();
   }
   
   getHealth() {
@@ -67,10 +82,10 @@ export class HealthView extends PIXI.Container {
     let frame = 0;
     AnimationAttractor.getInstance()
       .append(1, health, health => {
-        health.scale.set(bounceEaseOut(frame / 100));
+        health.scale.set(bounceEaseOut(frame / 100) / 100 * 8);
         return (frame += 2.5) >= 100;
       }, () => {}, health => {
-        health.scale.set(1);
+        health.scale.set(.08);
       });
   
     function bounce(progress) {

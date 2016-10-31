@@ -133,7 +133,9 @@ export class Main {
     
     ion.sound({
       sounds: [{
-        name: "fall",
+        name: "fall"
+      }, {
+        name: "failure",
         volume: .7
       }, {
         name: "chicken_1",

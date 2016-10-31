@@ -16,12 +16,11 @@ export class ScoreView extends PIXI.Container {
     });
   
     let sprite = PIXI.Sprite.fromFrame(`chicken-01`);
-    sprite.scale.x = .1;
-    sprite.scale.y = .1;
-    sprite.position.set(54, 50);
+    sprite.scale.set(.05);
+    sprite.position.set(300, 36);
     this.addChild(sprite);
   
-    this._message.position.set(80 + sprite.width, 60);
+    this._message.position.set(54, 30);
     this.addChild(this._message);
   }
   
@@ -41,7 +40,7 @@ export class ScoreView extends PIXI.Container {
   }
   
   getMessage() {
-    return `Score: ${this.getScore()}`
+    return `Score:    ${this.getScore()}`
   }
   
   reset() {

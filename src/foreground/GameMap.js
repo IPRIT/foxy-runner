@@ -28,9 +28,6 @@ export class GameMap extends IslandsMap {
     this.addChild(this.scoreView);
   
     this.healthView = new HealthView();
-    this.healthView.scale.set(.15);
-    this.healthView.position.x = Main.CanvasWidth / 2 - this.healthView.width / 2 + 30;
-    this.healthView.position.y = this.healthView.height / 2 + 50;
     this.addChild(this.healthView);
     
     this.attachEvents();
@@ -82,8 +79,6 @@ export class GameMap extends IslandsMap {
     document.addEventListener('keyup', this.onKeyUp.bind(this));
     document.addEventListener('mouseup', this.endJump.bind(this));
     document.addEventListener('touchend', this.endJump.bind(this));
-    
-    window.addEventListener('resize', this.resize.bind(this));
   }
   
   onKeyDown(event) {
@@ -171,6 +166,7 @@ export class GameMap extends IslandsMap {
   }
   
   destroyHp(hp) {
+    gameSounds && this.healthView.getHealth() <= 5 && ion.sound.play(`failure`);
     this.healthView.setHealth(this.healthView.getHealth() - hp);
     if (this.healthView.getHealth() <= 0) {
       game.gameOver();
@@ -182,10 +178,6 @@ export class GameMap extends IslandsMap {
       return obj;
     }
     return this.getListHead(obj._n);
-  }
-  
-  resize() {
-    this.healthView.position.x = Main.CanvasWidth / 2 - this.healthView.width / 2 + 30;
   }
   
   reset() {
