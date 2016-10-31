@@ -29,9 +29,11 @@ export default class ScoreTableCtrl {
     } else if (type === 'global') {
       promiseFulfilled = this.ApiService.getGlobalLeaderboard();
     }
-    promiseFulfilled.then(scores => {
+    promiseFulfilled.then(result => {
+      let { scores = [], lastUpdate = '' } = result || {};
       scores = this.ensureScores(scores);
       this.scores = this.cacheStore[ type ] = scores || [];
+      this.lastUpdate = lastUpdate;
     }).finally(() => {
       this.isLoading = false;
     });
