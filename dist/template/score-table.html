@@ -1,6 +1,6 @@
 <div class="score-table" ng-controller="ScoreTableCtrl as vm">
 
-  <div class="score-table__news">World's scores updated at {{lastUpdate | date}}</div>
+  <div class="score-table__news" ng-if="vm.selectedTable === 'global'">World's scores updated at {{lastUpdate | date}}</div>
 
   <div class="score-table__tabs-wrap">
     <div class="score-table__tabs">

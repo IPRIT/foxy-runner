@@ -33,7 +33,7 @@ export default class ScoreTableCtrl {
       let { scores = [], lastUpdate = '' } = result || {};
       scores = this.ensureScores(scores);
       this.scores = this.cacheStore[ type ] = scores || [];
-      this.lastUpdate = lastUpdate;
+      this.lastUpdate = lastUpdate ? new Date(lastUpdate) : '';
     }).finally(() => {
       this.isLoading = false;
     });
