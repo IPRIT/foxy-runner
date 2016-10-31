@@ -19,6 +19,7 @@ export class ScoreView extends PIXI.Container {
     sprite.scale.set(.05);
     sprite.position.set(300, 36);
     this.addChild(sprite);
+    this.chicken = sprite;
   
     this._message.position.set(54, 30);
     this.addChild(this._message);
@@ -26,6 +27,8 @@ export class ScoreView extends PIXI.Container {
   
   update() {
     this._message.text = this.getMessage();
+    let symbols = this.getScore().toString().length;
+    this.chicken.position.set(290 + (symbols - 1) * 20, 36);
   }
   
   setScore(score, noUpdate) {

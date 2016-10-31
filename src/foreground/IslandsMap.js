@@ -111,9 +111,6 @@ export class IslandsMap extends PIXI.Container {
       }
       let peaceAnimals = slice.unpinAnimals();
       peaceAnimals.forEach(animal => {
-        if (!animal.isExploded) {
-          window.game.destroyHp(1);
-        }
         slice.sprite.removeChild(animal);
       });
       this.returnAnimals(peaceAnimals);
@@ -196,6 +193,11 @@ export class IslandsMap extends PIXI.Container {
 
         if (conditions.every(condition => condition)) {
           animalIndex = index;
+        }
+        if (!animal.isExploded && !animal.isChecked && this.isBetween([-Infinity, foxyPosition[0] - foxy.getWidth() / 2 - 30], animalPosition[0])) {
+          console.info('Health lose [by 1]');
+          animal.isChecked = true;
+          window.game.destroyHp(1);
         }
       });
       if (animalIndex >= 0) {

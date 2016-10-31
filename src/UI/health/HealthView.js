@@ -10,7 +10,7 @@ export class HealthView extends PIXI.Container {
   
   init() {
     this._healthMax = 5;
-    this._health = 6;
+    this._health = 5;
     this._healths = [];
     this.addText();
     this.addSprites();
@@ -26,16 +26,6 @@ export class HealthView extends PIXI.Container {
     });
     this._text.anchor.set(.5);
     this.addChild(this._text);
-  /*
-    this._rule = new PIXI.Text(this.getRuleMessage(), {
-      fontFamily: 'Fredoka One',
-      fontSize: '200px',
-      fill: 'white'
-    });
-    this._rule.anchor.set(.5);
-    this._rule.position.x += 500;
-    this._rule.position.y += 512 + 100;
-    this.addChild(this._rule);*/
   }
   
   getMessage() {
@@ -74,7 +64,7 @@ export class HealthView extends PIXI.Container {
   }
   
   setHealth(hp) {
-    this._health = hp;
+    this._health = Math.min(this._healthMax, Math.max(0, hp));
     this.update();
   }
   
@@ -106,7 +96,7 @@ export class HealthView extends PIXI.Container {
   }
   
   reset() {
-    this._health = 6;
+    this._health = 5;
     this.update();
   }
 }

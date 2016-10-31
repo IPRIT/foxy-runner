@@ -153,6 +153,7 @@ export class GameMap extends IslandsMap {
   gameOver() {
     this.isGameOver = true;
     this.foxy.gameOver();
+    this.healthView.setHealth(0);
   
     if (!window.gameMe
       || !window.gameMe._shard

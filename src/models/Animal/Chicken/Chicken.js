@@ -37,6 +37,7 @@ export class Chicken extends Animal {
   
   reset() {
     this.isExploded = false;
+    this.isChecked = false;
     this.sprite.scale.x = .16;
     this.sprite.scale.y = .16;
     this.sprite.alpha = 1;
