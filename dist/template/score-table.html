@@ -12,7 +12,7 @@
 
   <div class="score-table__board">
     <div ng-if="!vm.scores.length" class="score-table__no-scores">Nothing to show. Waiting for your records!</div>
-    <div class="score-table__news" ng-if="vm.selectedTable === 'global' && vm.scores.length">World's scores updated at {{vm.lastUpdate | date}}</div>
+    <div class="score-table__news" ng-if="vm.selectedTable === 'global' && vm.scores.length">World's scores updated at {{vm.lastUpdate | date:'shortTime'}}</div>
 
     <div>
       <div class="score-table__item" ng-repeat="score in vm.scores track by $index">
