@@ -1,7 +1,5 @@
 <div class="score-table" ng-controller="ScoreTableCtrl as vm">
 
-  <div class="score-table__news" ng-if="vm.selectedTable === 'global'">World's scores updated at {{vm.lastUpdate | date}}</div>
-
   <div class="score-table__tabs-wrap">
     <div class="score-table__tabs">
       <div class="score-table__tab mobile" ng-init="vm.ngTouchLocal = false" ng-touchstart="vm.ngTouchLocal = true; vm.selectTab('local')" ng-touchend="vm.ngTouchLocal = false" ng-class="{'score-table__tab_selected': vm.selectedTable === 'local', 'ng-touch-started': vm.ngTouchLocal}">Local leaderboard</div>
@@ -14,6 +12,7 @@
 
   <div class="score-table__board">
     <div ng-if="!vm.scores.length" class="score-table__no-scores">Nothing to show. Waiting for your records!</div>
+    <div class="score-table__news" ng-if="vm.selectedTable === 'global' && vm.scores.length">World's scores updated at {{vm.lastUpdate | date}}</div>
 
     <div class="score-table__item" ng-repeat="score in vm.scores track by $index">
       <div class="score-table__item-rate">
