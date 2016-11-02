@@ -55,7 +55,7 @@ export default class PageCtrl {
     }
     let settings = ds.get('settings') || {};
     window.ds.set('settings', deap.extend(settings, {
-      gameMusic: window.gameMusic
+      gameMusic2: window.gameMusic
     }));
   }
   
