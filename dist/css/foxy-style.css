@@ -41,7 +41,7 @@ body:not(.bg5) .font-effect-destruction, body:not(.bg5) .font-effect-fire-animat
     background-size: contain !important;
 }
 body.bg5 {
-    background-position-x: -100px;
+    background-position-x: -100px !important;
 }
 canvas {
     background: transparent;
