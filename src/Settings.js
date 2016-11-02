@@ -5,7 +5,7 @@ export class Settings {
   static get Width() {
     let [ width, height ] = window.isCached ? window.bounds : Utils.getBodyBounds();
     if (width < 1000 && width < height) {
-      return 1500;
+      return 2500;
     }
     return 3072;
   }

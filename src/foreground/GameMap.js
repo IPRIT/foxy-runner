@@ -135,7 +135,7 @@ export class GameMap extends IslandsMap {
       deap.extend(head, c);
     }
     
-    if (isWebGLRenderer && game.getFPS() > 45 && Main.CanvasWidth > 1500) {
+    if (isWebGLRenderer && game.getFPS() > 45 && Main.CanvasWidth > 2500) {
       let scoreIncrementerView = new ScoreIncrementer();
       scoreIncrementerView.addScore(1, nearestAnimal.animalType, () => {
         this.removeChild(scoreIncrementerView);
