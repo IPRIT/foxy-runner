@@ -28,7 +28,7 @@ export class Chicken extends Animal {
     if (!this.isExploded) {
       this.isExploded = true;
       this.sprite.alpha = 1;
-      this.sprite.scale.set(.16);
+      this.sprite.scale.set(bgType === 5 ? .28 : .16);
       this.particles.alpha = 1;
     }
     this.explodeAnimationNextFrame();
@@ -38,8 +38,12 @@ export class Chicken extends Animal {
   reset() {
     this.isExploded = false;
     this.isChecked = false;
-    this.sprite.scale.x = .16;
-    this.sprite.scale.y = .16;
+    if (bgType === 5) {
+      this.sprite.scale.set(.28);
+      this.sprite.anchor.set(.34);
+    } else {
+      this.sprite.scale.set(.16);
+    }
     this.sprite.alpha = 1;
     this.sprite.position.x = 0;
     this.sprite.position.y = 0;

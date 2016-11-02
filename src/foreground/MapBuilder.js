@@ -32,7 +32,7 @@ export class MapBuilder extends IslandSlicesPool {
       return this.borrowEmpty();
     } else {
       if (this.isObjectIsland(lastObject)) {
-        if (!this.isObjectMovable(lastObject) && Utils.probabilityTest(.3) && score > 1) {
+        if (!this.isObjectMovable(lastObject) && Utils.probabilityTest(.2) && score > 1) {
           let island = this.borrowIslandByType(object => !this.isObjectMovable(object));
           if (island) {
             return island;

@@ -53,7 +53,11 @@ export class HealthView extends PIXI.Container {
   update() {
     for (let i = 0; i < this._healthMax; ++i) {
       if (i >= this._health) {
-        this._healths[ i ].blendMode = PIXI.BLEND_MODES.SCREEN;
+        if (window.bgType === 5) {
+          this._healths[ i ].alpha = .5;
+        } else {
+          this._healths[ i ].blendMode = PIXI.BLEND_MODES.SCREEN;
+        }
         this.bounceAnimation(this._healths[ i ]);
       }
     }

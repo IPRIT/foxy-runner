@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Tricky Foxy | Tricky fox goes for a walk! Help our little fox find as much as possible chickens!</title>
-  <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Comfortaa:700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Comfortaa:700&effect=fire-animation|destruction" rel="stylesheet">
   <link rel="stylesheet" href="css/foxy-style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="theme-color" content="#F5C14B">
@@ -57,7 +57,7 @@
         <div class="play-wrap">
           <div class="play desktop" ng-click="play()"></div>
           <div class="play mobile" ng-touchstart="vm.playTouched = true" ng-touchend="vm.playTouched = false; play()" ng-class="{'ng-button-touched': vm.playTouched}"></div>
-          <div class="play-text">Play</div>
+          <div class="play-text font-effect-destruction">Play</div>
         </div>
       </div>
       <div class="greeting-overlay__block greeting-overlay__block-content">
@@ -91,12 +91,12 @@
         <div class="restart-wrap">
           <div class="restart desktop" ng-click="restart()"></div>
           <div class="restart mobile" ng-touchstart="vm.playTouched = true" ng-touchend="vm.playTouched = false; restart()" ng-class="{'ng-button-touched': vm.playTouched}"></div>
-          <div class="restart-text">
+          <div class="restart-text font-effect-destruction">
             <span>Restart</span>
             <span class="share-button" onclick="TelegramGameProxy.shareScore()">Share</span>
           </div>
         </div>
-        <div class="gameover-overlay__total-score"></div>
+        <div class="gameover-overlay__total-score font-effect-fire-animation"></div>
       </div>
       <div class="gameover-overlay__block gameover-overlay__block-content">
         <score-table></score-table>

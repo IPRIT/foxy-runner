@@ -97,11 +97,19 @@ export class Main {
   
   loadSpriteSheet(callback) {
     var loader = PIXI.loader;
-    loader.add('islands', 'resources/bg/foreground/islands.json');
+    if (bgType === 5) {
+      loader.add('islands', 'resources/bg/foreground/halloween-islands.json');
+    } else {
+      loader.add('islands', 'resources/bg/foreground/islands.json');
+    }
     loader.add('foxy', './resources/models/foxy/foxy.json');
     loader.add('foxy-died', './resources/models/foxy/died/foxy-died.png');
     loader.add('foxy-ghost', './resources/models/foxy/died/ghost-all.json');
-    loader.add('chicken', './resources/models/chicken/chicken-all.json');
+    if (bgType === 5) {
+      loader.add('chicken', './resources/models/chicken/pumpkin-chicken-all.json');
+    } else {
+      loader.add('chicken', './resources/models/chicken/chicken-all.json');
+    }
     loader.add('chicken-particle', './resources/models/chicken/particle/chicken-particle-all.json');
     loader.add('dirt', './resources/models/dirt/dirt.png');
     loader.add('health', './resources/models/health/health.png');
@@ -113,6 +121,8 @@ export class Main {
       window.bgSpritesNumber = 5;
     } else if (window.bgType === 4) {
       window.bgSpritesNumber = 6;
+    } else if (window.bgType === 5) {
+      window.bgSpritesNumber = 7;
     } else {
       window.bgType = 3;
       window.bgSpritesNumber = 5;
@@ -141,9 +151,6 @@ export class Main {
         name: "chicken_1",
         volume: .7
       }, {
-        name: "chicken_2",
-        volume: .2
-      }, {
         name: "chicken_3",
         volume: .7
       }, {
@@ -158,7 +165,7 @@ export class Main {
         }
       }],
       volume: 1,
-      path: "./resources/sounds/",
+      path: `./resources/sounds/${window.bgType === 5 ? 'halloween/' : ''}`,
       preload: true,
       multiplay: true
     });
@@ -254,7 +261,7 @@ export class Main {
     this.scroller.alpha = 1;
     this.hideGreetingOverlay();
     this.hideGameoverOverlay();
-    ion.sound.stop(`music`);
+    bgType !== 5 && ion.sound.stop(`music`);
     angular.element(document.querySelectorAll('.button-pause')).removeClass('button-hidden');
     angular.element(document.querySelectorAll('.button-resume')).addClass('button-hidden');
   }
@@ -280,7 +287,7 @@ export class Main {
     this.resize();
     this.scroller.alpha = 1;
     this.hideGreetingOverlay();
-    ion.sound.stop(`music`);
+    bgType !== 5 && ion.sound.stop(`music`);
   
     angular.element(document.querySelectorAll('.button-pause')).removeClass('button-hidden');
     angular.element(document.querySelectorAll('.button-resume')).addClass('button-hidden');
