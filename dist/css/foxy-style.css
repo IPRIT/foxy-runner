@@ -36,7 +36,7 @@ body:not(.bg5) .font-effect-destruction, body:not(.bg5) .font-effect-fire-animat
     background: #f5c14b !important;
 }
 .bg5, .bg5 .greeting-overlay__bg, .bg5 .gameover-overlay__bg {
-    background: #060609 url(../resources/bg/5/bg-06.png) !important;
+    background: #060609 url(../resources/bg/5/bg-06.png) -100px center !important;
     background-size: 100% !important;
     background-size: contain !important;
 }
