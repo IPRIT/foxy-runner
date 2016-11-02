@@ -356,7 +356,7 @@ canvas {
 .bg5 .greeting-overlay__bg-1, .bg5 .gameover-overlay__bg-1 {
     background-image: url(../resources/bg/5/bg-07.png);
     background-repeat: no-repeat;
-    background-position-x: -160px;
+    background-position-x: 167px;
 }
 .bg5 .greeting-overlay__bg-2, .bg5 .gameover-overlay__bg-2 {
     background-image: url(../resources/bg/5/bg-06.png);
