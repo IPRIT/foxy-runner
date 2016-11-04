@@ -63,10 +63,22 @@ export class Foxy extends PhysicFreeFallObject {
     }
     // add a middle sprite in the end
     this.addSprite(`foxy-02`);
+    this.addFlyingFox();
   }
   
   addSprite(frameId) {
     let sprite = PIXI.Sprite.fromFrame(frameId);
+    sprite.scale.x = -.25;
+    sprite.scale.y = .25;
+    sprite.anchor.x = 0.5;
+    sprite.anchor.y = 0.5;
+    this.sprites.push(sprite);
+    this.addChild(sprite);
+  }
+  
+  addFlyingFox() {
+    let texture = PIXI.loader.resources[`foxy-flying`].texture;
+    let sprite = new PIXI.Sprite(texture);
     sprite.scale.x = -.25;
     sprite.scale.y = .25;
     sprite.anchor.x = 0.5;
@@ -93,7 +105,7 @@ export class Foxy extends PhysicFreeFallObject {
       return;
     }
     if (this.movementState === FoxyState.FLYING) {
-      this.frame = 0;
+      this.frame = 4;
       this.stateValue = 0;
       this.showState();
     } else {

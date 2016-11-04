@@ -104,6 +104,7 @@ export class Main {
     }
     loader.add('foxy', './resources/models/foxy/foxy.json');
     loader.add('foxy-died', './resources/models/foxy/died/foxy-died.png');
+    loader.add('foxy-flying', './resources/models/foxy/flying/foxy-flying.png');
     loader.add('foxy-ghost', './resources/models/foxy/died/ghost-all.json');
     if (bgType === 5) {
       loader.add('chicken', './resources/models/chicken/pumpkin-chicken-all.json');
