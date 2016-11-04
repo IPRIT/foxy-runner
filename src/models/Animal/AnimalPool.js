@@ -4,7 +4,7 @@ export class AnimalPool {
   
   constructor() {
     this.animals = [];
-    this.createChickens(10);
+    this.createChickens(15);
     this.shuffle();
   }
   
