@@ -27,7 +27,7 @@ gulp.task('build:js', [ 'build:es6-commonjs' ], function() {
     gulp.src([
       './node_modules/pixi.js/bin/pixi.min.js',
       './src/lib/runtime.js'
-    ]),
+    ]).pipe(uglify()),
     browserify('./dist/core/temp/game.js')
       .bundle()
       .pipe(source('tricky-foxy.min.js'))

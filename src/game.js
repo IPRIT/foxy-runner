@@ -4,6 +4,11 @@ import ds from 'fm-localstorage';
 import { typeCheck as isType } from 'type-check';
 import { Utils } from "./Utils";
 
+let cons = console.log;
+console.log = (...args) => {
+  cons.apply(console, args);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   entryPoint();
 });
