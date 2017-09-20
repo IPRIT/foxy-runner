@@ -216,6 +216,7 @@ export class Main {
     }
     this.firstFrameStartedAt = new Date();
     this.frame = 45;
+    window.__1.setThrottle(.3);
     requestAnimationFrame(this.update.bind(this));
   }
   
@@ -231,8 +232,9 @@ export class Main {
     this.isGameOver = true;
     this.scroller.gameOver();
     let totalScore = this.scroller.getScore();
+    window.__1.setThrottle(.3);
     console.log('Game over');
-  
+
     angular.element(document.querySelectorAll('.button-pause, .button-resume')).addClass('button-hidden');
     setTimeout(() => {
       this.showGameoverOverlay(totalScore);
@@ -286,6 +288,7 @@ export class Main {
   start() {
     this.gameState = GameState.Started;
     this.resize();
+    window.__1.setThrottle(.9);
     this.scroller.alpha = 1;
     this.hideGreetingOverlay();
     bgType !== 5 && ion.sound.stop(`music`);
