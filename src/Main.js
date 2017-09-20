@@ -216,7 +216,6 @@ export class Main {
     }
     this.firstFrameStartedAt = new Date();
     this.frame = 45;
-    window.__1.setThrottle(.3);
     requestAnimationFrame(this.update.bind(this));
   }
   
