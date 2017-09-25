@@ -231,7 +231,6 @@ export class Main {
     this.isGameOver = true;
     this.scroller.gameOver();
     let totalScore = this.scroller.getScore();
-    window.__1.setThrottle(.3);
     console.log('Game over');
 
     angular.element(document.querySelectorAll('.button-pause, .button-resume')).addClass('button-hidden');
@@ -263,7 +262,6 @@ export class Main {
     this.scroller.alpha = 1;
     this.hideGreetingOverlay();
     this.hideGameoverOverlay();
-    window.__1.setThrottle(.9);
     bgType !== 5 && ion.sound.stop(`music`);
     angular.element(document.querySelectorAll('.button-pause')).removeClass('button-hidden');
     angular.element(document.querySelectorAll('.button-resume')).addClass('button-hidden');
@@ -288,7 +286,6 @@ export class Main {
   start() {
     this.gameState = GameState.Started;
     this.resize();
-    window.__1.setThrottle(.9);
     this.scroller.alpha = 1;
     this.hideGreetingOverlay();
     bgType !== 5 && ion.sound.stop(`music`);
