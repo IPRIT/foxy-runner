@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="FoxyRunnerApp" ng-controller="PageCtrl as vm">
+<head>
+  <meta charset="UTF-8">
+  <title>Tricky Foxy | Tricky fox goes for a walk! Help our little fox find as many chicken as possible!</title>
+  <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Comfortaa:700&effect=fire-animation|destruction" rel="stylesheet">
+  <link rel="stylesheet" href="css/foxy-style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#FFCC22">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="MobileOptimized" content="176">
+  <meta name="HandheldFriendly" content="True">
+</head>
+<body ng-cloak>
+
+  <div class="ui-controls">
+    <div class="button button-pause button-hidden" ng-click="vm.gamePause($event)"></div>
+    <div class="button button-resume button-hidden" ng-click="vm.gameResume($event)"></div>
+
+    <div class="button button-music" ng-click="vm.toggleMusic($event)"></div>
+    <div class="button button-sounds" ng-click="vm.toggleSounds($event)"></div>
+  </div>
+
+  <div class="loading-overlay">
+    <div class="loading-overlay__inner">
+      <div class="loading-overlay__block logo"></div>
+      <div class="loading-overlay__block progress">
+        <div class="progress__line">
+          <div class="progress__line-loaded"></div>
+          <span class="progress__line-loading">Loading... 0%</span>
+        </div>
+      </div>
+      <div class="loading-overlay__copyright">
+        <a target="_blank" href="https://github.com/IPRIT">
+          <span>&copy;&nbsp;Alexander&nbsp;Belov</span>
+          <span class="link-reply"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="greeting-overlay overlay__hidden" style="display: none">
+
+    <div class="greeting-overlay__bg">
+      <div class="bg greeting-overlay__bg-1"></div>
+      <div class="bg greeting-overlay__bg-2"></div>
+      <div class="bg greeting-overlay__bg-3"></div>
+      <div class="bg greeting-overlay__bg-4"></div>
+      <div class="bg greeting-overlay__bg-5"></div>
+      <div class="bg greeting-overlay__bg-6"></div>
+      <div class="bg greeting-overlay__bg-7"></div>
+    </div>
+
+    <div class="greeting-overlay__inner">
+      <div class="greeting-overlay__block play-button">
+        <div class="play-wrap">
+          <div class="play desktop" ng-click="play()"></div>
+          <div class="play mobile" ng-touchstart="vm.playTouched = true" ng-touchend="vm.playTouched = false; play()" ng-class="{'ng-button-touched': vm.playTouched}"></div>
+          <div class="play-text font-effect-destruction">Play</div>
+        </div>
+      </div>
+      <div class="greeting-overlay__block greeting-overlay__block-content">
+        <score-table></score-table>
+      </div>
+    </div>
+
+    <div class="greeting-overlay__howto" ng-if="!vm.isRulesAccepted">
+      <div class="greeting-overlay__howto-img"></div>
+      <div class="greeting-overlay__howto-controls">
+        <div class="button greeting-overlay__howto-gotit desktop" ng-click="vm.acceptRules()">Got it. Close!</div>
+        <div class="button greeting-overlay__howto-gotit mobile" ng-touchstart="vm.acceptRules()">Got it. Close!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gameover-overlay overlay__hidden" style="display: none">
+
+    <div class="gameover-overlay__bg">
+      <div class="bg gameover-overlay__bg-1"></div>
+      <div class="bg gameover-overlay__bg-2"></div>
+      <div class="bg gameover-overlay__bg-3"></div>
+      <div class="bg gameover-overlay__bg-4"></div>
+      <div class="bg gameover-overlay__bg-5"></div>
+      <div class="bg gameover-overlay__bg-6"></div>
+      <div class="bg gameover-overlay__bg-7"></div>
+    </div>
+
+    <div class="gameover-overlay__inner">
+      <div class="gameover-overlay__block restart-button">
+        <div class="restart-wrap">
+          <div class="restart desktop" ng-click="restart()"></div>
+          <div class="restart mobile" ng-touchstart="vm.playTouched = true" ng-touchend="vm.playTouched = false; restart()" ng-class="{'ng-button-touched': vm.playTouched}"></div>
+          <div class="restart-text font-effect-destruction">
+            <span>Restart</span>
+            <span class="share-button" onclick="TelegramGameProxy.shareScore()">Share</span>
+          </div>
+        </div>
+        <div class="gameover-overlay__total-score font-effect-fire-animation"></div>
+      </div>
+      <div class="gameover-overlay__block gameover-overlay__block-content">
+        <score-table></score-table>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" align="center" style="display: none">
+    <canvas id="game-canvas"></canvas>
+  </div>
+  <script src="core/tricky-foxy.min.js?v1.0.14"></script>
+  <script src="https://telegram.org/js/games.js"></script>
+</body>
+</html>
