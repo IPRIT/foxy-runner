@@ -93,7 +93,7 @@
           <div class="restart mobile" ng-touchstart="vm.playTouched = true" ng-touchend="vm.playTouched = false; restart()" ng-class="{'ng-button-touched': vm.playTouched}"></div>
           <div class="restart-text font-effect-destruction">
             <span>Restart</span>
-            <span class="share-button" onclick="TelegramGameProxy.shareScore()">Share</span>
+            <span class="share-button" onclick="window.TelegramGameProxy.shareScore()">Share</span>
           </div>
         </div>
         <div class="gameover-overlay__total-score font-effect-fire-animation"></div>

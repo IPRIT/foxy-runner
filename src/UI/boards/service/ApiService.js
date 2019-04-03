@@ -62,7 +62,7 @@ class ApiService {
   }
   
   getSession() {
-    let { initParams } = TelegramGameProxy || {};
+    let { initParams } = window.TelegramGameProxy || {};
     let { session = '' } = initParams || {};
     return session;
   }
