@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function entryPoint() {
   setupSettings();
   attachEvents();
-  
+
   window.game = new Main();
   game.onload(() => game.run());
 }
@@ -24,10 +24,10 @@ function entryPoint() {
 function setupSettings() {
   window.bgType = Utils.getRandomInt(1, 4);
   angular.element(document.body).addClass(`bg${window.bgType}`);
-  
+
   let settings = ds.get('settings') || {};
   let { gameMusic2, gameSounds } = settings || {};
-  window.gameMusic = isType('Boolean', gameMusic2) ? gameMusic2 : true;
+  window.gameMusic = isType('Boolean', gameMusic2) ? gameMusic2 : false;
   window.gameSounds = isType('Boolean', gameSounds) ? gameSounds : true;
   if (!window.gameMusic) {
     angular.element(document.querySelector('.button-music')).addClass('music-off');
