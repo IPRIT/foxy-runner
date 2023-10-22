@@ -5,39 +5,39 @@ import { Utils } from "./Utils";
 import * as ionModule from 'ion-sound';
 
 export class GameState {
-  
+
   static get Started() {
     return 1;
   }
-  
+
   static get Greeting() {
     return 2;
   }
-  
+
   static get LeaderBoard() {
     return 3;
   }
 }
 
 export class Main {
-  
+
   static get CanvasWidth() {
     return Settings.Width;
   }
-  
+
   static get CanvasHeight() {
     return Settings.Height;
   }
-  
+
   static get CanvasRatio() {
     return Main.CanvasWidth / Main.CanvasHeight;
   }
-  
+
   constructor() {
     this.init();
     this.gameState = GameState.Greeting;
   }
-  
+
   init() {
     let [width, height] = Utils.getBodyBounds();
     this.ratio = Main.CanvasRatio;
@@ -51,7 +51,7 @@ export class Main {
     window.isWebGLRenderer = this.renderer instanceof PIXI.WebGLRenderer;
     this.loadResources();
   }
-  
+
   resize() {
     this.ratio = Main.CanvasRatio;
     let [ width, height ] = Utils.getBodyBounds();
@@ -64,7 +64,7 @@ export class Main {
     }
     window.bounds = [ width, height ];
     window.isCached = true;
-  
+
     let devicePixelRatio = window.devicePixelRatio;
     2 < devicePixelRatio && (devicePixelRatio = 2);
     this.renderer.resize(w * devicePixelRatio, h * devicePixelRatio);
@@ -73,28 +73,28 @@ export class Main {
     canvas.height = h * devicePixelRatio;
     canvas.style.width = `${w}px`;
     canvas.style.height = `${h}px`;
-  
+
     let widthScale = w / Main.CanvasWidth;
     let heightScale = h / Main.CanvasHeight;
     this.stage.scale.x = widthScale * devicePixelRatio;
     this.stage.scale.y = heightScale * devicePixelRatio;
-    
+
     if (this.gameState === GameState.Started) {
       this.scroller.hardViewUpdate();
     }
   }
-  
+
   loadResources() {
     this.loadSpriteSheet(() => {
       this.spriteSheetLoaded();
-  
+
       this.isResourcesLoaded = true;
       if (this._onloadCallback) {
         this._onloadCallback();
       }
     });
   }
-  
+
   loadSpriteSheet(callback) {
     var loader = PIXI.loader;
     if (bgType === 5) {
@@ -132,7 +132,7 @@ export class Main {
     for (let i = 1; i <= window.bgSpritesNumber; ++i) {
       loader.add(`bg-0${i}`, `./resources/bg/${window.bgType}/bg-0${i}.png`);
     }
-    
+
     loader.once('complete', callback);
     loader.load();
     let progressInterval = setInterval(() => {
@@ -141,7 +141,7 @@ export class Main {
         clearInterval(progressInterval);
       }
     }, 10);
-    
+
     ion.sound({
       sounds: [{
         name: "fall"
@@ -171,36 +171,41 @@ export class Main {
       multiplay: true
     });
   }
-  
+
   spriteSheetLoaded() {
     this.scroller = new Scroller(this.stage);
     this.scroller.setScrollSpeed(Settings.ScrollSpeed);
     this.attachEventsAfterLoad();
-    
+
     this.scroller.alpha = 0;
   }
-  
-  update() {
+
+  update(ms) {
     if (this.isPaused) {
       return requestAnimationFrame(this.update.bind(this));
     }
     this.frame++;
-    
+
+    if (!this.lastMs) {
+      this.lastMs = ms
+    }
+    this.delta = this.lastMs - ms;
+
     if (this.gameState === GameState.Started) {
       this.scroller.setScrollSpeed(
         Math.min(this.scroller.getScrollSpeed() + Settings.ScrollSpeedAcceleration, Settings.MaxScrollSpeed)
       );
       this.scroller.shiftViewportX(this.scroller.getScrollSpeed());
     }
-    
+
     this.renderer.render(this.stage);
     requestAnimationFrame(this.update.bind(this));
   }
-  
+
   attachEventsAfterLoad() {
     window.addEventListener('resize', this.resize.bind(this));
     this.resize();
-    
+
     window.addEventListener('keydown', (ev) => {
       if (ev.keyCode === 80 && this.gameState === GameState.Started) {
         (Array.from(
@@ -209,7 +214,7 @@ export class Main {
       }
     });
   }
-  
+
   run() {
     if (!this.isResourcesLoaded) {
       return console.error('Resources not loaded yet');
@@ -218,11 +223,11 @@ export class Main {
     this.frame = 45;
     requestAnimationFrame(this.update.bind(this));
   }
-  
+
   onload(cb) {
     this._onloadCallback = cb;
   }
-  
+
   gameOver() {
     if (this.isGameOver) {
       return;
@@ -239,21 +244,21 @@ export class Main {
       gameMusic && ion.sound.play(`music`);
     }, 1500);
   }
-  
+
   pause() {
     this.isPaused = true;
   }
-  
+
   resume() {
     this.firstFrameStartedAt = new Date();
     this.frame = 45;
     this.isPaused = false;
   }
-  
+
   getFPS() {
     return (this.frame / ((new Date().getTime() - this.firstFrameStartedAt.getTime()) / 1000));
   }
-  
+
   restart() {
     window.score = 0;
     this.reset();
@@ -266,34 +271,34 @@ export class Main {
     angular.element(document.querySelectorAll('.button-pause')).removeClass('button-hidden');
     angular.element(document.querySelectorAll('.button-resume')).addClass('button-hidden');
   }
-  
+
   reset() {
     this.pause();
-    
+
     if (this.stage.filters && this.stage.filters.length) {
       this.stage.filters[0].saturate(0);
     }
     this.scroller.reset();
     this.scroller = null;
-    
+
     this.scroller = new Scroller(this.stage);
     this.scroller.setScrollSpeed(Settings.ScrollSpeed);
     this.isGameOver = false;
-    
+
     this.resume();
   }
-  
+
   start() {
     this.gameState = GameState.Started;
     this.resize();
     this.scroller.alpha = 1;
     this.hideGreetingOverlay();
     bgType !== 5 && ion.sound.stop(`music`);
-  
+
     angular.element(document.querySelectorAll('.button-pause')).removeClass('button-hidden');
     angular.element(document.querySelectorAll('.button-resume')).addClass('button-hidden');
   }
-  
+
   hideGreetingOverlay() {
     let greetingOverlay = angular.element(document.querySelector('.greeting-overlay'));
     greetingOverlay.addClass('overlay__hidden');
@@ -302,7 +307,7 @@ export class Main {
       angular.element(document.body).addClass(`bg${window.bgType}`);
     }, 200);
   }
-  
+
   showGreetingOverlay() {
     let greetingOverlay = angular.element(document.querySelector('.greeting-overlay'));
     let canvasLayout = angular.element(document.querySelector('.page'));
@@ -310,7 +315,7 @@ export class Main {
     setTimeout(() => greetingOverlay.removeClass('overlay__hidden'), 50);
     setTimeout(() => canvasLayout.css({display: 'block'}), 300);
   }
-  
+
   hideGameoverOverlay() {
     let gameoverOverlay = angular.element(document.querySelector('.gameover-overlay'));
     gameoverOverlay.addClass('overlay__hidden');
@@ -318,7 +323,7 @@ export class Main {
       gameoverOverlay.css({display: 'none'});
     }, 200);
   }
-  
+
   showGameoverOverlay(totalScore = 0) {
     let gameoverOverlay = angular.element(document.querySelector('.gameover-overlay'));
     gameoverOverlay.css({display: 'block'});
@@ -332,12 +337,12 @@ export class Main {
     targetScope.vm.selectedTable = 'local';
     targetScope.vm.fetchScores('local', true);
   }
-  
+
   onLoaderProgress(progress = 0) {
     let progressLine = document.querySelector('.progress__line-loaded');
     let progressLineText = document.querySelector('.progress__line-loading');
     progressLine.style.width = `${progress || 0}%`;
-    
+
     if (progress === 100) {
       progressLineText.innerHTML = `Rendering chickens...`;
       setTimeout(() => {
@@ -353,7 +358,7 @@ export class Main {
       progressLineText.innerHTML = `Loading... ${progress.toFixed(0) || 0}%`;
     }
   }
-  
+
   destroyHp(hp = 1) {
     this.scroller.destroyHp(hp);
   }

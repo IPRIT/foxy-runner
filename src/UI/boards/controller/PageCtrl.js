@@ -1,48 +1,43 @@
 import { GameState } from "../../../Main";
 import ds from 'fm-localstorage';
 import deap from 'deap';
-import Encryption from 'one-encryption';
-
-const encryption = new Encryption();
-var defaultEncryptionConfig = {
-  algorithm : 'aes-256-ecb'
-};
+import CryptoJS from "crypto-js";
 
 export default class PageCtrl {
-  
+
   static $inject = [ '$scope', '$rootScope', '$timeout', 'ApiService' ];
-  
+
   constructor($scope, $rootScope, $timeout, ApiService) {
     this.$scope = $scope;
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
     this.ApiService = ApiService;
-    
+
     this.init();
-    
+
     $scope.play = this.play.bind(this);
     $scope.restart = this.restart.bind(this);
   }
-  
+
   init() {
     this.pageType = 'greeting';
     let settings = ds.get('settings') || {};
     this.isRulesAccepted = settings.isRulesAccepted2 || false;
-    
+
     window.gameMe = this.me = {};
     this.updateMe();
   }
-  
+
   play() {
     this.pageType = 'started';
     window.game.start();
   }
-  
+
   restart() {
     this.pageType = 'started';
     window.game.restart();
   }
-  
+
   toggleMusic(ev) {
     let target = angular.element(ev.target);
     window.gameMusic = !window.gameMusic;
@@ -58,7 +53,7 @@ export default class PageCtrl {
       gameMusic2: window.gameMusic
     }));
   }
-  
+
   toggleSounds(ev) {
     let target = angular.element(ev.target);
     window.gameSounds = !window.gameSounds;
@@ -72,7 +67,7 @@ export default class PageCtrl {
       gameSounds: window.gameSounds
     }));
   }
-  
+
   acceptRules() {
     this.isRulesAccepted = true;
     let settings = ds.get('settings') || {};
@@ -80,7 +75,7 @@ export default class PageCtrl {
       isRulesAccepted2: this.isRulesAccepted
     }));
   }
-  
+
   gamePause(ev) {
     let target = angular.element(ev.target);
     let buttonResume = angular.element(document.querySelector('.button-resume'));
@@ -88,7 +83,7 @@ export default class PageCtrl {
     buttonResume.removeClass('button-hidden');
     window.game.pause();
   }
-  
+
   gameResume(ev) {
     let target = angular.element(ev.target);
     let buttonPause = angular.element(document.querySelector('.button-pause'));
@@ -96,21 +91,27 @@ export default class PageCtrl {
     buttonPause.removeClass('button-hidden');
     window.game.resume();
   }
-  
+
   updateMe() {
     this.ApiService.getMe().then(result => {
       console.log(result);
       window.gameMe = this.me = this.$scope.me = result;
     });
   }
-  
+
   saveResults(result = {}) {
     let { gameMe } = window;
-    let config = deap.extend({
-      key: gameMe._shard
-    }, defaultEncryptionConfig);
-  
-    let hash = encryption.encrypt(config, JSON.stringify(result).split('').reverse().join(''));
+
+    const encrypt = (value) => {
+      let ciphertext = CryptoJS.AES.encrypt(value, gameMe._shard);
+
+      return ciphertext.toString();
+    }
+
+    const rawValue = JSON.stringify(result).split('').reverse().join('');
+
+    let hash = encrypt(rawValue);
+
     this.ApiService.setScore(hash).then(result => {
       this.updateMe();
     });
