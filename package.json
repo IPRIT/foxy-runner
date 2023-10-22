@@ -7,9 +7,6 @@
     "test": "mocha",
     "build": "gulp"
   },
-  "overrides": {
-    "graceful-fs": "4.2.11"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/IPRIT/foxy-runner.git"
