@@ -30,7 +30,6 @@ function setupSettings() {
   window.gameMusic = isType('Boolean', gameMusic2) ? gameMusic2 : false;
   window.gameSounds = isType('Boolean', gameSounds) ? gameSounds : true;
 
-  console.log('gameMusic, gameSounds', gameMusic, gameSounds)
   if (!window.gameMusic) {
     angular.element(document.querySelector('.button-music')).addClass('music-off');
   }
