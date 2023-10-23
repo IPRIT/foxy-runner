@@ -5,7 +5,7 @@
       <div class="score-table__tab mobile" ng-init="vm.ngTouchLocal = false" ng-mousedown="vm.ngTouchLocal = true; vm.selectTab('local')" ng-mouseup="vm.ngTouchLocal = false" ng-touchstart="vm.ngTouchLocal = true; vm.selectTab('local')" ng-touchend="vm.ngTouchLocal = false" ng-class="{'score-table__tab_selected': vm.selectedTable === 'local', 'ng-touch-started': vm.ngTouchLocal}">Local leaderboard</div>
       <div class="score-table__tab desktop" ng-click="vm.selectTab('local')" ng-class="{'score-table__tab_selected': vm.selectedTable === 'local'}">Local leaderboard</div>
 
-      <div class="score-table__tab mobile" ng-init="vm.ngTouchGlobal = false" ng-mousedown="vm.ngTouchLocal = true; vm.selectTab('global')" ng-mouseup="vm.ngTouchLocal = false" ng-touchstart="vm.ngTouchGlobal = true; vm.selectTab('global')" ng-touchend="vm.ngTouchGlobal = false" ng-class="{'score-table__tab_selected': vm.selectedTable === 'global', 'ng-touch-started': vm.ngTouchGlobal}">World leaderboard</div>
+      <div class="score-table__tab mobile" ng-init="vm.ngTouchGlobal = false" ng-mousedown="vm.ngTouchGlobal = true; vm.selectTab('global')" ng-mouseup="vm.ngTouchGlobal = false" ng-touchstart="vm.ngTouchGlobal = true; vm.selectTab('global')" ng-touchend="vm.ngTouchGlobal = false" ng-class="{'score-table__tab_selected': vm.selectedTable === 'global', 'ng-touch-started': vm.ngTouchGlobal}">World leaderboard</div>
       <div class="score-table__tab desktop" ng-click="vm.selectTab('global')" ng-class="{'score-table__tab_selected': vm.selectedTable === 'global'}">World leaderboard</div>
     </div>
   </div>
