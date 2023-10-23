@@ -56,7 +56,7 @@
       <div class="greeting-overlay__block play-button">
         <div class="play-wrap">
           <div class="play desktop" ng-click="play()"></div>
-          <div class="play mobile" ng-touchstart="vm.playTouched = true" ng-touchend="vm.playTouched = false; play()" ng-class="{'ng-button-touched': vm.playTouched}"></div>
+          <div class="play mobile" ng-mousedown="vm.playTouched = true" ng-mouseup="vm.playTouched = false; play()" ng-touchstart="vm.playTouched = true" ng-touchend="vm.playTouched = false; play()" ng-class="{'ng-button-touched': vm.playTouched}"></div>
           <div class="play-text font-effect-destruction">Play</div>
         </div>
       </div>
