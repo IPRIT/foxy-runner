@@ -22,7 +22,7 @@ function entryPoint() {
 }
 
 function setupSettings() {
-  window.bgType = Utils.getRandomInt(5, 5); // 1, 4
+  window.bgType = Utils.getRandomInt(1, 5); // 1, 4
   angular.element(document.body).addClass(`bg${window.bgType}`);
 
   let settings = ds.get('settings') || {};
