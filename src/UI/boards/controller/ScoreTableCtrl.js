@@ -47,7 +47,7 @@ export default class ScoreTableCtrl {
 
     this.selectingTabTimeout = setTimeout(() => {
       this.selectingTabTimeout = null
-    }, 300)
+    }, 1000)
   }
 
   ensureScores(scores) {
