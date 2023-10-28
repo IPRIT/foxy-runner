@@ -45,6 +45,10 @@ export default class ScoreTableCtrl {
 
     this.fetchScores(tabId, oldTableId === tabId && !this.selectingTabTimeout);
 
+    if (this.selectingTabTimeout) {
+      return
+    }
+
     this.selectingTabTimeout = setTimeout(() => {
       this.selectingTabTimeout = null
     }, 1000)
