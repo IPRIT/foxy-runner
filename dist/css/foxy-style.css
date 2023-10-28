@@ -16,7 +16,7 @@ body {
     transition: background .2s linear;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
 }
-body:not(.bg5) .font-effect-destruction, body:not(.bg5) .font-effect-fire-animation {
+.font-effect-destruction, body:not(.bg5) .font-effect-fire-animation {
     text-shadow: none !important;
     mask-image: none !important;
     -webkit-mask-image: none !important;
@@ -1109,5 +1109,40 @@ span[data-user-id="615945"] {
     }
     .mobile {
         display: none;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    .greeting-overlay__inner, .gameover-overlay__inner {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .greeting-overlay__block.play-button,
+    .gameover-overlay__block.restart-button {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .greeting-overlay__block.play-button {
+        padding: 0 0px 0 50px;
+    }
+
+    .greeting-overlay__block-content {
+        margin: 68px 67px 0px;
+    }
+
+    .gameover-overlay__block-content {
+        margin: 68px 20px 0px;
+    }
+
+    .greeting-overlay__block-content, .gameover-overlay__block-content {
+        max-height: initial;
+    }
+
+    .gameover-overlay__block:first-of-type {
+        flex: 3;
     }
 }

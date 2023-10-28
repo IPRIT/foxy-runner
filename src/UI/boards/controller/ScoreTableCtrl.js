@@ -1,23 +1,23 @@
 import deap from 'deap';
 
 export default class ScoreTableCtrl {
-  
+
   static $inject = [ '$scope', '$rootScope', '$http', '$timeout', 'ApiService' ];
-  
+
   selectedTable = 'local';
-  
+
   constructor($scope, $rootScope, $http, $timeout, ApiService) {
     this.ApiService = ApiService;
     deap.extend(this, {
       $http, $timeout
     });
-    
+
     this.scores = [];
     this.fetchScores(this.selectedTable);
     this.cacheStore = {};
     this.isLoading = false;
   }
-  
+
   fetchScores(type, force = false) {
     if (this.cacheStore && this.cacheStore[type] && !force) {
       return (this.scores = this.cacheStore[type]);
@@ -38,13 +38,18 @@ export default class ScoreTableCtrl {
       this.isLoading = false;
     });
   }
-  
+
   selectTab(tabId) {
     let oldTableId = this.selectedTable;
     this.selectedTable = tabId;
-    this.fetchScores(tabId, oldTableId === tabId);
+
+    this.fetchScores(tabId, oldTableId === tabId && !this.selectingTabTimeout);
+
+    this.selectingTabTimeout = setTimeout(() => {
+      this.selectingTabTimeout = null
+    }, 300)
   }
-  
+
   ensureScores(scores) {
     if (!Array.isArray(scores)) {
       return [];

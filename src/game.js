@@ -41,6 +41,11 @@ function setupSettings() {
 
 function attachEvents() {
   window.addEventListener('resize', resize);
+  window.oncontextmenu = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
+  };
   setTimeout(resize, 500);
 }
 
