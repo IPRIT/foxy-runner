@@ -1,10 +1,10 @@
 export class Ghost extends PIXI.Container {
-  
+
   constructor() {
     super();
     this.init();
   }
-  
+
   init() {
     this.frame = 0;
     this.frameValue = 0.0;
@@ -13,17 +13,17 @@ export class Ghost extends PIXI.Container {
     this.createSprites();
     this.showState();
   }
-  
+
   setStateAcceleration(acceleration) {
     this.stateAcceleration = Math.max(Math.min(acceleration, .45), .2);
   }
-  
+
   createSprites() {
     this.sprites = [];
     this.addSprite(`ghost-01`);
     this.addSprite(`ghost-02`);
   }
-  
+
   addSprite(frameId) {
     let sprite = PIXI.Sprite.fromFrame(frameId);
     sprite.scale.x = .12;
@@ -33,7 +33,7 @@ export class Ghost extends PIXI.Container {
     this.sprites.push(sprite);
     this.addChild(sprite);
   }
-  
+
   showState({ oldState } = {}) {
     if (this.frame === oldState) {
       return;
@@ -46,14 +46,14 @@ export class Ghost extends PIXI.Container {
       }
     });
   }
-  
+
   nextStateValue() {
     let oldState = this.frame;
-    this.frameValue += this.frameAcceleration;
+    this.frameValue += this.frameAcceleration * game.multiplier;
     this.frame = Math.floor(this.frameValue) % this.frames;
     this.showState({ oldState });
   }
-  
+
   reset() {
     this.frame = 0;
     this.frameValue = 0.0;

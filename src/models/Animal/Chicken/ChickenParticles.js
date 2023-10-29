@@ -2,7 +2,7 @@ import { AnimalType } from "../AnimalType";
 import { Utils } from "../../../Utils";
 
 export class ChickenParticles extends PIXI.particles.ParticleContainer {
-  
+
   constructor(animalType) {
     super(isWebGLRenderer ? 50 : 10, {
       scale: true,
@@ -14,7 +14,7 @@ export class ChickenParticles extends PIXI.particles.ParticleContainer {
     this.animalType = animalType;
     this.init();
   }
-  
+
   init() {
     let totalParticles = isWebGLRenderer ? 40 : 10;
     this.particles = [];
@@ -45,17 +45,17 @@ export class ChickenParticles extends PIXI.particles.ParticleContainer {
       this.addChild(chickenParticle);
     }
   }
-  
+
   scatter() {
     this._animationDone = true;
     this.particles.forEach(particle => {
       let progress = Math.max(
         Math.abs(particle.internalState.startX - particle.position.x) / particle.internalState.maxDeviationX,
         Math.abs(particle.internalState.startY - particle.position.y) / particle.internalState.maxDeviationY
-      );
+      ) * game.multiplier;
       if (progress < 1) {
-        particle.position.x += particle.internalState.accelerationX;
-        particle.position.y += particle.internalState.accelerationY;
+        particle.position.x += particle.internalState.accelerationX * game.multiplier;
+        particle.position.y += particle.internalState.accelerationY * game.multiplier;
         particle.scale.set(Math.min(particle.internalState.maxScale, progress / 30 + particle.internalState.startScale));
         particle.alpha = Math.sin((1 - progress) * Math.PI);
         this._animationDone = false;
@@ -68,11 +68,11 @@ export class ChickenParticles extends PIXI.particles.ParticleContainer {
     }
     return this.isAnimationDone();
   }
-  
+
   isAnimationDone() {
     return this._animationDone;
   }
-  
+
   reset() {
     this.alpha = 0;
     this.particles.forEach(particle => {

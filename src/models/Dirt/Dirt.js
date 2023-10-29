@@ -1,5 +1,5 @@
 export class Dirt extends PIXI.particles.ParticleContainer {
-  
+
   constructor() {
     super(isWebGLRenderer ? 50 : 10, {
       scale: true,
@@ -8,10 +8,10 @@ export class Dirt extends PIXI.particles.ParticleContainer {
       uvs: true,
       alpha: true
     });
-    
+
     this.init();
   }
-  
+
   init() {
     let totalDust = isWebGLRenderer ? 50 : 10;
     this.dust = [];
@@ -38,13 +38,13 @@ export class Dirt extends PIXI.particles.ParticleContainer {
       this.addChild(dustParticle);
     }
   }
-  
+
   animate() {
     this.dust.forEach(particle => {
       let progress = Math.max(
         Math.abs(particle.internalState.startX - particle.position.x) / particle.internalState.maxDeviationX,
         Math.abs(particle.internalState.startY - particle.position.y) / particle.internalState.maxDeviationY
-      );
+      ) * game.multiplier;
       if (progress >= 1) {
         particle.position.x = particle.internalState.startX;
         particle.position.y = particle.internalState.startY;
@@ -58,7 +58,7 @@ export class Dirt extends PIXI.particles.ParticleContainer {
       }
     });
   }
-  
+
   reset() {
     for (let dustParticle of this.dust) {
       dustParticle.position.x = Math.random() * 512;

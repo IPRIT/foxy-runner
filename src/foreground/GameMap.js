@@ -10,35 +10,35 @@ import { Utils } from "../Utils";
 import deap from "deap";
 
 export class GameMap extends IslandsMap {
-  
+
   constructor(parent) {
     super();
     this._parent = parent;
     this.init();
   }
-  
+
   init() {
     this.animationAttractor = AnimationAttractor.getInstance();
     this.foxy = new Foxy();
     this.foxOffsetX = 200;
     this.foxy.position.x += this.foxOffsetX;
     this.addChild(this.foxy);
-    
+
     this.scoreView = new ScoreView();
     this.addChild(this.scoreView);
-  
+
     this.healthView = new HealthView();
     this.addChild(this.healthView);
-    
+
     this.attachEvents();
     this.score = 0;
     this._passIslands = null;
   }
-  
+
   getMapSpeed() {
     return this._parent.getScrollSpeed();
   }
-  
+
   moveBy(shiftX) {
     this.shiftViewportX(shiftX);
     this.toFront(this.foxy);
@@ -48,7 +48,7 @@ export class GameMap extends IslandsMap {
     this.catchAnimals();
     this.animationAttractor.nextFrame();
   }
-  
+
   getCurrentMapY() {
     let floorY = Main.CanvasHeight - 200;
     let mapSlices = this.slices;
@@ -65,44 +65,44 @@ export class GameMap extends IslandsMap {
     }
     return floorY;
   }
-  
+
   toFront(object) {
     this.removeChild(object);
     this.addChild(object);
   }
-  
+
   attachEvents() {
     document.addEventListener('keydown', this.onKeyDown.bind(this));
     document.addEventListener('mousedown', this.startJump.bind(this));
     document.addEventListener('touchstart', this.startJump.bind(this));
-  
+
     document.addEventListener('keyup', this.onKeyUp.bind(this));
     document.addEventListener('mouseup', this.endJump.bind(this));
     document.addEventListener('touchend', this.endJump.bind(this));
   }
-  
+
   onKeyDown(event) {
     if (event.keyCode !== 32 && event.keyCode !== 87 && event.keyCode !== 38) {
       return;
     }
     this.startJump();
   }
-  
+
   onKeyUp() {
     if (event.keyCode !== 32 && event.keyCode !== 87 && event.keyCode !== 38) {
       return;
     }
     this.endJump();
   }
-  
+
   startJump() {
     this.foxy.enableJumpingState();
   }
-  
+
   endJump() {
     this.foxy.disableJumpingState();
   }
-  
+
   catchAnimals() {
     let foxyPosition = [this.foxOffsetX, this.foxy.position.y];
     let nearestAnimal = this.getHitAreaAnimal(this.foxy, foxyPosition, this.foxOffsetX);
@@ -117,7 +117,7 @@ export class GameMap extends IslandsMap {
       gameSounds && ion.sound.play(`chicken_1`);
     }
     this.scoreView.setScore(this.score);
-  
+
     if (!this._passIslands) {
       this._passIslands = {};
     }
@@ -134,7 +134,7 @@ export class GameMap extends IslandsMap {
     } else {
       deap.extend(head, c);
     }
-    
+
     if (isWebGLRenderer && game.getFPS() > 45 && Main.CanvasWidth > 2500) {
       let scoreIncrementerView = new ScoreIncrementer();
       scoreIncrementerView.addScore(1, nearestAnimal.animalType, () => {
@@ -144,28 +144,28 @@ export class GameMap extends IslandsMap {
       });
       this.addChild(scoreIncrementerView);
     }
-    
+
     this.animationAttractor.append(nearestAnimal.getRebornNumber(), nearestAnimal, function animate(animal) {
       return animal.explode();
     });
   }
-  
+
   gameOver() {
     this.isGameOver = true;
     this.foxy.gameOver();
     this.healthView.setHealth(0);
-  
+
     if (!window.gameMe
       || !window.gameMe._shard
       || window.gameMe.localHighscore >= this.score) {
       return;
     }
-    
+
     let body = angular.element(document.body);
     let scope = body.scope && body.scope();
     scope.vm.saveResults(this._passIslands);
   }
-  
+
   destroyHp(hp) {
     gameSounds && this.healthView.getHealth() <= 5 && ion.sound.play(`failure`);
     this.healthView.setHealth(this.healthView.getHealth() - hp);
@@ -173,14 +173,14 @@ export class GameMap extends IslandsMap {
       game.gameOver();
     }
   }
-  
+
   getListHead(obj = {}) {
     if (!obj._n) {
       return obj;
     }
     return this.getListHead(obj._n);
   }
-  
+
   reset() {
     this.animationAttractor.reset();
     this.foxy.reset();
@@ -189,9 +189,9 @@ export class GameMap extends IslandsMap {
     this._passIslands = null;
     this.scoreView.reset();
     this.scoreView.destroy();
-    
+
     this.isGameOver = false;
-    
+
     this.resetMap();
   }
 }

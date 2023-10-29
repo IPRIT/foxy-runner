@@ -3,12 +3,12 @@ import { AnimationAttractor } from "../../Animation/Attractor";
 import { Main } from "../../Main";
 
 export class ScoreIncrementer extends PIXI.Container {
-  
+
   constructor() {
     super();
     this.init();
   }
-  
+
   init() {
     this._message = new PIXI.Text(this.getMessage(), {
       fontFamily: 'Fredoka One',
@@ -17,18 +17,18 @@ export class ScoreIncrementer extends PIXI.Container {
     });
     window.addEventListener('resize', this.resize.bind(this));
   }
-  
+
   addScore(plus, animalType, cb) {
     this._message.text = this.getMessage(plus);
     this._message.position.x -= 550;
     this._message.position.y += 200;
-  
+
     let animal = ScoreAnimalPool.getInstance().borrowAnimal(animalType);
     animal.addChild(this._message);
     animal.scale.set(.12);
     animal.position.set(Main.CanvasWidth / 2 - animal.width / 2 + 50, 50);
     this.addChild(animal);
-    
+
     animal.internalState = {
       startPoint: [ animal.position.x, animal.position.y ],
       startScale: 1,
@@ -40,7 +40,7 @@ export class ScoreIncrementer extends PIXI.Container {
     };
     let passIterations = 40;
     let currentIteration = 0;
-    
+
     AnimationAttractor.getInstance()
       .append(1, animal, (animal) => {
         let currentPosition = [ animal.position.x, animal.position.y ];
@@ -48,9 +48,9 @@ export class ScoreIncrementer extends PIXI.Container {
         let passedDistanceX = animal.internalState.startPoint[0] - currentPosition[0];
         animal.progress = passedDistanceX / fullDistanceX;
         if (++currentIteration > passIterations) {
-          animal.position.x += (animal.internalState.xVelocity += animal.internalState.xAcceleration);
-          animal.scale.x = Math.max(0, animal.scale.x + animal.internalState.scaleVelocity);
-          animal.scale.y = Math.max(0, animal.scale.y + animal.internalState.scaleVelocity);
+          animal.position.x += (animal.internalState.xVelocity += animal.internalState.xAcceleration * game.multiplier);
+          animal.scale.x = Math.max(0, animal.scale.x + animal.internalState.scaleVelocity * game.multiplier);
+          animal.scale.y = Math.max(0, animal.scale.y + animal.internalState.scaleVelocity * game.multiplier);
           animal.alpha -= .01;
         } else {
           if (currentIteration > passIterations / 4) {
@@ -72,11 +72,11 @@ export class ScoreIncrementer extends PIXI.Container {
         cb();
       });
   }
-  
+
   getMessage(score = 1) {
     return `+${score}`
   }
-  
+
   resize() {
     this._message.position.set(Main.CanvasWidth / 2 - this._message.width / 2, 50);
   }

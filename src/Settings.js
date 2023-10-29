@@ -1,7 +1,7 @@
 import { Utils } from "./Utils";
 
 export class Settings {
-  
+
   static get Width() {
     let [ width, height ] = window.isCached ? window.bounds : Utils.getBodyBounds();
     if (width < 1000 && width < height) {
@@ -9,14 +9,14 @@ export class Settings {
     }
     return 3072;
   }
-  
+
   static Height = 1536;
-  
+
   static ScrollSpeed = 12;
-  
-  static MaxScrollSpeed = 45;
-  
-  static ScrollSpeedAcceleration = 0.011;
-  
+
+  static MaxScrollSpeed = 35;
+
+  static ScrollSpeedAcceleration = 0.009;
+
   static CanvasDomId = 'game-canvas';
 }

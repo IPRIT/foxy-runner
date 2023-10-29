@@ -3,12 +3,12 @@ import { Animal } from "../Animal";
 import { Utils } from "../../../Utils";
 
 export class Chicken extends Animal {
-  
+
   constructor() {
     super();
     this.init();
   }
-  
+
   init() {
     this.createSprite();
     this.createChickenParticles();
@@ -17,13 +17,13 @@ export class Chicken extends Animal {
     this.scaleAcceleration = -0.0005;
     this.scaleVelocity = 0.01;
   }
-  
+
   createSprite() {
     this.animalType = Utils.getRandomInt(1, 2);
     this.sprite = PIXI.Sprite.fromFrame(`chicken-0${this.animalType}`);
     this.addChild(this.sprite);
   }
-  
+
   explode() {
     if (!this.isExploded) {
       this.isExploded = true;
@@ -34,7 +34,7 @@ export class Chicken extends Animal {
     this.explodeAnimationNextFrame();
     return this.particles.scatter();
   }
-  
+
   reset() {
     this.isExploded = false;
     this.isChecked = false;
@@ -54,29 +54,29 @@ export class Chicken extends Animal {
     this.particles.reset();
     this._rebornNumber++;
   }
-  
+
   createChickenParticles() {
     this.particles = new ChickenParticles(this.animalType);
     this.particles.position.set(-200, -200);
     this.addChild(this.particles);
   }
-  
+
   getRebornNumber() {
     return this._rebornNumber;
   }
-  
+
   resetAnimal() {
     this.particles.destroy();
   }
-  
+
   explodeAnimationNextFrame() {
-    this.sprite.alpha = Math.max(0, this.sprite.alpha - .05);
+    this.sprite.alpha = Math.max(0, this.sprite.alpha - .05 * game.multiplier);
     this.scaleVelocity += this.scaleAcceleration;
     this.scaleVelocity = Math.max(0, this.scaleVelocity);
     this.sprite.scale.set(
-      Math.min(1, this.sprite.scale.x + this.scaleVelocity),
-      Math.min(1, this.sprite.scale.x + this.scaleVelocity)
+      Math.min(1, this.sprite.scale.x + this.scaleVelocity * game.multiplier),
+      Math.min(1, this.sprite.scale.x + this.scaleVelocity * game.multiplier)
     );
-    this.sprite.position.y -= 10;
+    this.sprite.position.y -= 10 * game.multiplier;
   }
 }

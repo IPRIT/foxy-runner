@@ -2,12 +2,12 @@ import { AnimationAttractor as ScoreAnimalPool } from "../../Animation/Attractor
 import { AnimationAttractor } from "../../Animation/Attractor";
 
 export class HealthView extends PIXI.Container {
-  
+
   constructor() {
     super();
     this.init();
   }
-  
+
   init() {
     this._healthMax = 5;
     this._health = 5;
@@ -17,7 +17,7 @@ export class HealthView extends PIXI.Container {
     this.position.set(137, 125);
     this.update();
   }
-  
+
   addText() {
     this._text = new PIXI.Text(this.getMessage(), {
       fontFamily: 'Fredoka One',
@@ -27,15 +27,15 @@ export class HealthView extends PIXI.Container {
     this._text.anchor.set(.5);
     this.addChild(this._text);
   }
-  
+
   getMessage() {
     return `Health:`;
   }
-  
+
   getRuleMessage() {
     return `You will lose a health if you miss a chicken`;
   }
-  
+
   addSprites() {
     let marginRight = 8;
     for (let i = 0; i < this._healthMax; ++i) {
@@ -49,7 +49,7 @@ export class HealthView extends PIXI.Container {
       this.addChild(health);
     }
   }
-  
+
   update() {
     for (let i = 0; i < this._healthMax; ++i) {
       if (i >= this._health) {
@@ -62,26 +62,26 @@ export class HealthView extends PIXI.Container {
       }
     }
   }
-  
+
   getHealth() {
     return this._health;
   }
-  
+
   setHealth(hp) {
     this._health = Math.min(this._healthMax, Math.max(0, hp));
     this.update();
   }
-  
+
   bounceAnimation(health) {
     let frame = 0;
     AnimationAttractor.getInstance()
       .append(1, health, health => {
         health.scale.set(bounceEaseOut(frame / 100) / 100 * 8);
-        return (frame += 2.5) >= 100;
+        return (frame += 2.5 * game.multiplier) >= 100;
       }, () => {}, health => {
         health.scale.set(.08);
       });
-  
+
     function bounce(progress) {
       for(var a = 0, b = 1; 1; a += b, b /= 2) {
         if (progress >= (7 - 4 * a) / 11) {
@@ -89,16 +89,16 @@ export class HealthView extends PIXI.Container {
         }
       }
     }
-  
+
     function makeEaseOut(delta) {
       return function(progress) {
         return 1 - delta(1 - progress);
       }
     }
-  
+
     var bounceEaseOut = makeEaseOut(bounce);
   }
-  
+
   reset() {
     this._health = 5;
     this.update();

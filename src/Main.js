@@ -189,13 +189,15 @@ export class Main {
     if (!this.lastMs) {
       this.lastMs = ms
     }
-    this.delta = this.lastMs - ms;
+
+    this.multiplier = this.computeMultiplier(ms - this.lastMs) || 1;
+    this.lastMs = ms
 
     if (this.gameState === GameState.Started) {
       this.scroller.setScrollSpeed(
-        Math.min(this.scroller.getScrollSpeed() + Settings.ScrollSpeedAcceleration, Settings.MaxScrollSpeed)
+        Math.min(this.scroller.getScrollSpeed() + Settings.ScrollSpeedAcceleration * game.multiplier, Settings.MaxScrollSpeed)
       );
-      this.scroller.shiftViewportX(this.scroller.getScrollSpeed());
+      this.scroller.shiftViewportX(this.scroller.getScrollSpeed() * this.multiplier);
     }
 
     this.renderer.render(this.stage);
@@ -361,5 +363,9 @@ export class Main {
 
   destroyHp(hp = 1) {
     this.scroller.destroyHp(hp);
+  }
+
+  computeMultiplier(delta) {
+    return delta / (1000 / 60)
   }
 }
