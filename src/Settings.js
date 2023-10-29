@@ -14,9 +14,9 @@ export class Settings {
 
   static ScrollSpeed = 12;
 
-  static MaxScrollSpeed = 35;
+  static MaxScrollSpeed = 30;
 
-  static ScrollSpeedAcceleration = 0.009;
+  static ScrollSpeedAcceleration = 0.008;
 
   static CanvasDomId = 'game-canvas';
 }
